@@ -7,6 +7,10 @@
 <img src="https://img.shields.io/twitter/follow/karan_6864.svg?style=social" />
 </p>
 
+### Start working
+`cd web/ && yarn start`
+`cd backend/ && yarn start:development`
+
 ### Motivation :star:
 
 Setting up boiler plates when starting new projects is tedious sometimes and I often found myself setting it up from scratch 🥱
