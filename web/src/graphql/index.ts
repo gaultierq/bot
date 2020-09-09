@@ -9,7 +9,7 @@ function configureApolloClient(config: Config): ApolloClient<NormalizedCacheObje
 
   const wsLink = new WebSocketLink({
     uri: config.endpoints.wss,
-    options: { reconnect: true }
+    options: { reconnect: false }
   });
 
   const link = split(

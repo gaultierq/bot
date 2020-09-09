@@ -1,0 +1,11 @@
+type Query {
+  getBot(input: GetBotInput!): GetBotResult!
+}
+
+input GetBotInput {
+  id: ID!
+}
+
+type GetBotResult {
+  bot: Bot
+}

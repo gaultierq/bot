@@ -1,0 +1,6 @@
+type Bot {
+  id: ID!
+  published: Boolean!
+  title: String!
+  author: User
+}

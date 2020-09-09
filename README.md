@@ -8,8 +8,12 @@
 </p>
 
 ### Start working
+start backend and client for development:
 `cd web/ && yarn start`
 `cd backend/ && yarn start:development`
+
+add endpoint + data model
+
 
 ### Motivation :star:
 

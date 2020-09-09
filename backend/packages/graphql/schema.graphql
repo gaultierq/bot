@@ -1,3 +1,10 @@
+type Bot {
+  id: ID!
+  published: Boolean!
+  title: String!
+  author: User
+}
+
 type Post {
   id: ID!
   content: String
@@ -14,8 +21,17 @@ type User {
 }
 
 type Query {
+  getBot(input: GetBotInput!): GetBotResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
+}
+
+input GetBotInput {
+  id: ID!
+}
+
+type GetBotResult {
+  bot: Bot
 }
 
 input GetPostInput {

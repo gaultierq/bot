@@ -9,6 +9,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type Bot = {
+  __typename?: 'Bot';
+  id: Scalars['ID'];
+  published: Scalars['Boolean'];
+  title: Scalars['String'];
+  author?: Maybe<User>;
+};
+
 export type Post = {
   __typename?: 'Post';
   id: Scalars['ID'];
@@ -28,16 +36,33 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
+  getBot: GetBotResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
+
+
+export type QueryGetBotArgs = {
+  input: GetBotInput;
+};
+
 
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
 
+
 export type QueryGetUserArgs = {
   input: GetUserInput;
+};
+
+export type GetBotInput = {
+  id: Scalars['ID'];
+};
+
+export type GetBotResult = {
+  __typename?: 'GetBotResult';
+  bot?: Maybe<Bot>;
 };
 
 export type GetPostInput = {

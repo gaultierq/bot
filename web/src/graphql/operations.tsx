@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 
@@ -11,6 +10,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+};
+
+export type Bot = {
+  __typename?: 'Bot';
+  id: Scalars['ID'];
+  published: Scalars['Boolean'];
+  title: Scalars['String'];
+  author?: Maybe<User>;
 };
 
 export type Post = {
@@ -32,16 +39,33 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
+  getBot: GetBotResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
+
+
+export type QueryGetBotArgs = {
+  input: GetBotInput;
+};
+
 
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
 
+
 export type QueryGetUserArgs = {
   input: GetUserInput;
+};
+
+export type GetBotInput = {
+  id: Scalars['ID'];
+};
+
+export type GetBotResult = {
+  __typename?: 'GetBotResult';
+  bot?: Maybe<Bot>;
 };
 
 export type GetPostInput = {
@@ -66,44 +90,57 @@ export type GetPostQueryVariables = Exact<{
   input: GetPostInput;
 }>;
 
-export type GetPostQuery = { __typename?: 'Query' } & {
-  getPost: { __typename?: 'GetPostResult' } & {
-    post?: Maybe<
-    { __typename?: 'Post' } & Pick<Post, 'id' | 'content' | 'published' | 'title'> & {
-      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
-    }
-    >;
-  };
-};
+
+export type GetPostQuery = (
+  { __typename?: 'Query' }
+  & { getPost: (
+    { __typename?: 'GetPostResult' }
+    & { post?: Maybe<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'content' | 'published' | 'title'>
+      & { author?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+        )> }
+      )> }
+    ) }
+  );
 
 export type GetUserQueryVariables = Exact<{
   input: GetUserInput;
 }>;
 
-export type GetUserQuery = { __typename?: 'Query' } & {
-  getUser: { __typename?: 'GetUserResult' } & {
-    user?: Maybe<
-    { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'name'> & {
-      posts?: Maybe<Array<Maybe<{ __typename?: 'Post' } & Pick<Post, 'id'>>>>;
-    }
-    >;
-  };
-};
+
+export type GetUserQuery = (
+  { __typename?: 'Query' }
+  & { getUser: (
+    { __typename?: 'GetUserResult' }
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'email' | 'name'>
+      & { posts?: Maybe<Array<Maybe<(
+        { __typename?: 'Post' }
+        & Pick<Post, 'id'>
+        )>>> }
+      )> }
+    ) }
+  );
+
 
 export const GetPostDocument = gql`
-  query getPost($input: GetPostInput!) {
-    getPost(input: $input) {
-      post {
-        id
-        content
-        published
-        title
-        author {
-          id
+    query getPost($input: GetPostInput!) {
+        getPost(input: $input) {
+            post {
+                id
+                content
+                published
+                title
+                author {
+                    id
+                }
+            }
         }
-      }
     }
-  }
 `;
 
 /**
@@ -132,18 +169,18 @@ export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<GetPostQuery, GetPostQueryVariables>;
 export const GetUserDocument = gql`
-  query getUser($input: GetUserInput!) {
-    getUser(input: $input) {
-      user {
-        id
-        email
-        name
-        posts {
-          id
+    query getUser($input: GetUserInput!) {
+        getUser(input: $input) {
+            user {
+                id
+                email
+                name
+                posts {
+                    id
+                }
+            }
         }
-      }
     }
-  }
 `;
 
 /**
