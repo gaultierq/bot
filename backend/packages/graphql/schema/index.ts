@@ -5,8 +5,9 @@ import { mergeResolvers, mergeTypeDefs, makeExecutableSchema, loadFilesSync } fr
 
 import { userResolvers } from './user';
 import { postResolvers } from './post';
+import { botResolvers } from './bot';
 
-const resolvers = mergeResolvers([userResolvers, postResolvers]);
+const resolvers = mergeResolvers([userResolvers, postResolvers, botResolvers]);
 
 const types = loadFilesSync(join(__dirname, './**/types.graphql'));
 const queries = loadFilesSync(join(__dirname, './**/queries.graphql'));
