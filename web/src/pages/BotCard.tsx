@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { Bot, useCreateBotMutation } from '@web/graphql';
 import { CardMedia, CardActionArea } from '@material-ui/core';
 
+import ReactLogo from '@web/assets/images/logo.png';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275
@@ -18,7 +20,7 @@ const useStyles = makeStyles({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white'
+    // color: 'white'
   },
   pos: {
     marginBottom: 12
@@ -65,8 +67,8 @@ function BotCard(props: BotCardProps): React.ReactElement<BotCardProps> {
     <Card className={classes.root}>
       {/* eslint-disable-next-line react/jsx-no-undef */}
       <CardActionArea>
-        {bot.image && (
-          <CardMedia className={classes.media} image={bot.image} title={'Contemplative Reptile'}>
+        {(
+          <CardMedia className={classes.media} image={bot. image || ReactLogo} >
             <Typography className={classes.title} color={'textSecondary'} gutterBottom>
               {bot.title}
             </Typography>

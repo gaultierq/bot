@@ -23,6 +23,7 @@ type User {
 
 type Query {
   getBot(input: GetBotInput!): GetBotResult!
+  indexBot: IndexBotResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
 }
@@ -33,6 +34,10 @@ input GetBotInput {
 
 type GetBotResult {
   bot: Bot
+}
+
+type IndexBotResult {
+  bots: [Bot]!
 }
 
 input GetPostInput {

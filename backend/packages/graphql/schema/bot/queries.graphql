@@ -1,5 +1,6 @@
 type Query {
   getBot(input: GetBotInput!): GetBotResult!
+  indexBot: IndexBotResult!
 }
 
 input GetBotInput {
@@ -8,4 +9,8 @@ input GetBotInput {
 
 type GetBotResult {
   bot: Bot
+}
+
+type IndexBotResult {
+  bots: [Bot]!
 }

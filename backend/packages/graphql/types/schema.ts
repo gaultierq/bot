@@ -38,17 +38,21 @@ export type User = {
 export type Query = {
   __typename?: 'Query';
   getBot: GetBotResult;
+  indexBot: IndexBotResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
+
 
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
+
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
+
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -61,6 +65,11 @@ export type GetBotInput = {
 export type GetBotResult = {
   __typename?: 'GetBotResult';
   bot?: Maybe<Bot>;
+};
+
+export type IndexBotResult = {
+  __typename?: 'IndexBotResult';
+  bots: Array<Maybe<Bot>>;
 };
 
 export type GetPostInput = {
@@ -85,6 +94,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createBot: CreateBotResult;
 };
+
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;

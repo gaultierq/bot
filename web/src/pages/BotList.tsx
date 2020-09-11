@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { gql, useQuery } from '@apollo/client';
-import { GetPostDocument, useGetPostQuery } from '@web/graphql';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import _ from 'lodash';
+import { useIndexBotQuery } from '@web/graphql';
 import BotCard, { BotAdd } from './BotCard';
 import { useHistory } from 'react-router-dom';
 
@@ -22,12 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const BOTLIST = [
-  { id: '1', title: 'first bot 1', published: true, image: 'https://placeimg.com/640/480/any' },
-  { id: '2', title: 'first bot 2', published: true, image: 'https://placeimg.com/640/480/any' },
-  { id: '3', title: 'first bot 3', published: true, image: 'https://placeimg.com/640/480/any' },
-  { id: '4', title: 'first bot 4', published: true, image: 'https://placeimg.com/640/480/any' }
-];
 
 function BotList() {
   const spacing = 2;
@@ -35,8 +28,12 @@ function BotList() {
   const classes = useStyles();
   // const { loading, error, data } = useQuery(GetPostDocument, { variables: { id: 3 } });
   // const query = useGetPostQuery({id: 3})
-  // console.debug('query response', { loading, error, data });
+
   const history = useHistory();
+  const { data, loading, error } = useIndexBotQuery();
+  console.debug('query response', { loading, error, data });
+
+  const bots = _.get(data, 'indexBot.bots', []);
 
   return (
     <Grid container className={classes.root} spacing={2}>
@@ -45,7 +42,7 @@ function BotList() {
           <Grid key={'add_bot_key'} item>
             <BotAdd />
           </Grid>
-          {BOTLIST.map(bot => {
+          {bots.map(bot => {
             const goToBot = (botId) => {
               return () => {
                 console.debug('clicked');
