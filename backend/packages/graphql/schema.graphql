@@ -50,3 +50,15 @@ input GetUserInput {
 type GetUserResult {
   user: User
 }
+
+type Mutation {
+  createBot(input: CreateBotInput!): CreateBotResult!
+}
+
+input CreateBotInput {
+  title: String!
+}
+
+type CreateBotResult {
+  bot: Bot
+}

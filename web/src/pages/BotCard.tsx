@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { Bot } from '@web/graphql';
+import { Bot, useCreateBotMutation } from '@web/graphql';
 import { CardMedia, CardActionArea } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -32,9 +32,19 @@ type BotCardProps = { bot: Bot };
 
 export function BotAdd(): React.ReactElement {
   const classes = useStyles();
+
+  const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
+    variables: {
+      input: { title: 'toto' }
+    },
+  });
+  console.debug('mutation status:', { data, loading, error });
+
   const addBot = React.useCallback(() => {
-    console.debug('clicked add bot');
+    console.debug('clicked add bot; executing mutation');
+    createBotMutation();
   }, []);
+
   return (
     <Card className={classes.root}>
       <CardActionArea onClick={addBot} style={{ backgroundColor: 'blue' }}>

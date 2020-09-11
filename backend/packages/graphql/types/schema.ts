@@ -83,3 +83,22 @@ export type GetUserResult = {
   __typename?: 'GetUserResult';
   user?: Maybe<User>;
 };
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createBot: CreateBotResult;
+};
+
+
+export type MutationCreateBotArgs = {
+  input: CreateBotInput;
+};
+
+export type CreateBotInput = {
+  title: Scalars['String'];
+};
+
+export type CreateBotResult = {
+  __typename?: 'CreateBotResult';
+  bot?: Maybe<Bot>;
+};

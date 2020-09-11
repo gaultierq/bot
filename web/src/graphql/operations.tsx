@@ -86,6 +86,45 @@ export type GetUserResult = {
   user?: Maybe<User>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createBot: CreateBotResult;
+};
+
+
+export type MutationCreateBotArgs = {
+  input: CreateBotInput;
+};
+
+export type CreateBotInput = {
+  title: Scalars['String'];
+};
+
+export type CreateBotResult = {
+  __typename?: 'CreateBotResult';
+  bot?: Maybe<Bot>;
+};
+
+export type CreateBotMutationVariables = Exact<{
+  input: CreateBotInput;
+}>;
+
+
+export type CreateBotMutation = (
+  { __typename?: 'Mutation' }
+  & { createBot: (
+    { __typename?: 'CreateBotResult' }
+    & { bot?: Maybe<(
+      { __typename?: 'Bot' }
+      & Pick<Bot, 'id' | 'published' | 'title'>
+      & { author?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+      )> }
+    )> }
+  ) }
+);
+
 export type GetBotQueryVariables = Exact<{
   input: GetBotInput;
 }>;
@@ -147,6 +186,45 @@ export type GetUserQuery = (
 );
 
 
+export const CreateBotDocument = gql`
+    mutation createBot($input: CreateBotInput!) {
+  createBot(input: $input) {
+    bot {
+      id
+      published
+      title
+      author {
+        id
+      }
+    }
+  }
+}
+    `;
+export type CreateBotMutationFn = Apollo.MutationFunction<CreateBotMutation, CreateBotMutationVariables>;
+
+/**
+ * __useCreateBotMutation__
+ *
+ * To run a mutation, you first call `useCreateBotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateBotMutation(baseOptions?: Apollo.MutationHookOptions<CreateBotMutation, CreateBotMutationVariables>) {
+        return Apollo.useMutation<CreateBotMutation, CreateBotMutationVariables>(CreateBotDocument, baseOptions);
+      }
+export type CreateBotMutationHookResult = ReturnType<typeof useCreateBotMutation>;
+export type CreateBotMutationResult = Apollo.MutationResult<CreateBotMutation>;
+export type CreateBotMutationOptions = Apollo.BaseMutationOptions<CreateBotMutation, CreateBotMutationVariables>;
 export const GetBotDocument = gql`
     query getBot($input: GetBotInput!) {
   getBot(input: $input) {
