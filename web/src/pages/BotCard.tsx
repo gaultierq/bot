@@ -36,7 +36,7 @@ export function BotAdd(): React.ReactElement {
   const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
     variables: {
       input: { title: 'toto' }
-    },
+    }
   });
   console.debug('mutation status:', { data, loading, error });
 

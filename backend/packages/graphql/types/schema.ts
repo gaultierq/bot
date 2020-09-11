@@ -42,16 +42,13 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -88,7 +85,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   createBot: CreateBotResult;
 };
-
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;

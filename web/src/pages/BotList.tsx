@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { gql, useQuery } from '@apollo/client';
 import { GetPostDocument, useGetPostQuery } from '@web/graphql';
 import BotCard, { BotAdd } from './BotCard';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,7 @@ function BotList() {
   // const { loading, error, data } = useQuery(GetPostDocument, { variables: { id: 3 } });
   // const query = useGetPostQuery({id: 3})
   // console.debug('query response', { loading, error, data });
+  const history = useHistory();
 
   return (
     <Grid container className={classes.root} spacing={2}>
@@ -43,11 +45,19 @@ function BotList() {
           <Grid key={'add_bot_key'} item>
             <BotAdd />
           </Grid>
-          {BOTLIST.map(bot => (
-            <Grid key={bot.id} item>
-              <BotCard bot={bot} />
-            </Grid>
-          ))}
+          {BOTLIST.map(bot => {
+            const goToBot = (botId) => {
+              return () => {
+                console.debug('clicked');
+                history.push(`/bot/${botId}`);
+              };
+            };
+            return (
+              <Grid key={bot.id} onClick={goToBot(bot.id)} item>
+                <BotCard bot={bot} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
     </Grid>
