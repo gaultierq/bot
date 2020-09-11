@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
 function BotList() {
   const spacing = 2;
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
@@ -43,7 +42,7 @@ function BotList() {
             <BotAdd />
           </Grid>
           {bots.map(bot => {
-            const goToBot = (botId) => {
+            const goToBot = botId => {
               return () => {
                 console.debug('clicked');
                 history.push(`/bot/${botId}`);

@@ -5,7 +5,7 @@ import { createBot } from './mutations';
 const resolvers = {
   Query: {
     getBot,
-    indexBot,
+    indexBot
   },
   Mutation: {
     createBot

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
     // color: 'white'
   },
   pos: {
@@ -67,13 +67,13 @@ function BotCard(props: BotCardProps): React.ReactElement<BotCardProps> {
     <Card className={classes.root}>
       {/* eslint-disable-next-line react/jsx-no-undef */}
       <CardActionArea>
-        {(
-          <CardMedia className={classes.media} image={bot. image || ReactLogo} >
+        {
+          <CardMedia className={classes.media} image={bot.image || ReactLogo}>
             <Typography className={classes.title} color={'textSecondary'} gutterBottom>
               {bot.title}
             </Typography>
           </CardMedia>
-        )}
+        }
         <CardContent></CardContent>
       </CardActionArea>
     </Card>
