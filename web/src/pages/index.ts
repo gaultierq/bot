@@ -1,4 +1,5 @@
 import Home from './Home';
-import BotList from './BotList';
+import BotList from './Bot/BotList';
+import BotCreate from './Bot/BotCreate';
 
-export { Home, BotList };
+export { Home, BotList, BotCreate };

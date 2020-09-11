@@ -5,8 +5,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Bot, useCreateBotMutation } from '@web/graphql';
 import { CardMedia, CardActionArea } from '@material-ui/core';
-
+import { useHistory } from 'react-router-dom';
 import ReactLogo from '@web/assets/images/logo.png';
+import {Routes} from "@web/constants";
 
 const useStyles = makeStyles({
   root: {
@@ -35,16 +36,18 @@ type BotCardProps = { bot: Bot };
 export function BotAdd(): React.ReactElement {
   const classes = useStyles();
 
-  const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
-    variables: {
-      input: { title: 'toto' }
-    }
-  });
-  console.debug('mutation status:', { data, loading, error });
+  // const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
+  //   variables: {
+  //     input: { title: 'toto' }
+  //   }
+  // });
+  // createBotMutation();
+  // console.debug('mutation status:', { data, loading, error });
 
+  const history = useHistory();
   const addBot = React.useCallback(() => {
     console.debug('clicked add bot; executing mutation');
-    createBotMutation();
+    history.push(Routes.BOT_CREATE);
   }, []);
 
   return (

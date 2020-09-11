@@ -1,4 +1,5 @@
 export enum Routes {
   HOME = '/',
-  BOT_LIST = '/bots'
+  BOT_LIST = '/bot/index',
+  BOT_CREATE = '/bot/new',
 }

@@ -34,9 +34,14 @@ function configureApolloClient(config: Config): ApolloClient<NormalizedCacheObje
           console.log(`[Network error]: ${networkError}`);
         }
       }),
-      link
+      link,
     ]),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'cache-and-network',
+      },
+    },
   });
 
   return client;

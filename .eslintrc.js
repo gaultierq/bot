@@ -81,7 +81,7 @@ module.exports = {
     'react/jsx-indent-props': ['error', 2],
     'react/jsx-indent': ['error', 2],
     'react/jsx-max-props-per-line': ['error', { maximum: 4 }],
-    'react/jsx-no-bind': 'error',
+    'react/jsx-no-bind': 'warn',
     'react/jsx-no-literals': 'off',
     'react/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }]
   }
