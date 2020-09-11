@@ -15,6 +15,7 @@ export type Bot = {
   published: Scalars['Boolean'];
   title: Scalars['String'];
   author?: Maybe<User>;
+  image?: Maybe<Scalars['String']>;
 };
 
 export type Post = {
@@ -41,16 +42,13 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;

@@ -1,3 +1,3 @@
-import getBot from './getPost';
+import getBot from './getBot';
 
 export { getBot };

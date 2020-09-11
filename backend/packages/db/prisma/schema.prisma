@@ -23,3 +23,12 @@ model Post {
   title     String
   author    User?   @relation(fields: [authorId], references: [id])
 }
+
+model Bot {
+  id        String  @default(cuid()) @id
+  authorId  String?
+  published Boolean @default(false)
+  title     String
+  image     String?
+  author    User?   @relation(fields: [authorId], references: [id])
+}

@@ -3,24 +3,32 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { gql, useQuery } from '@apollo/client';
-import { GetPostDocument, useGetPostQuery } from '@web/graphql'
+import { GetPostDocument, useGetPostQuery } from '@web/graphql';
+import BotCard, { BotAdd } from './BotCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      flexGrow: 1
     },
     paper: {
       height: 140,
-      width: 100,
+      width: 100
     },
     control: {
-      padding: theme.spacing(2),
-    },
-  }),
+      padding: theme.spacing(2)
+    }
+  })
 );
 
-export default function SpacingGrid() {
+const BOTLIST = [
+  { id: '1', title: 'first bot 1', published: true, image: 'https://placeimg.com/640/480/any' },
+  { id: '2', title: 'first bot 2', published: true, image: 'https://placeimg.com/640/480/any' },
+  { id: '3', title: 'first bot 3', published: true, image: 'https://placeimg.com/640/480/any' },
+  { id: '4', title: 'first bot 4', published: true, image: 'https://placeimg.com/640/480/any' }
+];
+
+function BotList() {
   const spacing = 2;
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();
@@ -32,9 +40,12 @@ export default function SpacingGrid() {
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={12}>
         <Grid container justify={'center'} spacing={spacing}>
-          {[0, 1, 2].map((value) => (
-            <Grid key={value} item>
-              <Paper className={classes.paper} />
+          <Grid key={'add_bot_key'} item>
+            <BotAdd />
+          </Grid>
+          {BOTLIST.map(bot => (
+            <Grid key={bot.id} item>
+              <BotCard bot={bot} />
             </Grid>
           ))}
         </Grid>
@@ -42,3 +53,4 @@ export default function SpacingGrid() {
     </Grid>
   );
 }
+export default BotList;

@@ -18,6 +18,7 @@ export type Bot = {
   published: Scalars['Boolean'];
   title: Scalars['String'];
   author?: Maybe<User>;
+  image?: Maybe<Scalars['String']>;
 };
 
 export type Post = {
@@ -44,16 +45,13 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -86,61 +84,102 @@ export type GetUserResult = {
   user?: Maybe<User>;
 };
 
+export type GetBotQueryVariables = Exact<{
+  input: GetBotInput;
+}>;
+
+export type GetBotQuery = { __typename?: 'Query' } & {
+  getBot: { __typename?: 'GetBotResult' } & {
+    bot?: Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
+
 export type GetPostQueryVariables = Exact<{
   input: GetPostInput;
 }>;
 
-
-export type GetPostQuery = (
-  { __typename?: 'Query' }
-  & { getPost: (
-    { __typename?: 'GetPostResult' }
-    & { post?: Maybe<(
-      { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'content' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-        )> }
-      )> }
-    ) }
-  );
+export type GetPostQuery = { __typename?: 'Query' } & {
+  getPost: { __typename?: 'GetPostResult' } & {
+    post?: Maybe<
+    { __typename?: 'Post' } & Pick<Post, 'id' | 'content' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
 export type GetUserQueryVariables = Exact<{
   input: GetUserInput;
 }>;
 
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { getUser: (
-    { __typename?: 'GetUserResult' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'name'>
-      & { posts?: Maybe<Array<Maybe<(
-        { __typename?: 'Post' }
-        & Pick<Post, 'id'>
-        )>>> }
-      )> }
-    ) }
-  );
-
-
-export const GetPostDocument = gql`
-    query getPost($input: GetPostInput!) {
-        getPost(input: $input) {
-            post {
-                id
-                content
-                published
-                title
-                author {
-                    id
-                }
-            }
-        }
+export type GetUserQuery = { __typename?: 'Query' } & {
+  getUser: { __typename?: 'GetUserResult' } & {
+    user?: Maybe<
+    { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'name'> & {
+      posts?: Maybe<Array<Maybe<{ __typename?: 'Post' } & Pick<Post, 'id'>>>>;
     }
+    >;
+  };
+};
+
+export const GetBotDocument = gql`
+  query getBot($input: GetBotInput!) {
+    getBot(input: $input) {
+      bot {
+        id
+        published
+        title
+        author {
+          id
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetBotQuery__
+ *
+ * To run a query within a React component, call `useGetBotQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBotQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBotQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetBotQuery(baseOptions?: Apollo.QueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
+  return Apollo.useQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
+export function useGetBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
+  return Apollo.useLazyQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
+export type GetBotQueryHookResult = ReturnType<typeof useGetBotQuery>;
+export type GetBotLazyQueryHookResult = ReturnType<typeof useGetBotLazyQuery>;
+export type GetBotQueryResult = Apollo.QueryResult<GetBotQuery, GetBotQueryVariables>;
+export const GetPostDocument = gql`
+  query getPost($input: GetPostInput!) {
+    getPost(input: $input) {
+      post {
+        id
+        content
+        published
+        title
+        author {
+          id
+        }
+      }
+    }
+  }
 `;
 
 /**
@@ -169,18 +208,18 @@ export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<GetPostQuery, GetPostQueryVariables>;
 export const GetUserDocument = gql`
-    query getUser($input: GetUserInput!) {
-        getUser(input: $input) {
-            user {
-                id
-                email
-                name
-                posts {
-                    id
-                }
-            }
+  query getUser($input: GetUserInput!) {
+    getUser(input: $input) {
+      user {
+        id
+        email
+        name
+        posts {
+          id
         }
+      }
     }
+  }
 `;
 
 /**

@@ -3,6 +3,7 @@ type Bot {
   published: Boolean!
   title: String!
   author: User
+  image: String
 }
 
 type Post {
