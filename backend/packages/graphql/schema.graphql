@@ -59,6 +59,7 @@ type GetUserResult {
 type Mutation {
   createBot(input: CreateBotInput!): CreateBotResult!
   editBot(input: EditBotInput!): EditBotResult!
+  deleteBot(input: DeleteBotInput!): DeleteBotResult!
 }
 
 input CreateBotInput {
@@ -79,5 +80,13 @@ input EditBotInput {
 }
 
 type EditBotResult {
+  bot: Bot
+}
+
+input DeleteBotInput {
+  id: ID!
+}
+
+type DeleteBotResult {
   bot: Bot
 }

@@ -6,23 +6,24 @@ import BotForm from './BotForm';
 
 export default function BotCreate() {
   const [bot] = React.useState({
-    title: '',
+    title: ''
   });
   const history = useHistory();
 
   const [createBotMutation, { data, loading, error }] = useCreateBotMutation();
 
-  const onSubmit = React.useCallback(async botParam => {
-    console.info('submiting bot creation');
-    await createBotMutation({
-      variables: {
-        input: botParam
-      }
-    });
-    history.push(Routes.BOT_LIST);
-  }, [loading, createBotMutation, history]);
-
-  return (
-    <BotForm bot={bot} onSubmit={onSubmit} />
+  const onSubmit = React.useCallback(
+    async botParam => {
+      console.info('submiting bot creation');
+      await createBotMutation({
+        variables: {
+          input: botParam
+        }
+      });
+      history.push(Routes.BOT_LIST);
+    },
+    [loading, createBotMutation, history]
   );
+
+  return <BotForm bot={bot} onSubmit={onSubmit} />;
 }

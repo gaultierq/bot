@@ -94,6 +94,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createBot: CreateBotResult;
   editBot: EditBotResult;
+  deleteBot: DeleteBotResult;
 };
 
 
@@ -104,6 +105,11 @@ export type MutationCreateBotArgs = {
 
 export type MutationEditBotArgs = {
   input: EditBotInput;
+};
+
+
+export type MutationDeleteBotArgs = {
+  input: DeleteBotInput;
 };
 
 export type CreateBotInput = {
@@ -126,5 +132,14 @@ export type EditBotInput = {
 
 export type EditBotResult = {
   __typename?: 'EditBotResult';
+  bot?: Maybe<Bot>;
+};
+
+export type DeleteBotInput = {
+  id: Scalars['ID'];
+};
+
+export type DeleteBotResult = {
+  __typename?: 'DeleteBotResult';
   bot?: Maybe<Bot>;
 };

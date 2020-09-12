@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {Bot, CreateBotInput, EditBotInput, Maybe, User} from '@web/graphql';
+import { Bot, CreateBotInput, EditBotInput, Maybe, User } from '@web/graphql';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +24,7 @@ type BotParam = { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' 
   author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
 };
 
-type BotFormParams = { bot: CreateBotInput | EditBotInput, onSubmit: (BotParam) => void };
+type BotFormParams = { bot: CreateBotInput | EditBotInput; onSubmit: (BotParam) => void };
 
 export default function BotForm(props: BotFormParams) {
   const classes = useStyles();
@@ -33,12 +33,7 @@ export default function BotForm(props: BotFormParams) {
   const [image, setImage] = useTextField(bot.image);
 
   return (
-    <form
-      className={classes.root}
-      noValidate
-      autoComplete={'off'}
-      onSubmit={event => onSubmit({ title, image })}
-    >
+    <form className={classes.root} noValidate autoComplete={'off'} onSubmit={event => onSubmit({ title, image })}>
       <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
       <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
       <div className='form-group my-4'>

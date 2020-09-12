@@ -96,6 +96,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createBot: CreateBotResult;
   editBot: EditBotResult;
+  deleteBot: DeleteBotResult;
 };
 
 
@@ -106,6 +107,11 @@ export type MutationCreateBotArgs = {
 
 export type MutationEditBotArgs = {
   input: EditBotInput;
+};
+
+
+export type MutationDeleteBotArgs = {
+  input: DeleteBotInput;
 };
 
 export type CreateBotInput = {
@@ -131,6 +137,15 @@ export type EditBotResult = {
   bot?: Maybe<Bot>;
 };
 
+export type DeleteBotInput = {
+  id: Scalars['ID'];
+};
+
+export type DeleteBotResult = {
+  __typename?: 'DeleteBotResult';
+  bot?: Maybe<Bot>;
+};
+
 export type CreateBotMutationVariables = Exact<{
   input: CreateBotInput;
 }>;
@@ -147,6 +162,22 @@ export type CreateBotMutation = (
         { __typename?: 'User' }
         & Pick<User, 'id'>
       )> }
+    )> }
+  ) }
+);
+
+export type DeleteBotMutationVariables = Exact<{
+  input: DeleteBotInput;
+}>;
+
+
+export type DeleteBotMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteBot: (
+    { __typename?: 'DeleteBotResult' }
+    & { bot?: Maybe<(
+      { __typename?: 'Bot' }
+      & Pick<Bot, 'id' | 'published' | 'title'>
     )> }
   ) }
 );
@@ -285,6 +316,42 @@ export function useCreateBotMutation(baseOptions?: Apollo.MutationHookOptions<Cr
 export type CreateBotMutationHookResult = ReturnType<typeof useCreateBotMutation>;
 export type CreateBotMutationResult = Apollo.MutationResult<CreateBotMutation>;
 export type CreateBotMutationOptions = Apollo.BaseMutationOptions<CreateBotMutation, CreateBotMutationVariables>;
+export const DeleteBotDocument = gql`
+    mutation deleteBot($input: DeleteBotInput!) {
+  deleteBot(input: $input) {
+    bot {
+      id
+      published
+      title
+    }
+  }
+}
+    `;
+export type DeleteBotMutationFn = Apollo.MutationFunction<DeleteBotMutation, DeleteBotMutationVariables>;
+
+/**
+ * __useDeleteBotMutation__
+ *
+ * To run a mutation, you first call `useDeleteBotMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBotMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBotMutation, { data, loading, error }] = useDeleteBotMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteBotMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBotMutation, DeleteBotMutationVariables>) {
+        return Apollo.useMutation<DeleteBotMutation, DeleteBotMutationVariables>(DeleteBotDocument, baseOptions);
+      }
+export type DeleteBotMutationHookResult = ReturnType<typeof useDeleteBotMutation>;
+export type DeleteBotMutationResult = Apollo.MutationResult<DeleteBotMutation>;
+export type DeleteBotMutationOptions = Apollo.BaseMutationOptions<DeleteBotMutation, DeleteBotMutationVariables>;
 export const EditBotDocument = gql`
     mutation editBot($input: EditBotInput!) {
   editBot(input: $input) {
