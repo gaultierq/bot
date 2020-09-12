@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
 import { useIndexBotQuery } from '@web/graphql';
-import BotCard, { BotAdd } from './BotCard';
+import BotCard, { BotAdd } from './components/BotCard';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +45,7 @@ function BotList() {
             const goToBot = botId => {
               return () => {
                 console.debug('clicked');
-                history.push(`/bot/${botId}`);
+                history.push(`/bot/${botId}/edit`);
               };
             };
             return (

@@ -64,7 +64,7 @@ module.exports = {
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     'no-multiple-empty-lines': ['error', { max: 2, maxBOF: 0, maxEOF: 1 }],
-    'no-trailing-spaces': 'error',
+    'no-trailing-spaces': 'warn',
     '@typescript-eslint/type-annotation-spacing': ['error'],
     'object-curly-spacing': ['error', 'always'],
     'key-spacing': ['error', { beforeColon: false }],
