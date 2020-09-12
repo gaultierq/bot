@@ -1,11 +1,25 @@
 type Mutation {
   createBot(input: CreateBotInput!): CreateBotResult!
+  editBot(input: EditBotInput!): EditBotResult!
 }
 
 input CreateBotInput {
   title: String!
+  image: String
+  published: Boolean
 }
 
 type CreateBotResult {
+  bot: Bot
+}
+
+input EditBotInput {
+  id: ID!
+  title: String!
+  image: String!
+  published: Boolean!
+}
+
+type EditBotResult {
   bot: Bot
 }

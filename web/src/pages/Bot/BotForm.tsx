@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {Bot, Maybe, User} from '@web/graphql';
+import {Bot, CreateBotInput, EditBotInput, Maybe, User} from '@web/graphql';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,8 +24,9 @@ type BotParam = { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' 
   author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
 };
 
+type BotFormParams = { bot: CreateBotInput | EditBotInput, onSubmit: (BotParam) => void };
 
-export default function BotForm(props: {bot: BotParam, onSubmit: (any) => void}) {
+export default function BotForm(props: BotFormParams) {
   const classes = useStyles();
   const { bot, onSubmit } = props;
   const [title, setTitle] = useTextField(bot.title);
@@ -36,7 +37,7 @@ export default function BotForm(props: {bot: BotParam, onSubmit: (any) => void})
       className={classes.root}
       noValidate
       autoComplete={'off'}
-      onSubmit={onSubmit}
+      onSubmit={event => onSubmit({ title, image })}
     >
       <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
       <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />

@@ -33,7 +33,11 @@ function BotList() {
   console.debug('query response', { loading, error, data });
 
   const bots = _.get(data, 'indexBot.bots', []);
-
+  const goToBot = botId => {
+    return () => {
+      history.push(`/bot/${botId}/edit`);
+    };
+  };
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={12}>
@@ -42,12 +46,6 @@ function BotList() {
             <BotAdd />
           </Grid>
           {bots.map(bot => {
-            const goToBot = botId => {
-              return () => {
-                console.debug('clicked');
-                history.push(`/bot/${botId}/edit`);
-              };
-            };
             return (
               <Grid key={bot.id} onClick={goToBot(bot.id)} item>
                 <BotCard bot={bot} />

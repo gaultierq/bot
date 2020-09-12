@@ -5,30 +5,21 @@ import { Routes } from '@web/constants';
 import BotForm from './BotForm';
 
 export default function BotCreate() {
-  // thats really not good, but still making progress on ts
   const [bot] = React.useState({
-    id: '',
-    published: false,
     title: '',
-    image: null,
   });
-
   const history = useHistory();
 
-  const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
-    variables: {
-      input: { title: bot.title }
-    }
-  });
+  const [createBotMutation, { data, loading, error }] = useCreateBotMutation();
 
-  const onSubmit = React.useCallback(e => {
+  const onSubmit = React.useCallback(async botParam => {
     console.info('submiting bot creation');
-    e.preventDefault();
-    if (loading) return;
-    (async () => {
-      await createBotMutation();
-      history.push(Routes.BOT_LIST);
-    })();
+    await createBotMutation({
+      variables: {
+        input: botParam
+      }
+    });
+    history.push(Routes.BOT_LIST);
   }, [loading, createBotMutation, history]);
 
   return (

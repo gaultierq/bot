@@ -1,43 +1,35 @@
 import React from 'react';
-import { useGetBotQuery } from '@web/graphql';
+import { useCreateBotMutation, useEditBotMutation, useGetBotQuery } from '@web/graphql';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
+import { Routes } from '@web/constants';
 import BotForm from './BotForm';
-import NotFound from '../Error/404';
+import NotFound from "../Error/404";
 
-type TParams = { id: string };
+type TParams = {
+  id: string
+};
 
 export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
-  const { data, loading, error } = useGetBotQuery({
-    variables: {
-      input: { id }
-    },
-  });
-
-  const bot = data?.getBot?.bot;
+  const { data: queryData, loading: queryLoading, error: queryError } = useGetBotQuery({ variables: { input: { id } } });
+  const bot = queryData?.getBot.bot;
 
   const history = useHistory();
 
-  // const [createBotMutation, { data, loading, error }] = useCreateBotMutation({
-  //   variables: {
-  //     input: { title: bot.title }
-  //   }
-  // });
+  const [editBotMutation, { data, loading, error }] = useEditBotMutation();
 
-
-  const onSubmit = React.useCallback(e => {
+  const onSubmit = React.useCallback(async botParam => {
     console.info('submiting bot creation');
-    e.preventDefault();
-    // (async () => {
-    //   await createBotMutation();
-    //   history.push(Routes.BOT_LIST);
-    // })();
-  }, [history]);
+    await editBotMutation({
+      variables: {
+        input: botParam
+      }
+    });
+    history.push(Routes.BOT_LIST);
+  }, [editBotMutation, history]);
 
-
-  if (!bot) return <NotFound />;
-
+  if (!bot) return <NotFound />
   return (
     <BotForm bot={bot} onSubmit={onSubmit} />
   );

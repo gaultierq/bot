@@ -1,3 +1,4 @@
 import createBot from './createBot';
+import editBot from './editBot';
 
-export { createBot };
+export { createBot, editBot };

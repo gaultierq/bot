@@ -43,13 +43,16 @@ export type Query = {
   getUser: GetUserResult;
 };
 
+
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
+
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
+
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -90,17 +93,38 @@ export type GetUserResult = {
 export type Mutation = {
   __typename?: 'Mutation';
   createBot: CreateBotResult;
+  editBot: EditBotResult;
 };
+
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
 
+
+export type MutationEditBotArgs = {
+  input: EditBotInput;
+};
+
 export type CreateBotInput = {
   title: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreateBotResult = {
   __typename?: 'CreateBotResult';
+  bot?: Maybe<Bot>;
+};
+
+export type EditBotInput = {
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  image: Scalars['String'];
+  published: Scalars['Boolean'];
+};
+
+export type EditBotResult = {
+  __typename?: 'EditBotResult';
   bot?: Maybe<Bot>;
 };

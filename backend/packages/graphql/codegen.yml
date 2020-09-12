@@ -8,6 +8,8 @@ generates:
   ./types/schema.ts:
     plugins:
       - typescript
+#    config:
+#      maybeValue: T
   ../../../web/src/graphql/operations.tsx:
     plugins:
       - typescript
