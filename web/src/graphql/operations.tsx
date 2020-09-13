@@ -64,6 +64,11 @@ export type QueryGetInteractionArgs = {
 };
 
 
+export type QueryIndexInteractionArgs = {
+  input: IndexInteractionInput;
+};
+
+
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
@@ -89,6 +94,10 @@ export type IndexBotResult = {
 
 export type GetInteractionInput = {
   id: Scalars['ID'];
+};
+
+export type IndexInteractionInput = {
+  botId: Scalars['ID'];
 };
 
 export type GetInteractionResult = {
@@ -373,7 +382,9 @@ export type GetInteractionQuery = (
   ) }
 );
 
-export type IndexInteractionQueryVariables = Exact<{ [key: string]: never; }>;
+export type IndexInteractionQueryVariables = Exact<{
+  input: IndexInteractionInput;
+}>;
 
 
 export type IndexInteractionQuery = (
@@ -762,8 +773,8 @@ export type GetInteractionQueryHookResult = ReturnType<typeof useGetInteractionQ
 export type GetInteractionLazyQueryHookResult = ReturnType<typeof useGetInteractionLazyQuery>;
 export type GetInteractionQueryResult = Apollo.QueryResult<GetInteractionQuery, GetInteractionQueryVariables>;
 export const IndexInteractionDocument = gql`
-    query indexInteraction {
-  indexInteraction {
+    query indexInteraction($input: IndexInteractionInput!) {
+  indexInteraction(input: $input) {
     interactions {
       id
       content
@@ -784,6 +795,7 @@ export const IndexInteractionDocument = gql`
  * @example
  * const { data, loading, error } = useIndexInteractionQuery({
  *   variables: {
+ *      input: // value for 'input'
  *   },
  * });
  */

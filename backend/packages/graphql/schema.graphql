@@ -30,7 +30,7 @@ type Query {
   getBot(input: GetBotInput!): GetBotResult!
   indexBot: IndexBotResult!
   getInteraction(input: GetInteractionInput!): GetInteractionResult!
-  indexInteraction: IndexInteractionResult!
+  indexInteraction(input: IndexInteractionInput!): IndexInteractionResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
 }
@@ -49,6 +49,10 @@ type IndexBotResult {
 
 input GetInteractionInput {
   id: ID!
+}
+
+input IndexInteractionInput {
+  botId: ID!
 }
 
 type GetInteractionResult {

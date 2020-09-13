@@ -21,25 +21,22 @@ const useTextField = defaultValue => {
   return [val, setVal2];
 };
 
-type InteractionParam = { __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content' > & {
+type InteractionParam = { __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'> & {
   author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
 };
 
-type InteractionFormParams = { interaction: CreateInteractionInput | EditInteractionInput; onSubmit: (InteractionParam) => void };
+type InteractionFormParams = {
+  interaction: CreateInteractionInput | EditInteractionInput;
+  onSubmit: (InteractionParam) => void;
+};
 
 export default function InteractionForm(props: InteractionFormParams) {
   const classes = useStyles();
   const { interaction, onSubmit } = props;
   const [content, setContent] = useTextField(interaction.content);
 
-
   return (
-    <form
-      className={classes.root}
-      noValidate
-      autoComplete={'off'}
-      onSubmit={event => onSubmit({  content })}
-    >
+    <form className={classes.root} noValidate autoComplete={'off'} onSubmit={event => onSubmit({ content })}>
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />
       <div className='form-group my-4'>
         <button className='btn btn-block' type='submit'>

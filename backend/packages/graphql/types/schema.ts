@@ -62,6 +62,11 @@ export type QueryGetInteractionArgs = {
 };
 
 
+export type QueryIndexInteractionArgs = {
+  input: IndexInteractionInput;
+};
+
+
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
@@ -87,6 +92,10 @@ export type IndexBotResult = {
 
 export type GetInteractionInput = {
   id: Scalars['ID'];
+};
+
+export type IndexInteractionInput = {
+  botId: Scalars['ID'];
 };
 
 export type GetInteractionResult = {

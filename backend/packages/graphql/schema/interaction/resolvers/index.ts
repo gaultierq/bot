@@ -1,5 +1,5 @@
 import { Interaction } from './types';
-import { getInteraction, indexInteraction } from './queries';
+import {getInteraction, indexInteraction} from './queries';
 import { createInteraction, deleteInteraction, editInteraction } from './mutations';
 
 const resolvers = {

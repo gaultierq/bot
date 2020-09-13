@@ -28,11 +28,9 @@ function App(): React.ReactElement {
             <Route exact path={Routes.BOT_CREATE} component={BotCreate} />
             <Route path={Routes.BOT_EDIT} component={BotEdit} />
 
-
             <Route exact path={Routes.INTERACTION_LIST} component={InteractionList} />
             <Route exact path={Routes.INTERACTION_CREATE} component={InteractionCreate} />
             <Route path={Routes.INTERACTION_EDIT} component={InteractionEdit} />
-
           </Switch>
           <Route component={Footer} />
         </Router>

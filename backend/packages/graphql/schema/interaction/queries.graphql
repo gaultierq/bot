@@ -1,10 +1,14 @@
 type Query {
   getInteraction(input: GetInteractionInput!): GetInteractionResult!
-  indexInteraction: IndexInteractionResult!
+  indexInteraction(input: IndexInteractionInput!): IndexInteractionResult!
 }
 
 input GetInteractionInput {
   id: ID!
+}
+
+input IndexInteractionInput {
+  botId: ID!
 }
 
 type GetInteractionResult {
