@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import { Bot, CreateBotInput, EditBotInput, Maybe, User } from '@web/graphql';
 import Checkbox from '@material-ui/core/Checkbox';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -39,7 +38,6 @@ export default function BotForm(props: BotFormParams) {
     setPublished(event.target.checked);
   };
 
-
   return (
     <form
       className={classes.root}
@@ -49,11 +47,7 @@ export default function BotForm(props: BotFormParams) {
     >
       <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
       <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
-      <Checkbox
-        checked={published}
-        onChange={handleChange}
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
+      <Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />
       <div className='form-group my-4'>
         <button className='btn btn-block' type='submit'>
           Submit

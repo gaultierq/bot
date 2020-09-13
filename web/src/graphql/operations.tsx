@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -45,16 +46,13 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -99,16 +97,13 @@ export type Mutation = {
   deleteBot: DeleteBotResult;
 };
 
-
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
 
-
 export type MutationEditBotArgs = {
   input: EditBotInput;
 };
-
 
 export type MutationDeleteBotArgs = {
   input: DeleteBotInput;
@@ -150,147 +145,106 @@ export type CreateBotMutationVariables = Exact<{
   input: CreateBotInput;
 }>;
 
-
-export type CreateBotMutation = (
-  { __typename?: 'Mutation' }
-  & { createBot: (
-    { __typename?: 'CreateBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type CreateBotMutation = { __typename?: 'Mutation' } & {
+  createBot: { __typename?: 'CreateBotResult' } & {
+    bot?: Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
 export type DeleteBotMutationVariables = Exact<{
   input: DeleteBotInput;
 }>;
 
-
-export type DeleteBotMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteBot: (
-    { __typename?: 'DeleteBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-    )> }
-  ) }
-);
+export type DeleteBotMutation = { __typename?: 'Mutation' } & {
+  deleteBot: { __typename?: 'DeleteBotResult' } & {
+    bot?: Maybe<{ __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'>>;
+  };
+};
 
 export type EditBotMutationVariables = Exact<{
   input: EditBotInput;
 }>;
 
-
-export type EditBotMutation = (
-  { __typename?: 'Mutation' }
-  & { editBot: (
-    { __typename?: 'EditBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'image' | 'title'>
-    )> }
-  ) }
-);
+export type EditBotMutation = { __typename?: 'Mutation' } & {
+  editBot: { __typename?: 'EditBotResult' } & {
+    bot?: Maybe<{ __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'image' | 'title'>>;
+  };
+};
 
 export type GetBotQueryVariables = Exact<{
   input: GetBotInput;
 }>;
 
+export type GetBotQuery = { __typename?: 'Query' } & {
+  getBot: { __typename?: 'GetBotResult' } & {
+    bot?: Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' | 'image'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
-export type GetBotQuery = (
-  { __typename?: 'Query' }
-  & { getBot: (
-    { __typename?: 'GetBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title' | 'image'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type IndexBotQueryVariables = Exact<{ [key: string]: never }>;
 
-export type IndexBotQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IndexBotQuery = (
-  { __typename?: 'Query' }
-  & { indexBot: (
-    { __typename?: 'IndexBotResult' }
-    & { bots: Array<Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )>> }
-  ) }
-);
+export type IndexBotQuery = { __typename?: 'Query' } & {
+  indexBot: { __typename?: 'IndexBotResult' } & {
+    bots: Array<
+    Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >
+    >;
+  };
+};
 
 export type GetPostQueryVariables = Exact<{
   input: GetPostInput;
 }>;
 
-
-export type GetPostQuery = (
-  { __typename?: 'Query' }
-  & { getPost: (
-    { __typename?: 'GetPostResult' }
-    & { post?: Maybe<(
-      { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'content' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type GetPostQuery = { __typename?: 'Query' } & {
+  getPost: { __typename?: 'GetPostResult' } & {
+    post?: Maybe<
+    { __typename?: 'Post' } & Pick<Post, 'id' | 'content' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
 export type GetUserQueryVariables = Exact<{
   input: GetUserInput;
 }>;
 
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { getUser: (
-    { __typename?: 'GetUserResult' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'name'>
-      & { posts?: Maybe<Array<Maybe<(
-        { __typename?: 'Post' }
-        & Pick<Post, 'id'>
-      )>>> }
-    )> }
-  ) }
-);
-
+export type GetUserQuery = { __typename?: 'Query' } & {
+  getUser: { __typename?: 'GetUserResult' } & {
+    user?: Maybe<
+    { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'name'> & {
+      posts?: Maybe<Array<Maybe<{ __typename?: 'Post' } & Pick<Post, 'id'>>>>;
+    }
+    >;
+  };
+};
 
 export const CreateBotDocument = gql`
-    mutation createBot($input: CreateBotInput!) {
-  createBot(input: $input) {
-    bot {
-      id
-      published
-      title
-      author {
+  mutation createBot($input: CreateBotInput!) {
+    createBot(input: $input) {
+      bot {
         id
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 export type CreateBotMutationFn = Apollo.MutationFunction<CreateBotMutation, CreateBotMutationVariables>;
 
 /**
@@ -310,23 +264,25 @@ export type CreateBotMutationFn = Apollo.MutationFunction<CreateBotMutation, Cre
  *   },
  * });
  */
-export function useCreateBotMutation(baseOptions?: Apollo.MutationHookOptions<CreateBotMutation, CreateBotMutationVariables>) {
-        return Apollo.useMutation<CreateBotMutation, CreateBotMutationVariables>(CreateBotDocument, baseOptions);
-      }
+export function useCreateBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateBotMutation, CreateBotMutationVariables>
+) {
+  return Apollo.useMutation<CreateBotMutation, CreateBotMutationVariables>(CreateBotDocument, baseOptions);
+}
 export type CreateBotMutationHookResult = ReturnType<typeof useCreateBotMutation>;
 export type CreateBotMutationResult = Apollo.MutationResult<CreateBotMutation>;
 export type CreateBotMutationOptions = Apollo.BaseMutationOptions<CreateBotMutation, CreateBotMutationVariables>;
 export const DeleteBotDocument = gql`
-    mutation deleteBot($input: DeleteBotInput!) {
-  deleteBot(input: $input) {
-    bot {
-      id
-      published
-      title
+  mutation deleteBot($input: DeleteBotInput!) {
+    deleteBot(input: $input) {
+      bot {
+        id
+        published
+        title
+      }
     }
   }
-}
-    `;
+`;
 export type DeleteBotMutationFn = Apollo.MutationFunction<DeleteBotMutation, DeleteBotMutationVariables>;
 
 /**
@@ -346,24 +302,26 @@ export type DeleteBotMutationFn = Apollo.MutationFunction<DeleteBotMutation, Del
  *   },
  * });
  */
-export function useDeleteBotMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBotMutation, DeleteBotMutationVariables>) {
-        return Apollo.useMutation<DeleteBotMutation, DeleteBotMutationVariables>(DeleteBotDocument, baseOptions);
-      }
+export function useDeleteBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteBotMutation, DeleteBotMutationVariables>
+) {
+  return Apollo.useMutation<DeleteBotMutation, DeleteBotMutationVariables>(DeleteBotDocument, baseOptions);
+}
 export type DeleteBotMutationHookResult = ReturnType<typeof useDeleteBotMutation>;
 export type DeleteBotMutationResult = Apollo.MutationResult<DeleteBotMutation>;
 export type DeleteBotMutationOptions = Apollo.BaseMutationOptions<DeleteBotMutation, DeleteBotMutationVariables>;
 export const EditBotDocument = gql`
-    mutation editBot($input: EditBotInput!) {
-  editBot(input: $input) {
-    bot {
-      id
-      published
-      image
-      title
+  mutation editBot($input: EditBotInput!) {
+    editBot(input: $input) {
+      bot {
+        id
+        published
+        image
+        title
+      }
     }
   }
-}
-    `;
+`;
 export type EditBotMutationFn = Apollo.MutationFunction<EditBotMutation, EditBotMutationVariables>;
 
 /**
@@ -383,27 +341,29 @@ export type EditBotMutationFn = Apollo.MutationFunction<EditBotMutation, EditBot
  *   },
  * });
  */
-export function useEditBotMutation(baseOptions?: Apollo.MutationHookOptions<EditBotMutation, EditBotMutationVariables>) {
-        return Apollo.useMutation<EditBotMutation, EditBotMutationVariables>(EditBotDocument, baseOptions);
-      }
+export function useEditBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<EditBotMutation, EditBotMutationVariables>
+) {
+  return Apollo.useMutation<EditBotMutation, EditBotMutationVariables>(EditBotDocument, baseOptions);
+}
 export type EditBotMutationHookResult = ReturnType<typeof useEditBotMutation>;
 export type EditBotMutationResult = Apollo.MutationResult<EditBotMutation>;
 export type EditBotMutationOptions = Apollo.BaseMutationOptions<EditBotMutation, EditBotMutationVariables>;
 export const GetBotDocument = gql`
-    query getBot($input: GetBotInput!) {
-  getBot(input: $input) {
-    bot {
-      id
-      published
-      title
-      image
-      author {
+  query getBot($input: GetBotInput!) {
+    getBot(input: $input) {
+      bot {
         id
+        published
+        title
+        image
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetBotQuery__
@@ -422,28 +382,28 @@ export const GetBotDocument = gql`
  * });
  */
 export function useGetBotQuery(baseOptions?: Apollo.QueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
-        return Apollo.useQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
 export function useGetBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
-          return Apollo.useLazyQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
 export type GetBotQueryHookResult = ReturnType<typeof useGetBotQuery>;
 export type GetBotLazyQueryHookResult = ReturnType<typeof useGetBotLazyQuery>;
 export type GetBotQueryResult = Apollo.QueryResult<GetBotQuery, GetBotQueryVariables>;
 export const IndexBotDocument = gql`
-    query indexBot {
-  indexBot {
-    bots {
-      id
-      published
-      title
-      author {
+  query indexBot {
+    indexBot {
+      bots {
         id
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useIndexBotQuery__
@@ -461,29 +421,29 @@ export const IndexBotDocument = gql`
  * });
  */
 export function useIndexBotQuery(baseOptions?: Apollo.QueryHookOptions<IndexBotQuery, IndexBotQueryVariables>) {
-        return Apollo.useQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
-      }
+  return Apollo.useQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
+}
 export function useIndexBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexBotQuery, IndexBotQueryVariables>) {
-          return Apollo.useLazyQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
+}
 export type IndexBotQueryHookResult = ReturnType<typeof useIndexBotQuery>;
 export type IndexBotLazyQueryHookResult = ReturnType<typeof useIndexBotLazyQuery>;
 export type IndexBotQueryResult = Apollo.QueryResult<IndexBotQuery, IndexBotQueryVariables>;
 export const GetPostDocument = gql`
-    query getPost($input: GetPostInput!) {
-  getPost(input: $input) {
-    post {
-      id
-      content
-      published
-      title
-      author {
+  query getPost($input: GetPostInput!) {
+    getPost(input: $input) {
+      post {
         id
+        content
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetPostQuery__
@@ -502,28 +462,28 @@ export const GetPostDocument = gql`
  * });
  */
 export function useGetPostQuery(baseOptions?: Apollo.QueryHookOptions<GetPostQuery, GetPostQueryVariables>) {
-        return Apollo.useQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
+}
 export function useGetPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostQuery, GetPostQueryVariables>) {
-          return Apollo.useLazyQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
+}
 export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<GetPostQuery, GetPostQueryVariables>;
 export const GetUserDocument = gql`
-    query getUser($input: GetUserInput!) {
-  getUser(input: $input) {
-    user {
-      id
-      email
-      name
-      posts {
+  query getUser($input: GetUserInput!) {
+    getUser(input: $input) {
+      user {
         id
+        email
+        name
+        posts {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetUserQuery__
@@ -542,11 +502,11 @@ export const GetUserDocument = gql`
  * });
  */
 export function useGetUserQuery(baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+}
 export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
