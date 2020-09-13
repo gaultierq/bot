@@ -1,0 +1,4 @@
+type Interaction {
+  id: ID!
+  content: String
+}

@@ -6,6 +6,11 @@ type Bot {
   image: String
 }
 
+type Interaction {
+  id: ID!
+  content: String
+}
+
 type Post {
   id: ID!
   content: String
@@ -24,6 +29,8 @@ type User {
 type Query {
   getBot(input: GetBotInput!): GetBotResult!
   indexBot: IndexBotResult!
+  getInteraction(input: GetInteractionInput!): GetInteractionResult!
+  indexInteraction: IndexInteractionResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
 }
@@ -38,6 +45,18 @@ type GetBotResult {
 
 type IndexBotResult {
   bots: [Bot]!
+}
+
+input GetInteractionInput {
+  id: ID!
+}
+
+type GetInteractionResult {
+  interaction: Interaction
+}
+
+type IndexInteractionResult {
+  interactions: [Interaction]!
 }
 
 input GetPostInput {
@@ -60,6 +79,9 @@ type Mutation {
   createBot(input: CreateBotInput!): CreateBotResult!
   editBot(input: EditBotInput!): EditBotResult!
   deleteBot(input: DeleteBotInput!): DeleteBotResult!
+  createInteraction(input: CreateInteractionInput!): CreateInteractionResult!
+  editInteraction(input: EditInteractionInput!): EditInteractionResult!
+  deleteInteraction(input: DeleteInteractionInput!): DeleteInteractionResult!
 }
 
 input CreateBotInput {
@@ -89,4 +111,29 @@ input DeleteBotInput {
 
 type DeleteBotResult {
   bot: Bot
+}
+
+input CreateInteractionInput {
+  content: String!
+}
+
+type CreateInteractionResult {
+  interaction: Interaction
+}
+
+input EditInteractionInput {
+  id: ID!
+  content: String!
+}
+
+type EditInteractionResult {
+  interaction: Interaction
+}
+
+input DeleteInteractionInput {
+  id: ID!
+}
+
+type DeleteInteractionResult {
+  interaction: Interaction
 }

@@ -18,6 +18,12 @@ export type Bot = {
   image?: Maybe<Scalars['String']>;
 };
 
+export type Interaction = {
+  __typename?: 'Interaction';
+  id: Scalars['ID'];
+  content?: Maybe<Scalars['String']>;
+};
+
 export type Post = {
   __typename?: 'Post';
   id: Scalars['ID'];
@@ -39,17 +45,27 @@ export type Query = {
   __typename?: 'Query';
   getBot: GetBotResult;
   indexBot: IndexBotResult;
+  getInteraction: GetInteractionResult;
+  indexInteraction: IndexInteractionResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
+
 
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
+
+export type QueryGetInteractionArgs = {
+  input: GetInteractionInput;
+};
+
+
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
+
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -67,6 +83,20 @@ export type GetBotResult = {
 export type IndexBotResult = {
   __typename?: 'IndexBotResult';
   bots: Array<Maybe<Bot>>;
+};
+
+export type GetInteractionInput = {
+  id: Scalars['ID'];
+};
+
+export type GetInteractionResult = {
+  __typename?: 'GetInteractionResult';
+  interaction?: Maybe<Interaction>;
+};
+
+export type IndexInteractionResult = {
+  __typename?: 'IndexInteractionResult';
+  interactions: Array<Maybe<Interaction>>;
 };
 
 export type GetPostInput = {
@@ -92,18 +122,39 @@ export type Mutation = {
   createBot: CreateBotResult;
   editBot: EditBotResult;
   deleteBot: DeleteBotResult;
+  createInteraction: CreateInteractionResult;
+  editInteraction: EditInteractionResult;
+  deleteInteraction: DeleteInteractionResult;
 };
+
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
 
+
 export type MutationEditBotArgs = {
   input: EditBotInput;
 };
 
+
 export type MutationDeleteBotArgs = {
   input: DeleteBotInput;
+};
+
+
+export type MutationCreateInteractionArgs = {
+  input: CreateInteractionInput;
+};
+
+
+export type MutationEditInteractionArgs = {
+  input: EditInteractionInput;
+};
+
+
+export type MutationDeleteInteractionArgs = {
+  input: DeleteInteractionInput;
 };
 
 export type CreateBotInput = {
@@ -136,4 +187,32 @@ export type DeleteBotInput = {
 export type DeleteBotResult = {
   __typename?: 'DeleteBotResult';
   bot?: Maybe<Bot>;
+};
+
+export type CreateInteractionInput = {
+  content: Scalars['String'];
+};
+
+export type CreateInteractionResult = {
+  __typename?: 'CreateInteractionResult';
+  interaction?: Maybe<Interaction>;
+};
+
+export type EditInteractionInput = {
+  id: Scalars['ID'];
+  content: Scalars['String'];
+};
+
+export type EditInteractionResult = {
+  __typename?: 'EditInteractionResult';
+  interaction?: Maybe<Interaction>;
+};
+
+export type DeleteInteractionInput = {
+  id: Scalars['ID'];
+};
+
+export type DeleteInteractionResult = {
+  __typename?: 'DeleteInteractionResult';
+  interaction?: Maybe<Interaction>;
 };

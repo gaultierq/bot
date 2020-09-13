@@ -1,0 +1,16 @@
+type Query {
+  getInteraction(input: GetInteractionInput!): GetInteractionResult!
+  indexInteraction: IndexInteractionResult!
+}
+
+input GetInteractionInput {
+  id: ID!
+}
+
+type GetInteractionResult {
+  interaction: Interaction
+}
+
+type IndexInteractionResult {
+  interactions: [Interaction]!
+}

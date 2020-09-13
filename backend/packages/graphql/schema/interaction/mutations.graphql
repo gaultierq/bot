@@ -1,0 +1,30 @@
+type Mutation {
+  createInteraction(input: CreateInteractionInput!): CreateInteractionResult!
+  editInteraction(input: EditInteractionInput!): EditInteractionResult!
+  deleteInteraction(input: DeleteInteractionInput!): DeleteInteractionResult!
+}
+
+input CreateInteractionInput {
+  content: String!
+}
+
+type CreateInteractionResult {
+  interaction: Interaction
+}
+
+input EditInteractionInput {
+  id: ID!
+  content: String!
+}
+
+type EditInteractionResult {
+  interaction: Interaction
+}
+
+input DeleteInteractionInput {
+  id: ID!
+}
+
+type DeleteInteractionResult {
+  interaction: Interaction
+}
