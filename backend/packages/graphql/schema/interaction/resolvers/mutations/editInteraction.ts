@@ -1,7 +1,18 @@
 import { Interaction } from '@prisma/client';
-import { Context, EditInteractionInput, GetInteractionResult, Maybe, MutationEditInteractionArgs, Parent } from '../../../../types';
+import {
+  Context,
+  EditInteractionInput,
+  GetInteractionResult,
+  Maybe,
+  MutationEditInteractionArgs,
+  Parent
+} from '../../../../types';
 
-async function editInteraction(_: Parent, args: MutationEditInteractionArgs, context: Context): Promise<GetInteractionResult> {
+async function editInteraction(
+  _: Parent,
+  args: MutationEditInteractionArgs,
+  context: Context
+): Promise<GetInteractionResult> {
   const { prisma } = context;
   const { input } = args;
   const { id }: EditInteractionInput = input;

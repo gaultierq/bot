@@ -1,7 +1,18 @@
 import { Interaction } from '@prisma/client';
-import { Context, DeleteInteractionInput, GetInteractionResult, Maybe, MutationDeleteInteractionArgs, Parent } from '../../../../types';
+import {
+  Context,
+  DeleteInteractionInput,
+  GetInteractionResult,
+  Maybe,
+  MutationDeleteInteractionArgs,
+  Parent
+} from '../../../../types';
 
-async function deleteInteraction(_: Parent, args: MutationDeleteInteractionArgs, context: Context): Promise<GetInteractionResult> {
+async function deleteInteraction(
+  _: Parent,
+  args: MutationDeleteInteractionArgs,
+  context: Context
+): Promise<GetInteractionResult> {
   const { prisma } = context;
   const { input } = args;
   const { id }: DeleteInteractionInput = input;

@@ -23,7 +23,7 @@ export type Bot = {
 export type Interaction = {
   __typename?: 'Interaction';
   id: Scalars['ID'];
-  content?: Maybe<Scalars['String']>;
+  content: Scalars['String'];
 };
 
 export type Post = {
@@ -271,6 +271,54 @@ export type EditBotMutation = (
   ) }
 );
 
+export type CreateInteractionMutationVariables = Exact<{
+  input: CreateInteractionInput;
+}>;
+
+
+export type CreateInteractionMutation = (
+  { __typename?: 'Mutation' }
+  & { createInteraction: (
+    { __typename?: 'CreateInteractionResult' }
+    & { interaction?: Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
+    )> }
+  ) }
+);
+
+export type DeleteInteractionMutationVariables = Exact<{
+  input: DeleteInteractionInput;
+}>;
+
+
+export type DeleteInteractionMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteInteraction: (
+    { __typename?: 'DeleteInteractionResult' }
+    & { interaction?: Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
+    )> }
+  ) }
+);
+
+export type EditInteractionMutationVariables = Exact<{
+  input: EditInteractionInput;
+}>;
+
+
+export type EditInteractionMutation = (
+  { __typename?: 'Mutation' }
+  & { editInteraction: (
+    { __typename?: 'EditInteractionResult' }
+    & { interaction?: Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
+    )> }
+  ) }
+);
+
 export type GetBotQueryVariables = Exact<{
   input: GetBotInput;
 }>;
@@ -305,6 +353,36 @@ export type IndexBotQuery = (
         { __typename?: 'User' }
         & Pick<User, 'id'>
       )> }
+    )>> }
+  ) }
+);
+
+export type GetInteractionQueryVariables = Exact<{
+  input: GetInteractionInput;
+}>;
+
+
+export type GetInteractionQuery = (
+  { __typename?: 'Query' }
+  & { getInteraction: (
+    { __typename?: 'GetInteractionResult' }
+    & { interaction?: Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
+    )> }
+  ) }
+);
+
+export type IndexInteractionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IndexInteractionQuery = (
+  { __typename?: 'Query' }
+  & { indexInteraction: (
+    { __typename?: 'IndexInteractionResult' }
+    & { interactions: Array<Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
     )>> }
   ) }
 );
@@ -462,6 +540,111 @@ export function useEditBotMutation(baseOptions?: Apollo.MutationHookOptions<Edit
 export type EditBotMutationHookResult = ReturnType<typeof useEditBotMutation>;
 export type EditBotMutationResult = Apollo.MutationResult<EditBotMutation>;
 export type EditBotMutationOptions = Apollo.BaseMutationOptions<EditBotMutation, EditBotMutationVariables>;
+export const CreateInteractionDocument = gql`
+    mutation createInteraction($input: CreateInteractionInput!) {
+  createInteraction(input: $input) {
+    interaction {
+      id
+      content
+    }
+  }
+}
+    `;
+export type CreateInteractionMutationFn = Apollo.MutationFunction<CreateInteractionMutation, CreateInteractionMutationVariables>;
+
+/**
+ * __useCreateInteractionMutation__
+ *
+ * To run a mutation, you first call `useCreateInteractionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateInteractionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createInteractionMutation, { data, loading, error }] = useCreateInteractionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateInteractionMutation(baseOptions?: Apollo.MutationHookOptions<CreateInteractionMutation, CreateInteractionMutationVariables>) {
+        return Apollo.useMutation<CreateInteractionMutation, CreateInteractionMutationVariables>(CreateInteractionDocument, baseOptions);
+      }
+export type CreateInteractionMutationHookResult = ReturnType<typeof useCreateInteractionMutation>;
+export type CreateInteractionMutationResult = Apollo.MutationResult<CreateInteractionMutation>;
+export type CreateInteractionMutationOptions = Apollo.BaseMutationOptions<CreateInteractionMutation, CreateInteractionMutationVariables>;
+export const DeleteInteractionDocument = gql`
+    mutation deleteInteraction($input: DeleteInteractionInput!) {
+  deleteInteraction(input: $input) {
+    interaction {
+      id
+      content
+    }
+  }
+}
+    `;
+export type DeleteInteractionMutationFn = Apollo.MutationFunction<DeleteInteractionMutation, DeleteInteractionMutationVariables>;
+
+/**
+ * __useDeleteInteractionMutation__
+ *
+ * To run a mutation, you first call `useDeleteInteractionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteInteractionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteInteractionMutation, { data, loading, error }] = useDeleteInteractionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteInteractionMutation(baseOptions?: Apollo.MutationHookOptions<DeleteInteractionMutation, DeleteInteractionMutationVariables>) {
+        return Apollo.useMutation<DeleteInteractionMutation, DeleteInteractionMutationVariables>(DeleteInteractionDocument, baseOptions);
+      }
+export type DeleteInteractionMutationHookResult = ReturnType<typeof useDeleteInteractionMutation>;
+export type DeleteInteractionMutationResult = Apollo.MutationResult<DeleteInteractionMutation>;
+export type DeleteInteractionMutationOptions = Apollo.BaseMutationOptions<DeleteInteractionMutation, DeleteInteractionMutationVariables>;
+export const EditInteractionDocument = gql`
+    mutation editInteraction($input: EditInteractionInput!) {
+  editInteraction(input: $input) {
+    interaction {
+      id
+      content
+    }
+  }
+}
+    `;
+export type EditInteractionMutationFn = Apollo.MutationFunction<EditInteractionMutation, EditInteractionMutationVariables>;
+
+/**
+ * __useEditInteractionMutation__
+ *
+ * To run a mutation, you first call `useEditInteractionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditInteractionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editInteractionMutation, { data, loading, error }] = useEditInteractionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEditInteractionMutation(baseOptions?: Apollo.MutationHookOptions<EditInteractionMutation, EditInteractionMutationVariables>) {
+        return Apollo.useMutation<EditInteractionMutation, EditInteractionMutationVariables>(EditInteractionDocument, baseOptions);
+      }
+export type EditInteractionMutationHookResult = ReturnType<typeof useEditInteractionMutation>;
+export type EditInteractionMutationResult = Apollo.MutationResult<EditInteractionMutation>;
+export type EditInteractionMutationOptions = Apollo.BaseMutationOptions<EditInteractionMutation, EditInteractionMutationVariables>;
 export const GetBotDocument = gql`
     query getBot($input: GetBotInput!) {
   getBot(input: $input) {
@@ -542,6 +725,77 @@ export function useIndexBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<I
 export type IndexBotQueryHookResult = ReturnType<typeof useIndexBotQuery>;
 export type IndexBotLazyQueryHookResult = ReturnType<typeof useIndexBotLazyQuery>;
 export type IndexBotQueryResult = Apollo.QueryResult<IndexBotQuery, IndexBotQueryVariables>;
+export const GetInteractionDocument = gql`
+    query getInteraction($input: GetInteractionInput!) {
+  getInteraction(input: $input) {
+    interaction {
+      id
+      content
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetInteractionQuery__
+ *
+ * To run a query within a React component, call `useGetInteractionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetInteractionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetInteractionQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetInteractionQuery(baseOptions?: Apollo.QueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>) {
+        return Apollo.useQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
+      }
+export function useGetInteractionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>) {
+          return Apollo.useLazyQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
+        }
+export type GetInteractionQueryHookResult = ReturnType<typeof useGetInteractionQuery>;
+export type GetInteractionLazyQueryHookResult = ReturnType<typeof useGetInteractionLazyQuery>;
+export type GetInteractionQueryResult = Apollo.QueryResult<GetInteractionQuery, GetInteractionQueryVariables>;
+export const IndexInteractionDocument = gql`
+    query indexInteraction {
+  indexInteraction {
+    interactions {
+      id
+      content
+    }
+  }
+}
+    `;
+
+/**
+ * __useIndexInteractionQuery__
+ *
+ * To run a query within a React component, call `useIndexInteractionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexInteractionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexInteractionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIndexInteractionQuery(baseOptions?: Apollo.QueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>) {
+        return Apollo.useQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(IndexInteractionDocument, baseOptions);
+      }
+export function useIndexInteractionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>) {
+          return Apollo.useLazyQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(IndexInteractionDocument, baseOptions);
+        }
+export type IndexInteractionQueryHookResult = ReturnType<typeof useIndexInteractionQuery>;
+export type IndexInteractionLazyQueryHookResult = ReturnType<typeof useIndexInteractionLazyQuery>;
+export type IndexInteractionQueryResult = Apollo.QueryResult<IndexInteractionQuery, IndexInteractionQueryVariables>;
 export const GetPostDocument = gql`
     query getPost($input: GetPostInput!) {
   getPost(input: $input) {

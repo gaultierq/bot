@@ -21,7 +21,7 @@ export type Bot = {
 export type Interaction = {
   __typename?: 'Interaction';
   id: Scalars['ID'];
-  content?: Maybe<Scalars['String']>;
+  content: Scalars['String'];
 };
 
 export type Post = {

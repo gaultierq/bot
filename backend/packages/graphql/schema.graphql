@@ -8,7 +8,7 @@ type Bot {
 
 type Interaction {
   id: ID!
-  content: String
+  content: String!
 }
 
 type Post {
