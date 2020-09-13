@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function InteractionList({ botId }: {botId: string}) {
+function InteractionList({ botId }: { botId: string }) {
   const spacing = 2;
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();

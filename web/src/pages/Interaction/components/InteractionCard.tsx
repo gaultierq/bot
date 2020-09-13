@@ -34,9 +34,8 @@ const useStyles = makeStyles({
 
 type InteractionCardProps = { interaction: Interaction };
 
-export function InteractionAdd({ botId }: {botId: string}): React.ReactElement {
+export function InteractionAdd({ botId }: { botId: string }): React.ReactElement {
   const classes = useStyles();
-
 
   const history = useHistory();
   const addInteraction = React.useCallback(() => {

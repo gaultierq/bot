@@ -7,7 +7,11 @@ import {
   QueryIndexInteractionArgs
 } from '../../../../types';
 
-async function indexInteraction(_: Parent, _args: QueryIndexInteractionArgs, context: Context): Promise<IndexInteractionResult> {
+async function indexInteraction(
+  _: Parent,
+  _args: QueryIndexInteractionArgs,
+  context: Context
+): Promise<IndexInteractionResult> {
   const { prisma } = context;
   const { input } = _args;
   const { botId }: IndexInteractionInput = input;

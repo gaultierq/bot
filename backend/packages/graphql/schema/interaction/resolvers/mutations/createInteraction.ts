@@ -16,17 +16,16 @@ async function createInteraction(
   const { input } = args;
   const { botId, content }: CreateInteractionInput = input;
 
-  const interaction: Interaction | null = await prisma.interaction.create(
-    {
-      data: {
-        bot: {
-          connect: {
-            id: botId
-          }
-        },
-        content
-      }
-    });
+  const interaction: Interaction | null = await prisma.interaction.create({
+    data: {
+      bot: {
+        connect: {
+          id: botId
+        }
+      },
+      content
+    }
+  });
 
   return { interaction };
 }

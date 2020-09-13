@@ -1,6 +1,6 @@
 import React from 'react';
-import {useCreateInteractionMutation} from '@web/graphql';
-import {RouteComponentProps, useHistory} from 'react-router-dom';
+import { useCreateInteractionMutation } from '@web/graphql';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import InteractionForm from './InteractionForm';
 
 type TParams = {
@@ -19,7 +19,6 @@ export default function InteractionCreate({ match }: RouteComponentProps<TParams
 
   const onSubmit = React.useCallback(
     async interactionParam => {
-
       const result = await createInteractionMutation({
         variables: {
           input: interactionParam

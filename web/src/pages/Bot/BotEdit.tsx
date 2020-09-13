@@ -6,7 +6,7 @@ import BotForm from './BotForm';
 import NotFound from '../Error/404';
 import { DeleteBotButton } from './components/BotDeleteButton';
 import Loader from '../../layout/Loader';
-import {InteractionList} from "@web/pages";
+import { InteractionList } from '@web/pages';
 
 type TParams = {
   id: string;
@@ -36,7 +36,7 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   );
 
   if (loading) return <Loader />;
-  if (!queryData) return <NotFound />;
+  if (!queryData?.getBot.bot) return <NotFound />;
 
   const bot = queryData?.getBot.bot as Bot;
   console.debug('fetched bot:', { bot });
