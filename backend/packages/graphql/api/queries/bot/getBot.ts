@@ -7,6 +7,7 @@ const getBot = gql`
         id
         published
         title
+        image
         author {
           id
         }

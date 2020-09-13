@@ -7,10 +7,10 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       '& > * + *': {
-        marginLeft: theme.spacing(2),
-      },
-    },
-  }),
+        marginLeft: theme.spacing(2)
+      }
+    }
+  })
 );
 
 export default function Loader() {

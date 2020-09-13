@@ -6,6 +6,7 @@ const editBot = gql`
       bot {
         id
         published
+        image
         title
       }
     }

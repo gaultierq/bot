@@ -1,11 +1,11 @@
 import React from 'react';
-import {Bot, useEditBotMutation, useGetBotQuery} from '@web/graphql';
-import {RouteComponentProps, useHistory} from 'react-router-dom';
-import {Routes} from '@web/constants';
+import { Bot, useEditBotMutation, useGetBotQuery } from '@web/graphql';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
+import { Routes } from '@web/constants';
 import BotForm from './BotForm';
 import NotFound from '../Error/404';
-import {DeleteBotButton} from "./components/BotDeleteButton";
-import Loader from "../../layout/Loader";
+import { DeleteBotButton } from './components/BotDeleteButton';
+import Loader from '../../layout/Loader';
 
 type TParams = {
   id: string;
@@ -18,21 +18,18 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
     variables: { input: { id } }
   });
 
-
   const history = useHistory();
 
   const [editBotMutation, { data, loading, error }] = useEditBotMutation();
-
 
   const onSubmit = React.useCallback(
     async botParam => {
       console.info('submiting bot creation');
       await editBotMutation({
         variables: {
-          input: botParam
+          input: { ...botParam, id }
         }
       });
-      history.push(Routes.BOT_LIST);
     },
     [editBotMutation, history]
   );
@@ -41,6 +38,7 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   if (!queryData) return <NotFound />;
 
   const bot = queryData?.getBot.bot as Bot;
+  console.debug('fetched bot:', { bot });
 
   return (
     <div>

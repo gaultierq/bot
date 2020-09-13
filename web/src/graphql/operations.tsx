@@ -193,7 +193,7 @@ export type EditBotMutation = (
     { __typename?: 'EditBotResult' }
     & { bot?: Maybe<(
       { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
+      & Pick<Bot, 'id' | 'published' | 'image' | 'title'>
     )> }
   ) }
 );
@@ -209,7 +209,7 @@ export type GetBotQuery = (
     { __typename?: 'GetBotResult' }
     & { bot?: Maybe<(
       { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
+      & Pick<Bot, 'id' | 'published' | 'title' | 'image'>
       & { author?: Maybe<(
         { __typename?: 'User' }
         & Pick<User, 'id'>
@@ -358,6 +358,7 @@ export const EditBotDocument = gql`
     bot {
       id
       published
+      image
       title
     }
   }
@@ -395,6 +396,7 @@ export const GetBotDocument = gql`
       id
       published
       title
+      image
       author {
         id
       }

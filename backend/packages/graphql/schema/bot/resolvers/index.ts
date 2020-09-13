@@ -1,6 +1,6 @@
 import { Bot } from './types';
 import { getBot, indexBot } from './queries';
-import { createBot, deleteBot } from './mutations';
+import { createBot, deleteBot, editBot } from './mutations';
 
 const resolvers = {
   Query: {
@@ -9,6 +9,7 @@ const resolvers = {
   },
   Mutation: {
     createBot,
+    editBot,
     deleteBot
   },
   Bot

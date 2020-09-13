@@ -5,8 +5,9 @@ async function editBot(_: Parent, args: MutationEditBotArgs, context: Context): 
   const { prisma } = context;
   const { input } = args;
   const { id }: EditBotInput = input;
-
   const bot = await prisma.bot.update({ data: input, where: { id } });
+
+  console.debug('editing bot', { input, bot });
 
   return { bot };
 }

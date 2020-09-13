@@ -8,7 +8,7 @@ import { CardMedia, CardActionArea } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import ReactLogo from '@web/assets/images/logo.png';
 import { Routes } from '@web/constants';
-import {DeleteBotButton} from "./BotDeleteButton";
+import { DeleteBotButton } from './BotDeleteButton';
 
 const useStyles = makeStyles({
   root: {
