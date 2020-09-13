@@ -1,4 +1,4 @@
-import {Interaction} from '@prisma/client';
+import { Interaction } from '@prisma/client';
 import {
   Context,
   IndexInteractionInput,

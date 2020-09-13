@@ -36,7 +36,15 @@ export default function InteractionForm(props: InteractionFormParams) {
   const [content, setContent] = useTextField(interaction.content);
 
   return (
-    <form className={classes.root} noValidate autoComplete={'off'} onSubmit={event => onSubmit({ content })}>
+    <form
+      className={classes.root}
+      noValidate
+      autoComplete={'off'}
+      onSubmit={event => {
+        event.preventDefault();
+        onSubmit({ ...interaction, content });
+      }}
+    >
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />
       <div className='form-group my-4'>
         <button className='btn btn-block' type='submit'>

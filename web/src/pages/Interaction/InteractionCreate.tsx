@@ -1,12 +1,17 @@
 import React from 'react';
-import { useCreateInteractionMutation } from '@web/graphql';
-import { useHistory } from 'react-router-dom';
-import { Routes } from '@web/constants';
+import {useCreateInteractionMutation} from '@web/graphql';
+import {RouteComponentProps, useHistory} from 'react-router-dom';
 import InteractionForm from './InteractionForm';
 
-export default function InteractionCreate() {
+type TParams = {
+  botId: string;
+};
+
+export default function InteractionCreate({ match }: RouteComponentProps<TParams>) {
+  const botId = match.params.botId;
   const [interaction] = React.useState({
-    content: ''
+    content: '',
+    botId
   });
   const history = useHistory();
 
@@ -14,13 +19,14 @@ export default function InteractionCreate() {
 
   const onSubmit = React.useCallback(
     async interactionParam => {
-      console.info('submiting interaction creation');
-      await createInteractionMutation({
+
+      const result = await createInteractionMutation({
         variables: {
           input: interactionParam
         }
       });
-      history.push(Routes.INTERACTION_LIST);
+      console.info('submiting interaction creation', { interactionParam, result });
+      history.push(`/bot/${botId}/interaction/index`);
     },
     [loading, createInteractionMutation, history]
   );

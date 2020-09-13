@@ -201,6 +201,7 @@ export type DeleteBotResult = {
 };
 
 export type CreateInteractionInput = {
+  botId: Scalars['String'];
   content: Scalars['String'];
 };
 

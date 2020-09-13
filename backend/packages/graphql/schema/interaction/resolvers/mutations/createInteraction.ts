@@ -14,9 +14,19 @@ async function createInteraction(
 ): Promise<GetInteractionResult> {
   const { prisma } = context;
   const { input } = args;
-  const { content }: CreateInteractionInput = input;
+  const { botId, content }: CreateInteractionInput = input;
 
-  const interaction: Interaction | null = await prisma.interaction.create({ data: { content } });
+  const interaction: Interaction | null = await prisma.interaction.create(
+    {
+      data: {
+        bot: {
+          connect: {
+            id: botId
+          }
+        },
+        content
+      }
+    });
 
   return { interaction };
 }

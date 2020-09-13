@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function InteractionList() {
+function InteractionList({ botId }: {botId: string}) {
   const spacing = 2;
   // const [spacing, setSpacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();
@@ -29,7 +29,7 @@ function InteractionList() {
   // const query = useGetPostQuery({id: 3})
 
   const history = useHistory();
-  const { data, loading, error } = useIndexInteractionQuery();
+  const { data, loading, error } = useIndexInteractionQuery({ variables: { input: { botId } } });
   console.debug('query response', { loading, error, data });
 
   const interactions = _.get(data, 'indexInteraction.interactions', []);
@@ -43,7 +43,7 @@ function InteractionList() {
       <Grid item xs={12}>
         <Grid container justify={'center'} spacing={spacing}>
           <Grid key={'add_interaction_key'} item>
-            <InteractionAdd />
+            <InteractionAdd botId={botId} />
           </Grid>
           {interactions.map(interaction => {
             return (

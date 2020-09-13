@@ -6,6 +6,7 @@ import BotForm from './BotForm';
 import NotFound from '../Error/404';
 import { DeleteBotButton } from './components/BotDeleteButton';
 import Loader from '../../layout/Loader';
+import {InteractionList} from "@web/pages";
 
 type TParams = {
   id: string;
@@ -43,6 +44,7 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   return (
     <div>
       <BotForm bot={bot} onSubmit={onSubmit} />
+      <InteractionList botId={bot.id} />
       <DeleteBotButton bot={bot} />
     </div>
   );

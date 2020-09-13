@@ -34,21 +34,14 @@ const useStyles = makeStyles({
 
 type InteractionCardProps = { interaction: Interaction };
 
-export function InteractionAdd(): React.ReactElement {
+export function InteractionAdd({ botId }: {botId: string}): React.ReactElement {
   const classes = useStyles();
 
-  // const [createInteractionMutation, { data, loading, error }] = useCreateInteractionMutation({
-  //   variables: {
-  //     input: { title: 'toto' }
-  //   }
-  // });
-  // createInteractionMutation();
-  // console.debug('mutation status:', { data, loading, error });
 
   const history = useHistory();
   const addInteraction = React.useCallback(() => {
     console.debug('clicked add interaction; executing mutation');
-    history.push(Routes.INTERACTION_CREATE);
+    history.push(`/bot/${botId}/interaction/new`);
   }, []);
 
   return (

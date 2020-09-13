@@ -118,6 +118,7 @@ type DeleteBotResult {
 }
 
 input CreateInteractionInput {
+  botId: String!
   content: String!
 }
 
