@@ -8,5 +8,5 @@ export enum Routes {
 
   INTERACTION_LIST = '/bot/:botId/interaction/index',
   INTERACTION_CREATE = '/bot/:botId/interaction/new',
-  INTERACTION_EDIT = '/bot/:botId/interaction/:id/edit',
+  INTERACTION_EDIT = '/bot/:botId/interaction/:id/edit'
 }

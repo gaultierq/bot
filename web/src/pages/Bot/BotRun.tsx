@@ -11,10 +11,9 @@ type TParams = {
 };
 
 type IMessage = {
-  content: string,
-  key: string,
+  content: string;
+  key: string;
 };
-
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
 
 export default function BotRun({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
@@ -42,12 +40,13 @@ export default function BotRun({ match }: RouteComponentProps<TParams>) {
   const bot = queryData?.getBot.bot as Bot;
   console.debug('fetched bot:', { bot });
 
-
   return (
     <div>
       <span>Hello this is the bot running</span>
       <ul>
-        {messages.map(i => <Message key={i.key} content={ i.content } />)}
+        {messages.map(i => (
+          <Message key={i.key} content={i.content} />
+        ))}
       </ul>
       <form
         className={classes.root}
@@ -56,10 +55,13 @@ export default function BotRun({ match }: RouteComponentProps<TParams>) {
         onSubmit={event => {
           event.preventDefault();
           console.debug('event', { event });
-          const newMessages: IMessage[] = [...messages, {
-            content: answer,
-            key: `fake-id-${messages.length + 1}`
-          }];
+          const newMessages: IMessage[] = [
+            ...messages,
+            {
+              content: answer,
+              key: `fake-id-${messages.length + 1}`
+            }
+          ];
           setMessages(newMessages);
           setAnswerState('');
         }}
