@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Bot, CreateBotInput, EditBotInput, Maybe, User } from '@web/graphql';
 import Checkbox from '@material-ui/core/Checkbox';
+import { useTextField } from '@web/utils';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,12 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
-const useTextField = defaultValue => {
-  const [val, setVal] = React.useState(defaultValue);
-  const setVal2 = React.useCallback(e => setVal(e.target.value), [setVal]);
-  return [val, setVal2];
-};
 
 type BotParam = { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' | 'image'> & {
   author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
