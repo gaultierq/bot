@@ -1,0 +1,11 @@
+type Query {
+  getAnswer(input: GetAnswerInput!): GetAnswerResult!
+}
+
+input GetAnswerInput {
+  id: ID!
+}
+
+type GetAnswerResult {
+  answer: Answer
+}

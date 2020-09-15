@@ -1,0 +1,11 @@
+type Query {
+  getConversation(input: GetConversationInput!): GetConversationResult!
+}
+
+input GetConversationInput {
+  id: ID!
+}
+
+type GetConversationResult {
+  conversation: Conversation
+}

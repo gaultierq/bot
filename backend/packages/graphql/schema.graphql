@@ -1,9 +1,22 @@
+type Answer {
+  id: ID!
+  conversation: Conversation
+  interaction: Interaction
+  content: String
+}
+
 type Bot {
   id: ID!
   published: Boolean!
   title: String!
   author: User
   image: String
+}
+
+type Conversation {
+  id: ID!
+  conversation: Conversation
+  interaction: Interaction
 }
 
 type Interaction {
@@ -27,12 +40,22 @@ type User {
 }
 
 type Query {
+  getAnswer(input: GetAnswerInput!): GetAnswerResult!
   getBot(input: GetBotInput!): GetBotResult!
   indexBot: IndexBotResult!
+  getConversation(input: GetConversationInput!): GetConversationResult!
   getInteraction(input: GetInteractionInput!): GetInteractionResult!
   indexInteraction(input: IndexInteractionInput!): IndexInteractionResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
+}
+
+input GetAnswerInput {
+  id: ID!
+}
+
+type GetAnswerResult {
+  answer: Answer
 }
 
 input GetBotInput {
@@ -45,6 +68,14 @@ type GetBotResult {
 
 type IndexBotResult {
   bots: [Bot]!
+}
+
+input GetConversationInput {
+  id: ID!
+}
+
+type GetConversationResult {
+  conversation: Conversation
 }
 
 input GetInteractionInput {
@@ -80,12 +111,24 @@ type GetUserResult {
 }
 
 type Mutation {
+  createAnswer(input: CreateAnswerInput!): CreateAnswerResult!
   createBot(input: CreateBotInput!): CreateBotResult!
   editBot(input: EditBotInput!): EditBotResult!
   deleteBot(input: DeleteBotInput!): DeleteBotResult!
+  createConversation(input: CreateConversationInput!): CreateConversationResult!
   createInteraction(input: CreateInteractionInput!): CreateInteractionResult!
   editInteraction(input: EditInteractionInput!): EditInteractionResult!
   deleteInteraction(input: DeleteInteractionInput!): DeleteInteractionResult!
+}
+
+input CreateAnswerInput {
+  interactionId: String!
+  conversationId: String!
+  content: String!
+}
+
+type CreateAnswerResult {
+  answer: Answer
 }
 
 input CreateBotInput {
@@ -115,6 +158,15 @@ input DeleteBotInput {
 
 type DeleteBotResult {
   bot: Bot
+}
+
+input CreateConversationInput {
+  botId: String!
+  content: String!
+}
+
+type CreateConversationResult {
+  conversation: Conversation
 }
 
 input CreateInteractionInput {

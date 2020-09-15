@@ -1,0 +1,13 @@
+type Mutation {
+  createAnswer(input: CreateAnswerInput!): CreateAnswerResult!
+}
+
+input CreateAnswerInput {
+  interactionId: String!
+  conversationId: String!
+  content: String!
+}
+
+type CreateAnswerResult {
+  answer: Answer
+}

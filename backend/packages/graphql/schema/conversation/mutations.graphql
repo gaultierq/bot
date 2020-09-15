@@ -1,0 +1,12 @@
+type Mutation {
+  createConversation(input: CreateConversationInput!): CreateConversationResult!
+}
+
+input CreateConversationInput {
+  botId: String!
+  content: String!
+}
+
+type CreateConversationResult {
+  conversation: Conversation
+}

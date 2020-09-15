@@ -9,6 +9,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type Answer = {
+  __typename?: 'Answer';
+  id: Scalars['ID'];
+  conversation?: Maybe<Conversation>;
+  interaction?: Maybe<Interaction>;
+  content?: Maybe<Scalars['String']>;
+};
+
 export type Bot = {
   __typename?: 'Bot';
   id: Scalars['ID'];
@@ -16,6 +24,13 @@ export type Bot = {
   title: Scalars['String'];
   author?: Maybe<User>;
   image?: Maybe<Scalars['String']>;
+};
+
+export type Conversation = {
+  __typename?: 'Conversation';
+  id: Scalars['ID'];
+  conversation?: Maybe<Conversation>;
+  interaction?: Maybe<Interaction>;
 };
 
 export type Interaction = {
@@ -43,32 +58,58 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
+  getAnswer: GetAnswerResult;
   getBot: GetBotResult;
   indexBot: IndexBotResult;
+  getConversation: GetConversationResult;
   getInteraction: GetInteractionResult;
   indexInteraction: IndexInteractionResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
 
+
+export type QueryGetAnswerArgs = {
+  input: GetAnswerInput;
+};
+
+
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
+
+
+export type QueryGetConversationArgs = {
+  input: GetConversationInput;
+};
+
 
 export type QueryGetInteractionArgs = {
   input: GetInteractionInput;
 };
 
+
 export type QueryIndexInteractionArgs = {
   input: IndexInteractionInput;
 };
+
 
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
 
+
 export type QueryGetUserArgs = {
   input: GetUserInput;
+};
+
+export type GetAnswerInput = {
+  id: Scalars['ID'];
+};
+
+export type GetAnswerResult = {
+  __typename?: 'GetAnswerResult';
+  answer?: Maybe<Answer>;
 };
 
 export type GetBotInput = {
@@ -83,6 +124,15 @@ export type GetBotResult = {
 export type IndexBotResult = {
   __typename?: 'IndexBotResult';
   bots: Array<Maybe<Bot>>;
+};
+
+export type GetConversationInput = {
+  id: Scalars['ID'];
+};
+
+export type GetConversationResult = {
+  __typename?: 'GetConversationResult';
+  conversation?: Maybe<Conversation>;
 };
 
 export type GetInteractionInput = {
@@ -123,36 +173,65 @@ export type GetUserResult = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAnswer: CreateAnswerResult;
   createBot: CreateBotResult;
   editBot: EditBotResult;
   deleteBot: DeleteBotResult;
+  createConversation: CreateConversationResult;
   createInteraction: CreateInteractionResult;
   editInteraction: EditInteractionResult;
   deleteInteraction: DeleteInteractionResult;
 };
 
+
+export type MutationCreateAnswerArgs = {
+  input: CreateAnswerInput;
+};
+
+
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
+
 
 export type MutationEditBotArgs = {
   input: EditBotInput;
 };
 
+
 export type MutationDeleteBotArgs = {
   input: DeleteBotInput;
 };
+
+
+export type MutationCreateConversationArgs = {
+  input: CreateConversationInput;
+};
+
 
 export type MutationCreateInteractionArgs = {
   input: CreateInteractionInput;
 };
 
+
 export type MutationEditInteractionArgs = {
   input: EditInteractionInput;
 };
 
+
 export type MutationDeleteInteractionArgs = {
   input: DeleteInteractionInput;
+};
+
+export type CreateAnswerInput = {
+  interactionId: Scalars['String'];
+  conversationId: Scalars['String'];
+  content: Scalars['String'];
+};
+
+export type CreateAnswerResult = {
+  __typename?: 'CreateAnswerResult';
+  answer?: Maybe<Answer>;
 };
 
 export type CreateBotInput = {
@@ -185,6 +264,16 @@ export type DeleteBotInput = {
 export type DeleteBotResult = {
   __typename?: 'DeleteBotResult';
   bot?: Maybe<Bot>;
+};
+
+export type CreateConversationInput = {
+  botId: Scalars['String'];
+  content: Scalars['String'];
+};
+
+export type CreateConversationResult = {
+  __typename?: 'CreateConversationResult';
+  conversation?: Maybe<Conversation>;
 };
 
 export type CreateInteractionInput = {

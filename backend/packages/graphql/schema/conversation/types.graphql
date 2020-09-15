@@ -1,0 +1,5 @@
+type Conversation {
+  id: ID!
+  conversation: Conversation
+  interaction: Interaction
+}

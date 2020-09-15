@@ -1,0 +1,6 @@
+type Answer {
+  id: ID!
+  conversation: Conversation
+  interaction: Interaction
+  content: String
+}
