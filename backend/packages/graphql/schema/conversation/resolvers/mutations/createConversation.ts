@@ -1,5 +1,11 @@
 import { Conversation } from '@prisma/client';
-import { Context, CreateConversationInput, GetConversationResult, MutationCreateConversationArgs, Parent } from '../../../../types';
+import {
+  Context,
+  CreateConversationInput,
+  GetConversationResult,
+  MutationCreateConversationArgs,
+  Parent
+} from '../../../../types';
 
 async function createConversation(
   _parent: Parent,
@@ -16,7 +22,7 @@ async function createConversation(
         connect: {
           id: botId
         }
-      },
+      }
     }
   });
 
