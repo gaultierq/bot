@@ -12,7 +12,9 @@ import { conversationResolvers } from './conversation';
 
 const resolvers = mergeResolvers([
   userResolvers, postResolvers, botResolvers,
-  interactionResolvers, answerResolvers, conversationResolvers]);
+  interactionResolvers, answerResolvers,
+  conversationResolvers
+]);
 
 const types = loadFilesSync(join(__dirname, './**/types.graphql'));
 const queries = loadFilesSync(join(__dirname, './**/queries.graphql'));

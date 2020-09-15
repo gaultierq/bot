@@ -16,7 +16,13 @@ async function getConversation(
   const { input } = args;
   const { id }: GetConversationInput = input;
 
-  const conversation: Conversation | null = await prisma.conversation.findOne({ where: { id } });
+  console.info('converstation1 with id', { id });
+  const conversation: Conversation | null = await prisma.conversation.findOne(
+    {
+      where: { id },
+    }
+  );
+  console.info('converstation2 with id', { id });
 
   return { conversation };
 }

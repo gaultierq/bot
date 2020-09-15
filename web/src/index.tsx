@@ -12,7 +12,7 @@ import Config from '@web/config';
 import { Footer } from '@web/layout';
 import * as serviceWorker from './serviceWorker';
 import BotCreate from './pages/Bot/BotCreate';
-import Conversation from "./pages/Conversation";
+import Conversation from './pages/Conversation/ConversationShow';
 
 const config = new Config(process.env);
 const client = configureApolloClient(config);

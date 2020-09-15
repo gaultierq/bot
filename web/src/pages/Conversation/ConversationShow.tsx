@@ -1,10 +1,11 @@
 import React from 'react';
-import { Bot, useGetBotQuery } from '@web/graphql';
+import {Conversation, useCreateAnswerMutation, useGetConversationQuery, useGetInteractionQuery} from '@web/graphql';
 import { RouteComponentProps } from 'react-router-dom';
 import { Message } from './components/Message';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { useTextField } from '@web/utils';
+import NotFound from "../Error/404";
 
 type TParams = {
   id: string;
@@ -26,20 +27,27 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Conversation({ match }: RouteComponentProps<TParams>) {
+export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
-  const { data: queryData, loading: queryLoading, error: queryError } = useGetBotQuery({
+  const { data: queryData, loading: queryLoading, error: queryError } = useGetConversationQuery({
     variables: { input: { id } }
   });
 
   const [messages, setMessages] = React.useState<IMessage[]>([]);
   const [answer, setAnswer, setAnswerState] = useTextField('');
+  const conversation = queryData?.getConversation?.conversation;
+  console.debug('Conversation retrieved:', { conversation });
+  if (conversation) {
+    const nextInteraction = conversation.nextInteraction;
+    console.debug('Conversation retrieved:', { nextInteraction });
+  }
+
   const classes = useStyles();
 
-  const bot = queryData?.getBot.bot as Bot;
-  console.debug('fetched bot:', { bot });
+  const [createAnswerMutation, { data, loading, error }] = useCreateAnswerMutation();
 
+  if (!conversation) return <NotFound />
   return (
     <div>
       <span>Hello this is the bot running</span>
@@ -52,17 +60,24 @@ export default function Conversation({ match }: RouteComponentProps<TParams>) {
         className={classes.root}
         noValidate
         autoComplete={'off'}
-        onSubmit={event => {
+        onSubmit={async event => {
           event.preventDefault();
           console.debug('event', { event });
-          const newMessages: IMessage[] = [
-            ...messages,
-            {
-              content: answer,
-              key: `fake-id-${messages.length + 1}`
-            }
-          ];
-          setMessages(newMessages);
+          // const newMessages: IMessage[] = [
+          //   ...messages,
+          //   {
+          //     content: answer,
+          //     key: `fake-id-${messages.length + 1}`
+          //   }
+          // ];
+
+
+          // const result = await createAnswerMutation({
+          //   variables: {
+          //     input: { conversationId: id, content: answer, interactionId: 'asd' },
+          //   },
+          // });
+          // setMessages(newMessages);
           setAnswerState('');
         }}
       >
