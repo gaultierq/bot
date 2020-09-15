@@ -25,7 +25,6 @@ async function createInteraction(
   const predecessorIds = await prisma.$queryRaw(QUERY, botId);
   if (predecessorIds.length > 1) throw `too many predecessors for ${botId}`;
 
-
   const predecessorId = _.get(predecessorIds, '0.id');
   console.debug(`creating interaction for bot=${botId} with`, { predecessorId });
 
@@ -35,7 +34,7 @@ async function createInteraction(
         id: botId
       }
     },
-    content,
+    content
   };
   if (predecessorId) {
     data['predecessor'] = {
@@ -44,7 +43,6 @@ async function createInteraction(
       }
     };
   }
-
 
   const interaction: Interaction | null = await prisma.interaction.create({
     data

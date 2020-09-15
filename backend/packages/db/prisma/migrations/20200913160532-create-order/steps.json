@@ -1,0 +1,104 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Interaction",
+      "field": "predecessorId",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Interaction",
+      "field": "predecessor",
+      "type": "Interaction",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "predecessor"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "predecessor"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"Node\""
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "predecessor"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[predecessorId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "predecessor"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Interaction",
+      "field": "successor",
+      "type": "Interaction",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "successor"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Interaction",
+          "field": "successor"
+        },
+        "directive": "relation"
+      },
+      "argument": "",
+      "value": "\"Node\""
+    }
+  ]
+}
