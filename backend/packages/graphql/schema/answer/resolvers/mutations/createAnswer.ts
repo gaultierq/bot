@@ -1,6 +1,5 @@
-import {Answer} from '@prisma/client';
-import {Context, CreateAnswerInput, GetAnswerResult, MutationCreateAnswerArgs, Parent} from '../../../../types';
-
+import { Answer } from '@prisma/client';
+import { Context, CreateAnswerInput, GetAnswerResult, MutationCreateAnswerArgs, Parent } from '../../../../types';
 
 async function createAnswer(
   _parent: Parent,
@@ -10,7 +9,6 @@ async function createAnswer(
   const { prisma } = context;
   const { input } = args;
   const { conversationId, interactionId, content }: CreateAnswerInput = input;
-
 
   const answer: Answer | null = await prisma.answer.create({
     data: {

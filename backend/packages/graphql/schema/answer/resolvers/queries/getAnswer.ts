@@ -1,11 +1,7 @@
 import { Answer } from '@prisma/client';
 import { Parent, Context, QueryGetAnswerArgs, GetAnswerInput, GetAnswerResult } from '../../../../types';
 
-async function getAnswer(
-  _: Parent,
-  args: QueryGetAnswerArgs,
-  context: Context
-): Promise<GetAnswerResult> {
+async function getAnswer(_: Parent, args: QueryGetAnswerArgs, context: Context): Promise<GetAnswerResult> {
   const { prisma } = context;
   const { input } = args;
   const { id }: GetAnswerInput = input;

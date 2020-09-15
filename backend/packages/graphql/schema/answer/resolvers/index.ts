@@ -4,10 +4,10 @@ import { createAnswer } from './mutations';
 
 const resolvers = {
   Query: {
-    getAnswer,
+    getAnswer
   },
   Mutation: {
-    createAnswer,
+    createAnswer
   },
   Answer
 };
