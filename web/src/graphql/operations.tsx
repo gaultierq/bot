@@ -307,6 +307,22 @@ export type DeleteInteractionResult = {
   interaction?: Maybe<Interaction>;
 };
 
+export type CreateAnswerMutationVariables = Exact<{
+  input: CreateAnswerInput;
+}>;
+
+
+export type CreateAnswerMutation = (
+  { __typename?: 'Mutation' }
+  & { createAnswer: (
+    { __typename?: 'CreateAnswerResult' }
+    & { answer?: Maybe<(
+      { __typename?: 'Answer' }
+      & Pick<Answer, 'id' | 'content'>
+    )> }
+  ) }
+);
+
 export type CreateBotMutationVariables = Exact<{
   input: CreateBotInput;
 }>;
@@ -403,6 +419,22 @@ export type EditInteractionMutation = (
     & { interaction?: Maybe<(
       { __typename?: 'Interaction' }
       & Pick<Interaction, 'id' | 'content'>
+    )> }
+  ) }
+);
+
+export type GetAnswerQueryVariables = Exact<{
+  input: GetAnswerInput;
+}>;
+
+
+export type GetAnswerQuery = (
+  { __typename?: 'Query' }
+  & { getAnswer: (
+    { __typename?: 'GetAnswerResult' }
+    & { answer?: Maybe<(
+      { __typename?: 'Answer' }
+      & Pick<Answer, 'id' | 'content'>
     )> }
   ) }
 );
@@ -518,6 +550,41 @@ export type GetUserQuery = (
 );
 
 
+export const CreateAnswerDocument = gql`
+    mutation createAnswer($input: CreateAnswerInput!) {
+  createAnswer(input: $input) {
+    answer {
+      id
+      content
+    }
+  }
+}
+    `;
+export type CreateAnswerMutationFn = Apollo.MutationFunction<CreateAnswerMutation, CreateAnswerMutationVariables>;
+
+/**
+ * __useCreateAnswerMutation__
+ *
+ * To run a mutation, you first call `useCreateAnswerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateAnswerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createAnswerMutation, { data, loading, error }] = useCreateAnswerMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateAnswerMutation(baseOptions?: Apollo.MutationHookOptions<CreateAnswerMutation, CreateAnswerMutationVariables>) {
+        return Apollo.useMutation<CreateAnswerMutation, CreateAnswerMutationVariables>(CreateAnswerDocument, baseOptions);
+      }
+export type CreateAnswerMutationHookResult = ReturnType<typeof useCreateAnswerMutation>;
+export type CreateAnswerMutationResult = Apollo.MutationResult<CreateAnswerMutation>;
+export type CreateAnswerMutationOptions = Apollo.BaseMutationOptions<CreateAnswerMutation, CreateAnswerMutationVariables>;
 export const CreateBotDocument = gql`
     mutation createBot($input: CreateBotInput!) {
   createBot(input: $input) {
@@ -735,6 +802,42 @@ export function useEditInteractionMutation(baseOptions?: Apollo.MutationHookOpti
 export type EditInteractionMutationHookResult = ReturnType<typeof useEditInteractionMutation>;
 export type EditInteractionMutationResult = Apollo.MutationResult<EditInteractionMutation>;
 export type EditInteractionMutationOptions = Apollo.BaseMutationOptions<EditInteractionMutation, EditInteractionMutationVariables>;
+export const GetAnswerDocument = gql`
+    query getAnswer($input: GetAnswerInput!) {
+  getAnswer(input: $input) {
+    answer {
+      id
+      content
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAnswerQuery__
+ *
+ * To run a query within a React component, call `useGetAnswerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAnswerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAnswerQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetAnswerQuery(baseOptions?: Apollo.QueryHookOptions<GetAnswerQuery, GetAnswerQueryVariables>) {
+        return Apollo.useQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
+      }
+export function useGetAnswerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAnswerQuery, GetAnswerQueryVariables>) {
+          return Apollo.useLazyQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
+        }
+export type GetAnswerQueryHookResult = ReturnType<typeof useGetAnswerQuery>;
+export type GetAnswerLazyQueryHookResult = ReturnType<typeof useGetAnswerLazyQuery>;
+export type GetAnswerQueryResult = Apollo.QueryResult<GetAnswerQuery, GetAnswerQueryVariables>;
 export const GetBotDocument = gql`
     query getBot($input: GetBotInput!) {
   getBot(input: $input) {
