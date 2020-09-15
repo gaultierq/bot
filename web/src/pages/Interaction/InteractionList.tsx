@@ -35,7 +35,7 @@ function InteractionList({ botId }: { botId: string }) {
   const interactions = _.get(data, 'indexInteraction.interactions', []);
   const goToInteraction = interactionId => {
     return () => {
-      history.push(`/interaction/${interactionId}/edit`);
+      history.push(`interaction/${interactionId}/edit`);
     };
   };
   return (

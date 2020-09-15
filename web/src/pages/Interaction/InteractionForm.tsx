@@ -42,7 +42,7 @@ export default function InteractionForm(props: InteractionFormParams) {
       autoComplete={'off'}
       onSubmit={event => {
         event.preventDefault();
-        onSubmit({ ...interaction, content });
+        onSubmit({ content });
       }}
     >
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />

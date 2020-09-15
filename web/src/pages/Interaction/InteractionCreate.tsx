@@ -21,11 +21,10 @@ export default function InteractionCreate({ match }: RouteComponentProps<TParams
     async interactionParam => {
       const result = await createInteractionMutation({
         variables: {
-          input: interactionParam
+          input: { ...interactionParam, botId }
         }
       });
-      console.info('submiting interaction creation', { interactionParam, result });
-      history.push(`/bot/${botId}/interaction/index`);
+      history.push(`/bot/${botId}/edit`);
     },
     [loading, createInteractionMutation, history]
   );
