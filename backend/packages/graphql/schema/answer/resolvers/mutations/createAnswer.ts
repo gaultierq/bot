@@ -1,17 +1,6 @@
-import { Answer } from '@prisma/client';
-import _ from 'lodash';
-import {
-  Context,
-  CreateAnswerInput,
-  GetAnswerResult,
-  MutationCreateAnswerArgs,
-  Parent
-} from '../../../../types';
+import {Answer} from '@prisma/client';
+import {Context, CreateAnswerInput, GetAnswerResult, MutationCreateAnswerArgs, Parent} from '../../../../types';
 
-const QUERY = `SELECT i1.id FROM "Answer" i1
-left join "Answer" i2
-ON i1.id = i2."predecessorId"
-WHERE i2.id IS NULL AND i1."botId" = $1`;
 
 async function createAnswer(
   _parent: Parent,

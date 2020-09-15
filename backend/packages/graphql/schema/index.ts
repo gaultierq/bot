@@ -7,6 +7,7 @@ import { userResolvers } from './user';
 import { postResolvers } from './post';
 import { botResolvers } from './bot';
 import { interactionResolvers } from './interaction';
+import { answerResolvers } from './answer';
 
 const resolvers = mergeResolvers([userResolvers, postResolvers, botResolvers, interactionResolvers]);
 
