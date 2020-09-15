@@ -11,8 +11,11 @@ import { answerResolvers } from './answer';
 import { conversationResolvers } from './conversation';
 
 const resolvers = mergeResolvers([
-  userResolvers, postResolvers, botResolvers,
-  interactionResolvers, answerResolvers,
+  userResolvers,
+  postResolvers,
+  botResolvers,
+  interactionResolvers,
+  answerResolvers,
   conversationResolvers
 ]);
 

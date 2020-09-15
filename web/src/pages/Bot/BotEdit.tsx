@@ -21,7 +21,7 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   const [createConversationMutation] = useCreateConversationMutation({
     variables: {
       input: { botId: id }
-    },
+    }
   });
 
   const history = useHistory();
@@ -48,15 +48,16 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
 
   return (
     <div>
-      <Link href='#' onClick={async (event) => {
-        event.preventDefault();
-        const data = await createConversationMutation();
-        const conversationId = data?.data?.createConversation?.conversation?.id;
-        if (conversationId) {
-          history.push(`/conversation/${conversationId}`);
-        }
-
-      }}
+      <Link
+        href='#'
+        onClick={async event => {
+          event.preventDefault();
+          const data = await createConversationMutation();
+          const conversationId = data?.data?.createConversation?.conversation?.id;
+          if (conversationId) {
+            history.push(`/conversation/${conversationId}`);
+          }
+        }}
       >
         Start bot
       </Link>

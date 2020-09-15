@@ -1,11 +1,11 @@
 import React from 'react';
-import {Conversation, useCreateAnswerMutation, useGetConversationQuery, useGetInteractionQuery} from '@web/graphql';
+import { Conversation, useCreateAnswerMutation, useGetConversationQuery, useGetInteractionQuery } from '@web/graphql';
 import { RouteComponentProps } from 'react-router-dom';
 import { Message } from './components/Message';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { useTextField } from '@web/utils';
-import NotFound from "../Error/404";
+import NotFound from '../Error/404';
 
 type TParams = {
   id: string;
@@ -47,7 +47,7 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
 
   const [createAnswerMutation, { data, loading, error }] = useCreateAnswerMutation();
 
-  if (!conversation) return <NotFound />
+  if (!conversation) return <NotFound />;
   return (
     <div>
       <span>Hello this is the bot running</span>
@@ -70,7 +70,6 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
           //     key: `fake-id-${messages.length + 1}`
           //   }
           // ];
-
 
           // const result = await createAnswerMutation({
           //   variables: {

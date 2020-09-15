@@ -17,11 +17,9 @@ async function getConversation(
   const { id }: GetConversationInput = input;
 
   console.info('converstation1 with id', { id });
-  const conversation: Conversation | null = await prisma.conversation.findOne(
-    {
-      where: { id },
-    }
-  );
+  const conversation: Conversation | null = await prisma.conversation.findOne({
+    where: { id }
+  });
   console.info('converstation2 with id', { id });
 
   return { conversation };
