@@ -15,8 +15,7 @@ type Bot {
 
 type Conversation {
   id: ID!
-  conversation: Conversation
-  interaction: Interaction
+  bot: Bot
 }
 
 type Interaction {

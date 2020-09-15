@@ -29,8 +29,7 @@ export type Bot = {
 export type Conversation = {
   __typename?: 'Conversation';
   id: Scalars['ID'];
-  conversation?: Maybe<Conversation>;
-  interaction?: Maybe<Interaction>;
+  bot?: Maybe<Bot>;
 };
 
 export type Interaction = {

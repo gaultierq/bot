@@ -31,8 +31,7 @@ export type Bot = {
 export type Conversation = {
   __typename?: 'Conversation';
   id: Scalars['ID'];
-  conversation?: Maybe<Conversation>;
-  interaction?: Maybe<Interaction>;
+  bot?: Maybe<Bot>;
 };
 
 export type Interaction = {
@@ -374,6 +373,22 @@ export type EditBotMutation = (
   ) }
 );
 
+export type CreateConversationMutationVariables = Exact<{
+  input: CreateConversationInput;
+}>;
+
+
+export type CreateConversationMutation = (
+  { __typename?: 'Mutation' }
+  & { createConversation: (
+    { __typename?: 'CreateConversationResult' }
+    & { conversation?: Maybe<(
+      { __typename?: 'Conversation' }
+      & Pick<Conversation, 'id'>
+    )> }
+  ) }
+);
+
 export type CreateInteractionMutationVariables = Exact<{
   input: CreateInteractionInput;
 }>;
@@ -473,6 +488,22 @@ export type IndexBotQuery = (
         & Pick<User, 'id'>
       )> }
     )>> }
+  ) }
+);
+
+export type GetConversationQueryVariables = Exact<{
+  input: GetConversationInput;
+}>;
+
+
+export type GetConversationQuery = (
+  { __typename?: 'Query' }
+  & { getConversation: (
+    { __typename?: 'GetConversationResult' }
+    & { conversation?: Maybe<(
+      { __typename?: 'Conversation' }
+      & Pick<Conversation, 'id'>
+    )> }
   ) }
 );
 
@@ -696,6 +727,40 @@ export function useEditBotMutation(baseOptions?: Apollo.MutationHookOptions<Edit
 export type EditBotMutationHookResult = ReturnType<typeof useEditBotMutation>;
 export type EditBotMutationResult = Apollo.MutationResult<EditBotMutation>;
 export type EditBotMutationOptions = Apollo.BaseMutationOptions<EditBotMutation, EditBotMutationVariables>;
+export const CreateConversationDocument = gql`
+    mutation createConversation($input: CreateConversationInput!) {
+  createConversation(input: $input) {
+    conversation {
+      id
+    }
+  }
+}
+    `;
+export type CreateConversationMutationFn = Apollo.MutationFunction<CreateConversationMutation, CreateConversationMutationVariables>;
+
+/**
+ * __useCreateConversationMutation__
+ *
+ * To run a mutation, you first call `useCreateConversationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateConversationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createConversationMutation, { data, loading, error }] = useCreateConversationMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateConversationMutation(baseOptions?: Apollo.MutationHookOptions<CreateConversationMutation, CreateConversationMutationVariables>) {
+        return Apollo.useMutation<CreateConversationMutation, CreateConversationMutationVariables>(CreateConversationDocument, baseOptions);
+      }
+export type CreateConversationMutationHookResult = ReturnType<typeof useCreateConversationMutation>;
+export type CreateConversationMutationResult = Apollo.MutationResult<CreateConversationMutation>;
+export type CreateConversationMutationOptions = Apollo.BaseMutationOptions<CreateConversationMutation, CreateConversationMutationVariables>;
 export const CreateInteractionDocument = gql`
     mutation createInteraction($input: CreateInteractionInput!) {
   createInteraction(input: $input) {
@@ -917,6 +982,41 @@ export function useIndexBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<I
 export type IndexBotQueryHookResult = ReturnType<typeof useIndexBotQuery>;
 export type IndexBotLazyQueryHookResult = ReturnType<typeof useIndexBotLazyQuery>;
 export type IndexBotQueryResult = Apollo.QueryResult<IndexBotQuery, IndexBotQueryVariables>;
+export const GetConversationDocument = gql`
+    query getConversation($input: GetConversationInput!) {
+  getConversation(input: $input) {
+    conversation {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetConversationQuery__
+ *
+ * To run a query within a React component, call `useGetConversationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetConversationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetConversationQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGetConversationQuery(baseOptions?: Apollo.QueryHookOptions<GetConversationQuery, GetConversationQueryVariables>) {
+        return Apollo.useQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
+      }
+export function useGetConversationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetConversationQuery, GetConversationQueryVariables>) {
+          return Apollo.useLazyQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
+        }
+export type GetConversationQueryHookResult = ReturnType<typeof useGetConversationQuery>;
+export type GetConversationLazyQueryHookResult = ReturnType<typeof useGetConversationLazyQuery>;
+export type GetConversationQueryResult = Apollo.QueryResult<GetConversationQuery, GetConversationQueryVariables>;
 export const GetInteractionDocument = gql`
     query getInteraction($input: GetInteractionInput!) {
   getInteraction(input: $input) {
