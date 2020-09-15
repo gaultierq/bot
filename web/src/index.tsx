@@ -12,6 +12,7 @@ import Config from '@web/config';
 import { Footer } from '@web/layout';
 import * as serviceWorker from './serviceWorker';
 import BotCreate from './pages/Bot/BotCreate';
+import Conversation from "./pages/Conversation";
 
 const config = new Config(process.env);
 const client = configureApolloClient(config);
@@ -22,7 +23,7 @@ function App(): React.ReactElement {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path={Routes.HOME} component={Home} />
+            <Route exact path={Routes.HOME} component={BotList} />
 
             <Route exact path={Routes.BOT_LIST} component={BotList} />
             <Route exact path={Routes.BOT_CREATE} component={BotCreate} />
@@ -31,7 +32,7 @@ function App(): React.ReactElement {
 
             <Route exact path={Routes.INTERACTION_LIST} component={InteractionList} />
             <Route exact path={Routes.INTERACTION_CREATE} component={InteractionCreate} />
-            <Route path={Routes.INTERACTION_EDIT} component={InteractionEdit} />
+            <Route path={Routes.CONVERSATION_SHOW} component={Conversation} />
           </Switch>
           <Route component={Footer} />
         </Router>

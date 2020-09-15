@@ -26,9 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
-// create a conversation and display
-export default function BotRun({ match }: RouteComponentProps<TParams>) {
+export default function Conversation({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
   const { data: queryData, loading: queryLoading, error: queryError } = useGetBotQuery({
@@ -44,7 +42,37 @@ export default function BotRun({ match }: RouteComponentProps<TParams>) {
 
   return (
     <div>
-      <span>Creating a new conversation</span>
+      <span>Hello this is the bot running</span>
+      <ul>
+        {messages.map(i => (
+          <Message key={i.key} content={i.content} />
+        ))}
+      </ul>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete={'off'}
+        onSubmit={event => {
+          event.preventDefault();
+          console.debug('event', { event });
+          const newMessages: IMessage[] = [
+            ...messages,
+            {
+              content: answer,
+              key: `fake-id-${messages.length + 1}`
+            }
+          ];
+          setMessages(newMessages);
+          setAnswerState('');
+        }}
+      >
+        <TextField id={'standard-basic'} label={'répondre'} value={answer} onChange={setAnswer} />
+        <div className='form-group my-4'>
+          <button className='btn btn-block' type='submit'>
+            Envoyer
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
