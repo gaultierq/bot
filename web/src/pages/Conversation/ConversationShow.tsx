@@ -42,6 +42,9 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
     const nextInteraction = conversation.nextInteraction;
     console.debug('Conversation retrieved:', { nextInteraction });
   }
+  // const nextInteraction = useNextInteraction();
+  // messages = answers à droite, et leurs interactions au dessus
+  // + nextInteraction
 
   const classes = useStyles();
 

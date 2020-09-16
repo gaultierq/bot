@@ -7,12 +7,20 @@ input GetInteractionInput {
   id: ID!
 }
 
-input IndexInteractionInput {
-  botId: ID!
-}
-
 type GetInteractionResult {
   interaction: Interaction
+}
+
+input NextInteractionInput {
+  conversationId: ID!
+}
+
+type NextInteractionResult {
+  interaction: Interaction
+}
+
+input IndexInteractionInput {
+  botId: ID!
 }
 
 type IndexInteractionResult {
