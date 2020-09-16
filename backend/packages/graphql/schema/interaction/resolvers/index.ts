@@ -6,7 +6,7 @@ const resolvers = {
   Query: {
     getInteraction,
     indexInteraction,
-    nextInteraction,
+    nextInteraction
   },
   Mutation: {
     createInteraction,

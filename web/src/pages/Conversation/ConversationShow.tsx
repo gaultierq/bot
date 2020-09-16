@@ -45,18 +45,20 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const conversation = queryData?.getConversation?.conversation;
   console.debug('Conversation retrieved:', { conversation });
 
-  const { data, loading, error } = useNextInteractionQuery({
+  const { data: nextInteractionData, loading, error } = useNextInteractionQuery({
     variables: {
       input: { conversationId: id }
-    },
+    }
   });
 
-  console.debug('next interactionquery:', { data, loading, error });
+  console.debug('next interaction query data:', { nextInteractionData, loading, error });
 
   // messages = answers à droite, et leurs interactions au dessus
   // + nextInteraction
 
   const classes = useStyles();
+
+  const currentInteraction = nextInteractionData?.nextInteraction?.interaction;
 
   const [
     createAnswerMutation,
@@ -71,6 +73,7 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
         {messages.map(i => (
           <Message key={i.key} content={i.content} />
         ))}
+        {currentInteraction && <div>{currentInteraction.content}</div>}
       </ul>
       <form
         className={classes.root}
@@ -79,6 +82,7 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
         onSubmit={async event => {
           event.preventDefault();
           console.debug('event', { event });
+
           // const newMessages: IMessage[] = [
           //   ...messages,
           //   {
@@ -86,12 +90,13 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
           //     key: `fake-id-${messages.length + 1}`
           //   }
           // ];
-
-          // const result = await createAnswerMutation({
-          //   variables: {
-          //     input: { conversationId: id, content: answer, interactionId: 'asd' },
-          //   },
-          // });
+          if (currentInteraction) {
+            const result = await createAnswerMutation({
+              variables: {
+                input: { conversationId: id, content: answer, interactionId: currentInteraction.id },
+              },
+            });
+          }
           // setMessages(newMessages);
           setAnswerState('');
         }}

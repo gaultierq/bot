@@ -17,6 +17,10 @@ async function nextInteraction(
   const { input } = _args;
   const { conversationId }: NextInteractionInput = input;
 
+  const c = await prisma.conversation.findOne({ where: { id: conversationId } });
+
+  if (!c) throw 'conversation not found: ' + conversationId;
+
   // find last answer
   const answers = await prisma.answer.findMany({
     where: { conversationId },
@@ -26,9 +30,11 @@ async function nextInteraction(
 
   const lastAnswer = _.get(answers, 0);
   const lastInteractionId = lastAnswer?.interactionId;
-
+  console.debug('interaction after ', { lastAnswer });
   // just for compilation
-  const interactions: Interaction[] | null = await prisma.interaction.findMany({ where: { predecessorId: lastInteractionId } });
+  const interactions: Interaction[] | null = await prisma.interaction.findMany({
+    where: { predecessorId: lastInteractionId, botId: c.botId }
+  });
 
   return { interaction: _.get(interactions, 0) };
 }
