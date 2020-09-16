@@ -1,5 +1,11 @@
 import React from 'react';
-import { Conversation, useCreateAnswerMutation, useGetConversationQuery, useGetInteractionQuery } from '@web/graphql';
+import {
+  Conversation,
+  useCreateAnswerMutation,
+  useGetConversationQuery,
+  useGetInteractionQuery,
+  useNextInteractionQuery
+} from '@web/graphql';
 import { RouteComponentProps } from 'react-router-dom';
 import { Message } from './components/Message';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -38,17 +44,24 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const [answer, setAnswer, setAnswerState] = useTextField('');
   const conversation = queryData?.getConversation?.conversation;
   console.debug('Conversation retrieved:', { conversation });
-  if (conversation) {
-    const nextInteraction = conversation.nextInteraction;
-    console.debug('Conversation retrieved:', { nextInteraction });
-  }
-  // const nextInteraction = useNextInteraction();
+
+  const { data, loading, error } = useNextInteractionQuery({
+    variables: {
+      input: { conversationId: id }
+    },
+  });
+
+  console.debug('next interactionquery:', { data, loading, error });
+
   // messages = answers à droite, et leurs interactions au dessus
   // + nextInteraction
 
   const classes = useStyles();
 
-  const [createAnswerMutation, { data, loading, error }] = useCreateAnswerMutation();
+  const [
+    createAnswerMutation,
+    { data: answerData, loading: answerLoading, error: answerError }
+  ] = useCreateAnswerMutation();
 
   if (!conversation) return <NotFound />;
   return (

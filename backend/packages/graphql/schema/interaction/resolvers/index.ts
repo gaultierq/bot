@@ -1,11 +1,12 @@
 import { Interaction } from './types';
-import { getInteraction, indexInteraction } from './queries';
+import { getInteraction, indexInteraction, nextInteraction } from './queries';
 import { createInteraction, deleteInteraction, editInteraction } from './mutations';
 
 const resolvers = {
   Query: {
     getInteraction,
-    indexInteraction
+    indexInteraction,
+    nextInteraction,
   },
   Mutation: {
     createInteraction,

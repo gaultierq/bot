@@ -6,6 +6,7 @@ import {
   Parent,
   QueryNextInteractionArgs
 } from '../../../../types';
+import _ from 'lodash';
 
 async function nextInteraction(
   _parent: Parent,
@@ -16,9 +17,20 @@ async function nextInteraction(
   const { input } = _args;
   const { conversationId }: NextInteractionInput = input;
 
+  // find last answer
+  const answers = await prisma.answer.findMany({
+    where: { conversationId },
+    orderBy: [{ createdAt: 'desc' }],
+    take: 1
+  });
+
+  const lastAnswer = _.get(answers, 0);
+  const lastInteractionId = lastAnswer?.interactionId;
+
   // just for compilation
-  const interaction: Interaction | null = await prisma.interaction.findOne({ where: { id: conversationId } });
-  return { interaction };
+  const interactions: Interaction[] | null = await prisma.interaction.findMany({ where: { predecessorId: lastInteractionId } });
+
+  return { interaction: _.get(interactions, 0) };
 }
 
 export default nextInteraction;
