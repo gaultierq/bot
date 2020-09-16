@@ -17,7 +17,6 @@ type Conversation {
   id: ID!
   bot: Bot
   answers: [Answer]
-  nextInteraction: Interaction
 }
 
 type Interaction {
@@ -47,6 +46,7 @@ type Query {
   getConversation(input: GetConversationInput!): GetConversationResult!
   getInteraction(input: GetInteractionInput!): GetInteractionResult!
   indexInteraction(input: IndexInteractionInput!): IndexInteractionResult!
+  nextInteraction(input: NextInteractionInput!): NextInteractionResult!
   getPost(input: GetPostInput!): GetPostResult!
   getUser(input: GetUserInput!): GetUserResult!
 }
@@ -83,12 +83,20 @@ input GetInteractionInput {
   id: ID!
 }
 
-input IndexInteractionInput {
-  botId: ID!
-}
-
 type GetInteractionResult {
   interaction: Interaction
+}
+
+input NextInteractionInput {
+  conversationId: ID!
+}
+
+type NextInteractionResult {
+  interaction: Interaction
+}
+
+input IndexInteractionInput {
+  botId: ID!
 }
 
 type IndexInteractionResult {

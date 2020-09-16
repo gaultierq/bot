@@ -5,9 +5,6 @@ const getConversation = gql`
     getConversation(input: $input) {
       conversation {
         id
-        nextInteraction {
-          id
-        }
       }
     }
   }

@@ -1,6 +1,7 @@
 type Query {
   getInteraction(input: GetInteractionInput!): GetInteractionResult!
   indexInteraction(input: IndexInteractionInput!): IndexInteractionResult!
+  nextInteraction(input: NextInteractionInput!): NextInteractionResult!
 }
 
 input GetInteractionInput {

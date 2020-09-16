@@ -2,5 +2,4 @@ type Conversation {
   id: ID!
   bot: Bot
   answers: [Answer]
-  nextInteraction: Interaction
 }

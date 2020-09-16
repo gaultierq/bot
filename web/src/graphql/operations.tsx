@@ -34,7 +34,6 @@ export type Conversation = {
   id: Scalars['ID'];
   bot?: Maybe<Bot>;
   answers?: Maybe<Array<Maybe<Answer>>>;
-  nextInteraction?: Maybe<Interaction>;
 };
 
 export type Interaction = {
@@ -68,6 +67,7 @@ export type Query = {
   getConversation: GetConversationResult;
   getInteraction: GetInteractionResult;
   indexInteraction: IndexInteractionResult;
+  nextInteraction: NextInteractionResult;
   getPost: GetPostResult;
   getUser: GetUserResult;
 };
@@ -90,6 +90,10 @@ export type QueryGetInteractionArgs = {
 
 export type QueryIndexInteractionArgs = {
   input: IndexInteractionInput;
+};
+
+export type QueryNextInteractionArgs = {
+  input: NextInteractionInput;
 };
 
 export type QueryGetPostArgs = {
@@ -136,13 +140,22 @@ export type GetInteractionInput = {
   id: Scalars['ID'];
 };
 
-export type IndexInteractionInput = {
-  botId: Scalars['ID'];
-};
-
 export type GetInteractionResult = {
   __typename?: 'GetInteractionResult';
   interaction?: Maybe<Interaction>;
+};
+
+export type NextInteractionInput = {
+  conversationId: Scalars['ID'];
+};
+
+export type NextInteractionResult = {
+  __typename?: 'NextInteractionResult';
+  interaction?: Maybe<Interaction>;
+};
+
+export type IndexInteractionInput = {
+  botId: Scalars['ID'];
 };
 
 export type IndexInteractionResult = {
@@ -421,11 +434,7 @@ export type GetConversationQueryVariables = Exact<{
 
 export type GetConversationQuery = { __typename?: 'Query' } & {
   getConversation: { __typename?: 'GetConversationResult' } & {
-    conversation?: Maybe<
-    { __typename?: 'Conversation' } & Pick<Conversation, 'id'> & {
-      nextInteraction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id'>>;
-    }
-    >;
+    conversation?: Maybe<{ __typename?: 'Conversation' } & Pick<Conversation, 'id'>>;
   };
 };
 
@@ -941,9 +950,6 @@ export const GetConversationDocument = gql`
     getConversation(input: $input) {
       conversation {
         id
-        nextInteraction {
-          id
-        }
       }
     }
   }
