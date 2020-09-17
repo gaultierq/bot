@@ -13,28 +13,37 @@ import { Footer } from '@web/layout';
 import * as serviceWorker from './serviceWorker';
 import BotCreate from './pages/Bot/BotCreate';
 import Conversation from './pages/Conversation/ConversationShow';
+import WithAppBar from './layout/AppBar';
 
 const config = new Config(process.env);
 const client = configureApolloClient(config);
+
+function Routess() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path={Routes.HOME} component={BotList} />
+
+        <Route exact path={Routes.BOT_LIST} component={BotList} />
+        <Route exact path={Routes.BOT_CREATE} component={BotCreate} />
+        <Route path={Routes.BOT_EDIT} component={BotEdit} />
+
+        <Route exact path={Routes.INTERACTION_LIST} component={InteractionList} />
+        <Route exact path={Routes.INTERACTION_CREATE} component={InteractionCreate} />
+        <Route path={Routes.CONVERSATION_SHOW} component={Conversation} />
+      </Switch>
+      <Route component={Footer} />
+    </Router>
+  );
+}
 
 function App(): React.ReactElement {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route exact path={Routes.HOME} component={BotList} />
-
-            <Route exact path={Routes.BOT_LIST} component={BotList} />
-            <Route exact path={Routes.BOT_CREATE} component={BotCreate} />
-            <Route path={Routes.BOT_EDIT} component={BotEdit} />
-
-            <Route exact path={Routes.INTERACTION_LIST} component={InteractionList} />
-            <Route exact path={Routes.INTERACTION_CREATE} component={InteractionCreate} />
-            <Route path={Routes.CONVERSATION_SHOW} component={Conversation} />
-          </Switch>
-          <Route component={Footer} />
-        </Router>
+        <WithAppBar>
+          <Routess />
+        </WithAppBar>
       </ThemeProvider>
     </ApolloProvider>
   );

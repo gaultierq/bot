@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type BotParam = { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' | 'image'> & {
-  author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
-};
+    author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+  };
 
 type BotFormParams = { bot: CreateBotInput | EditBotInput; onSubmit: (BotParam) => void };
 
@@ -38,8 +38,10 @@ export default function BotForm(props: BotFormParams) {
       className={classes.root}
       noValidate
       autoComplete={'off'}
-      onSubmit={event => onSubmit({ title, image, published })}
-    >
+      onSubmit={event => {
+        event.preventDefault();
+        onSubmit({ title, image, published });
+      }}>
       <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
       <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
       <Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />
