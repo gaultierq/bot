@@ -32,7 +32,6 @@ export const findNextInteraction = async function (prisma: Prisma, conversationI
   return { interaction: _.get(interactions, 0) };
 };
 
-
 async function nextInteraction(
   _parent: Parent,
   _args: QueryNextInteractionArgs,

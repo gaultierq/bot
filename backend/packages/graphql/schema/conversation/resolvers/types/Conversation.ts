@@ -9,7 +9,7 @@ const Conversation = {
     const { prisma } = context;
 
     return prisma.answer.findMany({ where: { conversationId: id }, include: { interaction: true } });
-  },
+  }
 };
 
 export default Conversation;

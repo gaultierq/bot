@@ -5,7 +5,7 @@ import { createConversation } from './mutations';
 const resolvers = {
   Query: {
     getConversation,
-    nextInteraction,
+    nextInteraction
   },
   Mutation: {
     createConversation
