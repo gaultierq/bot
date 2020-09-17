@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: theme.spacing(1),
         width: '25ch'
       }
-
     }
   })
 );
@@ -47,9 +46,7 @@ export function AnswerField(props: { currentInteraction: any; conversationId: st
         onChange={setAnswer}
       />
       <div className='form-group my-4'>
-        <Button onClick={onSubmit}>
-          Envoyer
-        </Button>
+        <Button onClick={onSubmit}>Envoyer</Button>
       </div>
     </>
   );

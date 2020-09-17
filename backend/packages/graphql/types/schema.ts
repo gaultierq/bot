@@ -70,41 +70,33 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetAnswerArgs = {
   input: GetAnswerInput;
 };
-
 
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetConversationArgs = {
   input: GetConversationInput;
 };
-
 
 export type QueryGetInteractionArgs = {
   input: GetInteractionInput;
 };
 
-
 export type QueryIndexInteractionArgs = {
   input: IndexInteractionInput;
 };
-
 
 export type QueryNextInteractionArgs = {
   input: NextInteractionInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -200,41 +192,33 @@ export type Mutation = {
   deleteInteraction: DeleteInteractionResult;
 };
 
-
 export type MutationCreateAnswerArgs = {
   input: CreateAnswerInput;
 };
-
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
 
-
 export type MutationEditBotArgs = {
   input: EditBotInput;
 };
-
 
 export type MutationDeleteBotArgs = {
   input: DeleteBotInput;
 };
 
-
 export type MutationCreateConversationArgs = {
   input: CreateConversationInput;
 };
-
 
 export type MutationCreateInteractionArgs = {
   input: CreateInteractionInput;
 };
 
-
 export type MutationEditInteractionArgs = {
   input: EditInteractionInput;
 };
-
 
 export type MutationDeleteInteractionArgs = {
   input: DeleteInteractionInput;

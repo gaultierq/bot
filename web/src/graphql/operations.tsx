@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -72,41 +73,33 @@ export type Query = {
   getUser: GetUserResult;
 };
 
-
 export type QueryGetAnswerArgs = {
   input: GetAnswerInput;
 };
-
 
 export type QueryGetBotArgs = {
   input: GetBotInput;
 };
 
-
 export type QueryGetConversationArgs = {
   input: GetConversationInput;
 };
-
 
 export type QueryGetInteractionArgs = {
   input: GetInteractionInput;
 };
 
-
 export type QueryIndexInteractionArgs = {
   input: IndexInteractionInput;
 };
-
 
 export type QueryNextInteractionArgs = {
   input: NextInteractionInput;
 };
 
-
 export type QueryGetPostArgs = {
   input: GetPostInput;
 };
-
 
 export type QueryGetUserArgs = {
   input: GetUserInput;
@@ -202,41 +195,33 @@ export type Mutation = {
   deleteInteraction: DeleteInteractionResult;
 };
 
-
 export type MutationCreateAnswerArgs = {
   input: CreateAnswerInput;
 };
-
 
 export type MutationCreateBotArgs = {
   input: CreateBotInput;
 };
 
-
 export type MutationEditBotArgs = {
   input: EditBotInput;
 };
-
 
 export type MutationDeleteBotArgs = {
   input: DeleteBotInput;
 };
 
-
 export type MutationCreateConversationArgs = {
   input: CreateConversationInput;
 };
-
 
 export type MutationCreateInteractionArgs = {
   input: CreateInteractionInput;
 };
 
-
 export type MutationEditInteractionArgs = {
   input: EditInteractionInput;
 };
-
 
 export type MutationDeleteInteractionArgs = {
   input: DeleteInteractionInput;
@@ -327,314 +312,213 @@ export type CreateAnswerMutationVariables = Exact<{
   input: CreateAnswerInput;
 }>;
 
-
-export type CreateAnswerMutation = (
-  { __typename?: 'Mutation' }
-  & { createAnswer: (
-    { __typename?: 'CreateAnswerResult' }
-    & { answer?: Maybe<(
-      { __typename?: 'Answer' }
-      & Pick<Answer, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type CreateAnswerMutation = { __typename?: 'Mutation' } & {
+  createAnswer: { __typename?: 'CreateAnswerResult' } & {
+    answer?: Maybe<{ __typename?: 'Answer' } & Pick<Answer, 'id' | 'content'>>;
+  };
+};
 
 export type CreateBotMutationVariables = Exact<{
   input: CreateBotInput;
 }>;
 
-
-export type CreateBotMutation = (
-  { __typename?: 'Mutation' }
-  & { createBot: (
-    { __typename?: 'CreateBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type CreateBotMutation = { __typename?: 'Mutation' } & {
+  createBot: { __typename?: 'CreateBotResult' } & {
+    bot?: Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
 export type DeleteBotMutationVariables = Exact<{
   input: DeleteBotInput;
 }>;
 
-
-export type DeleteBotMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteBot: (
-    { __typename?: 'DeleteBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-    )> }
-  ) }
-);
+export type DeleteBotMutation = { __typename?: 'Mutation' } & {
+  deleteBot: { __typename?: 'DeleteBotResult' } & {
+    bot?: Maybe<{ __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'>>;
+  };
+};
 
 export type EditBotMutationVariables = Exact<{
   input: EditBotInput;
 }>;
 
-
-export type EditBotMutation = (
-  { __typename?: 'Mutation' }
-  & { editBot: (
-    { __typename?: 'EditBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'image' | 'title'>
-    )> }
-  ) }
-);
+export type EditBotMutation = { __typename?: 'Mutation' } & {
+  editBot: { __typename?: 'EditBotResult' } & {
+    bot?: Maybe<{ __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'image' | 'title'>>;
+  };
+};
 
 export type CreateConversationMutationVariables = Exact<{
   input: CreateConversationInput;
 }>;
 
-
-export type CreateConversationMutation = (
-  { __typename?: 'Mutation' }
-  & { createConversation: (
-    { __typename?: 'CreateConversationResult' }
-    & { conversation?: Maybe<(
-      { __typename?: 'Conversation' }
-      & Pick<Conversation, 'id'>
-    )> }
-  ) }
-);
+export type CreateConversationMutation = { __typename?: 'Mutation' } & {
+  createConversation: { __typename?: 'CreateConversationResult' } & {
+    conversation?: Maybe<{ __typename?: 'Conversation' } & Pick<Conversation, 'id'>>;
+  };
+};
 
 export type CreateInteractionMutationVariables = Exact<{
   input: CreateInteractionInput;
 }>;
 
-
-export type CreateInteractionMutation = (
-  { __typename?: 'Mutation' }
-  & { createInteraction: (
-    { __typename?: 'CreateInteractionResult' }
-    & { interaction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type CreateInteractionMutation = { __typename?: 'Mutation' } & {
+  createInteraction: { __typename?: 'CreateInteractionResult' } & {
+    interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type DeleteInteractionMutationVariables = Exact<{
   input: DeleteInteractionInput;
 }>;
 
-
-export type DeleteInteractionMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteInteraction: (
-    { __typename?: 'DeleteInteractionResult' }
-    & { interaction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type DeleteInteractionMutation = { __typename?: 'Mutation' } & {
+  deleteInteraction: { __typename?: 'DeleteInteractionResult' } & {
+    interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type EditInteractionMutationVariables = Exact<{
   input: EditInteractionInput;
 }>;
 
-
-export type EditInteractionMutation = (
-  { __typename?: 'Mutation' }
-  & { editInteraction: (
-    { __typename?: 'EditInteractionResult' }
-    & { interaction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type EditInteractionMutation = { __typename?: 'Mutation' } & {
+  editInteraction: { __typename?: 'EditInteractionResult' } & {
+    interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type GetAnswerQueryVariables = Exact<{
   input: GetAnswerInput;
 }>;
 
-
-export type GetAnswerQuery = (
-  { __typename?: 'Query' }
-  & { getAnswer: (
-    { __typename?: 'GetAnswerResult' }
-    & { answer?: Maybe<(
-      { __typename?: 'Answer' }
-      & Pick<Answer, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type GetAnswerQuery = { __typename?: 'Query' } & {
+  getAnswer: { __typename?: 'GetAnswerResult' } & {
+    answer?: Maybe<{ __typename?: 'Answer' } & Pick<Answer, 'id' | 'content'>>;
+  };
+};
 
 export type GetBotQueryVariables = Exact<{
   input: GetBotInput;
 }>;
 
+export type GetBotQuery = { __typename?: 'Query' } & {
+  getBot: { __typename?: 'GetBotResult' } & {
+    bot?: Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title' | 'image'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
-export type GetBotQuery = (
-  { __typename?: 'Query' }
-  & { getBot: (
-    { __typename?: 'GetBotResult' }
-    & { bot?: Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title' | 'image'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type IndexBotQueryVariables = Exact<{ [key: string]: never }>;
 
-export type IndexBotQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IndexBotQuery = (
-  { __typename?: 'Query' }
-  & { indexBot: (
-    { __typename?: 'IndexBotResult' }
-    & { bots: Array<Maybe<(
-      { __typename?: 'Bot' }
-      & Pick<Bot, 'id' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )>> }
-  ) }
-);
+export type IndexBotQuery = { __typename?: 'Query' } & {
+  indexBot: { __typename?: 'IndexBotResult' } & {
+    bots: Array<
+    Maybe<
+    { __typename?: 'Bot' } & Pick<Bot, 'id' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >
+    >;
+  };
+};
 
 export type GetConversationQueryVariables = Exact<{
   input: GetConversationInput;
 }>;
 
-
-export type GetConversationQuery = (
-  { __typename?: 'Query' }
-  & { getConversation: (
-    { __typename?: 'GetConversationResult' }
-    & { conversation?: Maybe<(
-      { __typename?: 'Conversation' }
-      & Pick<Conversation, 'id' | 'botId'>
-      & { answers?: Maybe<Array<(
-        { __typename?: 'Answer' }
-        & Pick<Answer, 'id' | 'content'>
-        & { interaction?: Maybe<(
-          { __typename?: 'Interaction' }
-          & Pick<Interaction, 'id' | 'content'>
-        )> }
-      )>> }
-    )>, nextInteraction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type GetConversationQuery = { __typename?: 'Query' } & {
+  getConversation: { __typename?: 'GetConversationResult' } & {
+    conversation?: Maybe<
+    { __typename?: 'Conversation' } & Pick<Conversation, 'id' | 'botId'> & {
+      answers?: Maybe<
+      Array<
+      { __typename?: 'Answer' } & Pick<Answer, 'id' | 'content'> & {
+        interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+      }
+      >
+      >;
+    }
+    >;
+    nextInteraction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type GetInteractionQueryVariables = Exact<{
   input: GetInteractionInput;
 }>;
 
-
-export type GetInteractionQuery = (
-  { __typename?: 'Query' }
-  & { getInteraction: (
-    { __typename?: 'GetInteractionResult' }
-    & { interaction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type GetInteractionQuery = { __typename?: 'Query' } & {
+  getInteraction: { __typename?: 'GetInteractionResult' } & {
+    interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type IndexInteractionQueryVariables = Exact<{
   input: IndexInteractionInput;
 }>;
 
-
-export type IndexInteractionQuery = (
-  { __typename?: 'Query' }
-  & { indexInteraction: (
-    { __typename?: 'IndexInteractionResult' }
-    & { interactions: Array<Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )>> }
-  ) }
-);
+export type IndexInteractionQuery = { __typename?: 'Query' } & {
+  indexInteraction: { __typename?: 'IndexInteractionResult' } & {
+    interactions: Array<Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>>;
+  };
+};
 
 export type NextInteractionQueryVariables = Exact<{
   input: NextInteractionInput;
 }>;
 
-
-export type NextInteractionQuery = (
-  { __typename?: 'Query' }
-  & { nextInteraction: (
-    { __typename?: 'NextInteractionResult' }
-    & { interaction?: Maybe<(
-      { __typename?: 'Interaction' }
-      & Pick<Interaction, 'id' | 'content'>
-    )> }
-  ) }
-);
+export type NextInteractionQuery = { __typename?: 'Query' } & {
+  nextInteraction: { __typename?: 'NextInteractionResult' } & {
+    interaction?: Maybe<{ __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'>>;
+  };
+};
 
 export type GetPostQueryVariables = Exact<{
   input: GetPostInput;
 }>;
 
-
-export type GetPostQuery = (
-  { __typename?: 'Query' }
-  & { getPost: (
-    { __typename?: 'GetPostResult' }
-    & { post?: Maybe<(
-      { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'content' | 'published' | 'title'>
-      & { author?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )> }
-  ) }
-);
+export type GetPostQuery = { __typename?: 'Query' } & {
+  getPost: { __typename?: 'GetPostResult' } & {
+    post?: Maybe<
+    { __typename?: 'Post' } & Pick<Post, 'id' | 'content' | 'published' | 'title'> & {
+      author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+    }
+    >;
+  };
+};
 
 export type GetUserQueryVariables = Exact<{
   input: GetUserInput;
 }>;
 
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { getUser: (
-    { __typename?: 'GetUserResult' }
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'name'>
-      & { posts?: Maybe<Array<Maybe<(
-        { __typename?: 'Post' }
-        & Pick<Post, 'id'>
-      )>>> }
-    )> }
-  ) }
-);
-
+export type GetUserQuery = { __typename?: 'Query' } & {
+  getUser: { __typename?: 'GetUserResult' } & {
+    user?: Maybe<
+    { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'name'> & {
+      posts?: Maybe<Array<Maybe<{ __typename?: 'Post' } & Pick<Post, 'id'>>>>;
+    }
+    >;
+  };
+};
 
 export const CreateAnswerDocument = gql`
-    mutation createAnswer($input: CreateAnswerInput!) {
-  createAnswer(input: $input) {
-    answer {
-      id
-      content
+  mutation createAnswer($input: CreateAnswerInput!) {
+    createAnswer(input: $input) {
+      answer {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 export type CreateAnswerMutationFn = Apollo.MutationFunction<CreateAnswerMutation, CreateAnswerMutationVariables>;
 
 /**
@@ -654,26 +538,31 @@ export type CreateAnswerMutationFn = Apollo.MutationFunction<CreateAnswerMutatio
  *   },
  * });
  */
-export function useCreateAnswerMutation(baseOptions?: Apollo.MutationHookOptions<CreateAnswerMutation, CreateAnswerMutationVariables>) {
-        return Apollo.useMutation<CreateAnswerMutation, CreateAnswerMutationVariables>(CreateAnswerDocument, baseOptions);
-      }
+export function useCreateAnswerMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateAnswerMutation, CreateAnswerMutationVariables>
+) {
+  return Apollo.useMutation<CreateAnswerMutation, CreateAnswerMutationVariables>(CreateAnswerDocument, baseOptions);
+}
 export type CreateAnswerMutationHookResult = ReturnType<typeof useCreateAnswerMutation>;
 export type CreateAnswerMutationResult = Apollo.MutationResult<CreateAnswerMutation>;
-export type CreateAnswerMutationOptions = Apollo.BaseMutationOptions<CreateAnswerMutation, CreateAnswerMutationVariables>;
+export type CreateAnswerMutationOptions = Apollo.BaseMutationOptions<
+CreateAnswerMutation,
+CreateAnswerMutationVariables
+>;
 export const CreateBotDocument = gql`
-    mutation createBot($input: CreateBotInput!) {
-  createBot(input: $input) {
-    bot {
-      id
-      published
-      title
-      author {
+  mutation createBot($input: CreateBotInput!) {
+    createBot(input: $input) {
+      bot {
         id
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 export type CreateBotMutationFn = Apollo.MutationFunction<CreateBotMutation, CreateBotMutationVariables>;
 
 /**
@@ -693,23 +582,25 @@ export type CreateBotMutationFn = Apollo.MutationFunction<CreateBotMutation, Cre
  *   },
  * });
  */
-export function useCreateBotMutation(baseOptions?: Apollo.MutationHookOptions<CreateBotMutation, CreateBotMutationVariables>) {
-        return Apollo.useMutation<CreateBotMutation, CreateBotMutationVariables>(CreateBotDocument, baseOptions);
-      }
+export function useCreateBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateBotMutation, CreateBotMutationVariables>
+) {
+  return Apollo.useMutation<CreateBotMutation, CreateBotMutationVariables>(CreateBotDocument, baseOptions);
+}
 export type CreateBotMutationHookResult = ReturnType<typeof useCreateBotMutation>;
 export type CreateBotMutationResult = Apollo.MutationResult<CreateBotMutation>;
 export type CreateBotMutationOptions = Apollo.BaseMutationOptions<CreateBotMutation, CreateBotMutationVariables>;
 export const DeleteBotDocument = gql`
-    mutation deleteBot($input: DeleteBotInput!) {
-  deleteBot(input: $input) {
-    bot {
-      id
-      published
-      title
+  mutation deleteBot($input: DeleteBotInput!) {
+    deleteBot(input: $input) {
+      bot {
+        id
+        published
+        title
+      }
     }
   }
-}
-    `;
+`;
 export type DeleteBotMutationFn = Apollo.MutationFunction<DeleteBotMutation, DeleteBotMutationVariables>;
 
 /**
@@ -729,24 +620,26 @@ export type DeleteBotMutationFn = Apollo.MutationFunction<DeleteBotMutation, Del
  *   },
  * });
  */
-export function useDeleteBotMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBotMutation, DeleteBotMutationVariables>) {
-        return Apollo.useMutation<DeleteBotMutation, DeleteBotMutationVariables>(DeleteBotDocument, baseOptions);
-      }
+export function useDeleteBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteBotMutation, DeleteBotMutationVariables>
+) {
+  return Apollo.useMutation<DeleteBotMutation, DeleteBotMutationVariables>(DeleteBotDocument, baseOptions);
+}
 export type DeleteBotMutationHookResult = ReturnType<typeof useDeleteBotMutation>;
 export type DeleteBotMutationResult = Apollo.MutationResult<DeleteBotMutation>;
 export type DeleteBotMutationOptions = Apollo.BaseMutationOptions<DeleteBotMutation, DeleteBotMutationVariables>;
 export const EditBotDocument = gql`
-    mutation editBot($input: EditBotInput!) {
-  editBot(input: $input) {
-    bot {
-      id
-      published
-      image
-      title
+  mutation editBot($input: EditBotInput!) {
+    editBot(input: $input) {
+      bot {
+        id
+        published
+        image
+        title
+      }
     }
   }
-}
-    `;
+`;
 export type EditBotMutationFn = Apollo.MutationFunction<EditBotMutation, EditBotMutationVariables>;
 
 /**
@@ -766,22 +659,27 @@ export type EditBotMutationFn = Apollo.MutationFunction<EditBotMutation, EditBot
  *   },
  * });
  */
-export function useEditBotMutation(baseOptions?: Apollo.MutationHookOptions<EditBotMutation, EditBotMutationVariables>) {
-        return Apollo.useMutation<EditBotMutation, EditBotMutationVariables>(EditBotDocument, baseOptions);
-      }
+export function useEditBotMutation(
+  baseOptions?: Apollo.MutationHookOptions<EditBotMutation, EditBotMutationVariables>
+) {
+  return Apollo.useMutation<EditBotMutation, EditBotMutationVariables>(EditBotDocument, baseOptions);
+}
 export type EditBotMutationHookResult = ReturnType<typeof useEditBotMutation>;
 export type EditBotMutationResult = Apollo.MutationResult<EditBotMutation>;
 export type EditBotMutationOptions = Apollo.BaseMutationOptions<EditBotMutation, EditBotMutationVariables>;
 export const CreateConversationDocument = gql`
-    mutation createConversation($input: CreateConversationInput!) {
-  createConversation(input: $input) {
-    conversation {
-      id
+  mutation createConversation($input: CreateConversationInput!) {
+    createConversation(input: $input) {
+      conversation {
+        id
+      }
     }
   }
-}
-    `;
-export type CreateConversationMutationFn = Apollo.MutationFunction<CreateConversationMutation, CreateConversationMutationVariables>;
+`;
+export type CreateConversationMutationFn = Apollo.MutationFunction<
+CreateConversationMutation,
+CreateConversationMutationVariables
+>;
 
 /**
  * __useCreateConversationMutation__
@@ -800,23 +698,34 @@ export type CreateConversationMutationFn = Apollo.MutationFunction<CreateConvers
  *   },
  * });
  */
-export function useCreateConversationMutation(baseOptions?: Apollo.MutationHookOptions<CreateConversationMutation, CreateConversationMutationVariables>) {
-        return Apollo.useMutation<CreateConversationMutation, CreateConversationMutationVariables>(CreateConversationDocument, baseOptions);
-      }
+export function useCreateConversationMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateConversationMutation, CreateConversationMutationVariables>
+) {
+  return Apollo.useMutation<CreateConversationMutation, CreateConversationMutationVariables>(
+    CreateConversationDocument,
+    baseOptions
+  );
+}
 export type CreateConversationMutationHookResult = ReturnType<typeof useCreateConversationMutation>;
 export type CreateConversationMutationResult = Apollo.MutationResult<CreateConversationMutation>;
-export type CreateConversationMutationOptions = Apollo.BaseMutationOptions<CreateConversationMutation, CreateConversationMutationVariables>;
+export type CreateConversationMutationOptions = Apollo.BaseMutationOptions<
+CreateConversationMutation,
+CreateConversationMutationVariables
+>;
 export const CreateInteractionDocument = gql`
-    mutation createInteraction($input: CreateInteractionInput!) {
-  createInteraction(input: $input) {
-    interaction {
-      id
-      content
+  mutation createInteraction($input: CreateInteractionInput!) {
+    createInteraction(input: $input) {
+      interaction {
+        id
+        content
+      }
     }
   }
-}
-    `;
-export type CreateInteractionMutationFn = Apollo.MutationFunction<CreateInteractionMutation, CreateInteractionMutationVariables>;
+`;
+export type CreateInteractionMutationFn = Apollo.MutationFunction<
+CreateInteractionMutation,
+CreateInteractionMutationVariables
+>;
 
 /**
  * __useCreateInteractionMutation__
@@ -835,23 +744,34 @@ export type CreateInteractionMutationFn = Apollo.MutationFunction<CreateInteract
  *   },
  * });
  */
-export function useCreateInteractionMutation(baseOptions?: Apollo.MutationHookOptions<CreateInteractionMutation, CreateInteractionMutationVariables>) {
-        return Apollo.useMutation<CreateInteractionMutation, CreateInteractionMutationVariables>(CreateInteractionDocument, baseOptions);
-      }
+export function useCreateInteractionMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateInteractionMutation, CreateInteractionMutationVariables>
+) {
+  return Apollo.useMutation<CreateInteractionMutation, CreateInteractionMutationVariables>(
+    CreateInteractionDocument,
+    baseOptions
+  );
+}
 export type CreateInteractionMutationHookResult = ReturnType<typeof useCreateInteractionMutation>;
 export type CreateInteractionMutationResult = Apollo.MutationResult<CreateInteractionMutation>;
-export type CreateInteractionMutationOptions = Apollo.BaseMutationOptions<CreateInteractionMutation, CreateInteractionMutationVariables>;
+export type CreateInteractionMutationOptions = Apollo.BaseMutationOptions<
+CreateInteractionMutation,
+CreateInteractionMutationVariables
+>;
 export const DeleteInteractionDocument = gql`
-    mutation deleteInteraction($input: DeleteInteractionInput!) {
-  deleteInteraction(input: $input) {
-    interaction {
-      id
-      content
+  mutation deleteInteraction($input: DeleteInteractionInput!) {
+    deleteInteraction(input: $input) {
+      interaction {
+        id
+        content
+      }
     }
   }
-}
-    `;
-export type DeleteInteractionMutationFn = Apollo.MutationFunction<DeleteInteractionMutation, DeleteInteractionMutationVariables>;
+`;
+export type DeleteInteractionMutationFn = Apollo.MutationFunction<
+DeleteInteractionMutation,
+DeleteInteractionMutationVariables
+>;
 
 /**
  * __useDeleteInteractionMutation__
@@ -870,23 +790,34 @@ export type DeleteInteractionMutationFn = Apollo.MutationFunction<DeleteInteract
  *   },
  * });
  */
-export function useDeleteInteractionMutation(baseOptions?: Apollo.MutationHookOptions<DeleteInteractionMutation, DeleteInteractionMutationVariables>) {
-        return Apollo.useMutation<DeleteInteractionMutation, DeleteInteractionMutationVariables>(DeleteInteractionDocument, baseOptions);
-      }
+export function useDeleteInteractionMutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteInteractionMutation, DeleteInteractionMutationVariables>
+) {
+  return Apollo.useMutation<DeleteInteractionMutation, DeleteInteractionMutationVariables>(
+    DeleteInteractionDocument,
+    baseOptions
+  );
+}
 export type DeleteInteractionMutationHookResult = ReturnType<typeof useDeleteInteractionMutation>;
 export type DeleteInteractionMutationResult = Apollo.MutationResult<DeleteInteractionMutation>;
-export type DeleteInteractionMutationOptions = Apollo.BaseMutationOptions<DeleteInteractionMutation, DeleteInteractionMutationVariables>;
+export type DeleteInteractionMutationOptions = Apollo.BaseMutationOptions<
+DeleteInteractionMutation,
+DeleteInteractionMutationVariables
+>;
 export const EditInteractionDocument = gql`
-    mutation editInteraction($input: EditInteractionInput!) {
-  editInteraction(input: $input) {
-    interaction {
-      id
-      content
+  mutation editInteraction($input: EditInteractionInput!) {
+    editInteraction(input: $input) {
+      interaction {
+        id
+        content
+      }
     }
   }
-}
-    `;
-export type EditInteractionMutationFn = Apollo.MutationFunction<EditInteractionMutation, EditInteractionMutationVariables>;
+`;
+export type EditInteractionMutationFn = Apollo.MutationFunction<
+EditInteractionMutation,
+EditInteractionMutationVariables
+>;
 
 /**
  * __useEditInteractionMutation__
@@ -905,22 +836,30 @@ export type EditInteractionMutationFn = Apollo.MutationFunction<EditInteractionM
  *   },
  * });
  */
-export function useEditInteractionMutation(baseOptions?: Apollo.MutationHookOptions<EditInteractionMutation, EditInteractionMutationVariables>) {
-        return Apollo.useMutation<EditInteractionMutation, EditInteractionMutationVariables>(EditInteractionDocument, baseOptions);
-      }
+export function useEditInteractionMutation(
+  baseOptions?: Apollo.MutationHookOptions<EditInteractionMutation, EditInteractionMutationVariables>
+) {
+  return Apollo.useMutation<EditInteractionMutation, EditInteractionMutationVariables>(
+    EditInteractionDocument,
+    baseOptions
+  );
+}
 export type EditInteractionMutationHookResult = ReturnType<typeof useEditInteractionMutation>;
 export type EditInteractionMutationResult = Apollo.MutationResult<EditInteractionMutation>;
-export type EditInteractionMutationOptions = Apollo.BaseMutationOptions<EditInteractionMutation, EditInteractionMutationVariables>;
+export type EditInteractionMutationOptions = Apollo.BaseMutationOptions<
+EditInteractionMutation,
+EditInteractionMutationVariables
+>;
 export const GetAnswerDocument = gql`
-    query getAnswer($input: GetAnswerInput!) {
-  getAnswer(input: $input) {
-    answer {
-      id
-      content
+  query getAnswer($input: GetAnswerInput!) {
+    getAnswer(input: $input) {
+      answer {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetAnswerQuery__
@@ -939,29 +878,31 @@ export const GetAnswerDocument = gql`
  * });
  */
 export function useGetAnswerQuery(baseOptions?: Apollo.QueryHookOptions<GetAnswerQuery, GetAnswerQueryVariables>) {
-        return Apollo.useQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
-      }
-export function useGetAnswerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAnswerQuery, GetAnswerQueryVariables>) {
-          return Apollo.useLazyQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
-        }
+  return Apollo.useQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
+}
+export function useGetAnswerLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetAnswerQuery, GetAnswerQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetAnswerQuery, GetAnswerQueryVariables>(GetAnswerDocument, baseOptions);
+}
 export type GetAnswerQueryHookResult = ReturnType<typeof useGetAnswerQuery>;
 export type GetAnswerLazyQueryHookResult = ReturnType<typeof useGetAnswerLazyQuery>;
 export type GetAnswerQueryResult = Apollo.QueryResult<GetAnswerQuery, GetAnswerQueryVariables>;
 export const GetBotDocument = gql`
-    query getBot($input: GetBotInput!) {
-  getBot(input: $input) {
-    bot {
-      id
-      published
-      title
-      image
-      author {
+  query getBot($input: GetBotInput!) {
+    getBot(input: $input) {
+      bot {
         id
+        published
+        title
+        image
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetBotQuery__
@@ -980,28 +921,28 @@ export const GetBotDocument = gql`
  * });
  */
 export function useGetBotQuery(baseOptions?: Apollo.QueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
-        return Apollo.useQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
 export function useGetBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBotQuery, GetBotQueryVariables>) {
-          return Apollo.useLazyQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetBotQuery, GetBotQueryVariables>(GetBotDocument, baseOptions);
+}
 export type GetBotQueryHookResult = ReturnType<typeof useGetBotQuery>;
 export type GetBotLazyQueryHookResult = ReturnType<typeof useGetBotLazyQuery>;
 export type GetBotQueryResult = Apollo.QueryResult<GetBotQuery, GetBotQueryVariables>;
 export const IndexBotDocument = gql`
-    query indexBot {
-  indexBot {
-    bots {
-      id
-      published
-      title
-      author {
+  query indexBot {
+    indexBot {
+      bots {
         id
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useIndexBotQuery__
@@ -1019,36 +960,36 @@ export const IndexBotDocument = gql`
  * });
  */
 export function useIndexBotQuery(baseOptions?: Apollo.QueryHookOptions<IndexBotQuery, IndexBotQueryVariables>) {
-        return Apollo.useQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
-      }
+  return Apollo.useQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
+}
 export function useIndexBotLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexBotQuery, IndexBotQueryVariables>) {
-          return Apollo.useLazyQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<IndexBotQuery, IndexBotQueryVariables>(IndexBotDocument, baseOptions);
+}
 export type IndexBotQueryHookResult = ReturnType<typeof useIndexBotQuery>;
 export type IndexBotLazyQueryHookResult = ReturnType<typeof useIndexBotLazyQuery>;
 export type IndexBotQueryResult = Apollo.QueryResult<IndexBotQuery, IndexBotQueryVariables>;
 export const GetConversationDocument = gql`
-    query getConversation($input: GetConversationInput!) {
-  getConversation(input: $input) {
-    conversation {
-      id
-      botId
-      answers {
+  query getConversation($input: GetConversationInput!) {
+    getConversation(input: $input) {
+      conversation {
         id
-        content
-        interaction {
+        botId
+        answers {
           id
           content
+          interaction {
+            id
+            content
+          }
         }
       }
-    }
-    nextInteraction {
-      id
-      content
+      nextInteraction {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetConversationQuery__
@@ -1066,25 +1007,29 @@ export const GetConversationDocument = gql`
  *   },
  * });
  */
-export function useGetConversationQuery(baseOptions?: Apollo.QueryHookOptions<GetConversationQuery, GetConversationQueryVariables>) {
-        return Apollo.useQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
-      }
-export function useGetConversationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetConversationQuery, GetConversationQueryVariables>) {
-          return Apollo.useLazyQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
-        }
+export function useGetConversationQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetConversationQuery, GetConversationQueryVariables>
+) {
+  return Apollo.useQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
+}
+export function useGetConversationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetConversationQuery, GetConversationQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetConversationQuery, GetConversationQueryVariables>(GetConversationDocument, baseOptions);
+}
 export type GetConversationQueryHookResult = ReturnType<typeof useGetConversationQuery>;
 export type GetConversationLazyQueryHookResult = ReturnType<typeof useGetConversationLazyQuery>;
 export type GetConversationQueryResult = Apollo.QueryResult<GetConversationQuery, GetConversationQueryVariables>;
 export const GetInteractionDocument = gql`
-    query getInteraction($input: GetInteractionInput!) {
-  getInteraction(input: $input) {
-    interaction {
-      id
-      content
+  query getInteraction($input: GetInteractionInput!) {
+    getInteraction(input: $input) {
+      interaction {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetInteractionQuery__
@@ -1102,25 +1047,29 @@ export const GetInteractionDocument = gql`
  *   },
  * });
  */
-export function useGetInteractionQuery(baseOptions?: Apollo.QueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>) {
-        return Apollo.useQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
-      }
-export function useGetInteractionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>) {
-          return Apollo.useLazyQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
-        }
+export function useGetInteractionQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>
+) {
+  return Apollo.useQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
+}
+export function useGetInteractionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetInteractionQuery, GetInteractionQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetInteractionQuery, GetInteractionQueryVariables>(GetInteractionDocument, baseOptions);
+}
 export type GetInteractionQueryHookResult = ReturnType<typeof useGetInteractionQuery>;
 export type GetInteractionLazyQueryHookResult = ReturnType<typeof useGetInteractionLazyQuery>;
 export type GetInteractionQueryResult = Apollo.QueryResult<GetInteractionQuery, GetInteractionQueryVariables>;
 export const IndexInteractionDocument = gql`
-    query indexInteraction($input: IndexInteractionInput!) {
-  indexInteraction(input: $input) {
-    interactions {
-      id
-      content
+  query indexInteraction($input: IndexInteractionInput!) {
+    indexInteraction(input: $input) {
+      interactions {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useIndexInteractionQuery__
@@ -1138,25 +1087,32 @@ export const IndexInteractionDocument = gql`
  *   },
  * });
  */
-export function useIndexInteractionQuery(baseOptions?: Apollo.QueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>) {
-        return Apollo.useQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(IndexInteractionDocument, baseOptions);
-      }
-export function useIndexInteractionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>) {
-          return Apollo.useLazyQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(IndexInteractionDocument, baseOptions);
-        }
+export function useIndexInteractionQuery(
+  baseOptions?: Apollo.QueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>
+) {
+  return Apollo.useQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(IndexInteractionDocument, baseOptions);
+}
+export function useIndexInteractionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<IndexInteractionQuery, IndexInteractionQueryVariables>
+) {
+  return Apollo.useLazyQuery<IndexInteractionQuery, IndexInteractionQueryVariables>(
+    IndexInteractionDocument,
+    baseOptions
+  );
+}
 export type IndexInteractionQueryHookResult = ReturnType<typeof useIndexInteractionQuery>;
 export type IndexInteractionLazyQueryHookResult = ReturnType<typeof useIndexInteractionLazyQuery>;
 export type IndexInteractionQueryResult = Apollo.QueryResult<IndexInteractionQuery, IndexInteractionQueryVariables>;
 export const NextInteractionDocument = gql`
-    query nextInteraction($input: NextInteractionInput!) {
-  nextInteraction(input: $input) {
-    interaction {
-      id
-      content
+  query nextInteraction($input: NextInteractionInput!) {
+    nextInteraction(input: $input) {
+      interaction {
+        id
+        content
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useNextInteractionQuery__
@@ -1174,30 +1130,34 @@ export const NextInteractionDocument = gql`
  *   },
  * });
  */
-export function useNextInteractionQuery(baseOptions?: Apollo.QueryHookOptions<NextInteractionQuery, NextInteractionQueryVariables>) {
-        return Apollo.useQuery<NextInteractionQuery, NextInteractionQueryVariables>(NextInteractionDocument, baseOptions);
-      }
-export function useNextInteractionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NextInteractionQuery, NextInteractionQueryVariables>) {
-          return Apollo.useLazyQuery<NextInteractionQuery, NextInteractionQueryVariables>(NextInteractionDocument, baseOptions);
-        }
+export function useNextInteractionQuery(
+  baseOptions?: Apollo.QueryHookOptions<NextInteractionQuery, NextInteractionQueryVariables>
+) {
+  return Apollo.useQuery<NextInteractionQuery, NextInteractionQueryVariables>(NextInteractionDocument, baseOptions);
+}
+export function useNextInteractionLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<NextInteractionQuery, NextInteractionQueryVariables>
+) {
+  return Apollo.useLazyQuery<NextInteractionQuery, NextInteractionQueryVariables>(NextInteractionDocument, baseOptions);
+}
 export type NextInteractionQueryHookResult = ReturnType<typeof useNextInteractionQuery>;
 export type NextInteractionLazyQueryHookResult = ReturnType<typeof useNextInteractionLazyQuery>;
 export type NextInteractionQueryResult = Apollo.QueryResult<NextInteractionQuery, NextInteractionQueryVariables>;
 export const GetPostDocument = gql`
-    query getPost($input: GetPostInput!) {
-  getPost(input: $input) {
-    post {
-      id
-      content
-      published
-      title
-      author {
+  query getPost($input: GetPostInput!) {
+    getPost(input: $input) {
+      post {
         id
+        content
+        published
+        title
+        author {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetPostQuery__
@@ -1216,28 +1176,28 @@ export const GetPostDocument = gql`
  * });
  */
 export function useGetPostQuery(baseOptions?: Apollo.QueryHookOptions<GetPostQuery, GetPostQueryVariables>) {
-        return Apollo.useQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
+}
 export function useGetPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostQuery, GetPostQueryVariables>) {
-          return Apollo.useLazyQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetPostQuery, GetPostQueryVariables>(GetPostDocument, baseOptions);
+}
 export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<GetPostQuery, GetPostQueryVariables>;
 export const GetUserDocument = gql`
-    query getUser($input: GetUserInput!) {
-  getUser(input: $input) {
-    user {
-      id
-      email
-      name
-      posts {
+  query getUser($input: GetUserInput!) {
+    getUser(input: $input) {
+      user {
         id
+        email
+        name
+        posts {
+          id
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetUserQuery__
@@ -1256,11 +1216,11 @@ export const GetUserDocument = gql`
  * });
  */
 export function useGetUserQuery(baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-      }
+  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+}
 export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-        }
+  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;

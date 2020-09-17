@@ -1,12 +1,12 @@
-import React from 'react'
-import { Bot, useEditBotMutation, useGetBotQuery } from '@web/graphql'
-import { RouteComponentProps, useHistory } from 'react-router-dom'
-import BotForm from './BotForm'
-import NotFound from '../Error/404'
-import { DeleteBotButton } from './components/BotDeleteButton'
-import Loader from '../../layout/Loader'
-import { InteractionList } from '@web/pages'
-import { StartBotButton } from './components/StartConversation'
+import React from 'react';
+import { Bot, useEditBotMutation, useGetBotQuery } from '@web/graphql';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
+import BotForm from './BotForm';
+import NotFound from '../Error/404';
+import { DeleteBotButton } from './components/BotDeleteButton';
+import Loader from '../../layout/Loader';
+import { InteractionList } from '@web/pages';
+import { StartBotButton } from './components/StartConversation';
 
 type TParams = {
   id: string;
@@ -50,4 +50,3 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
     </div>
   );
 }
-
