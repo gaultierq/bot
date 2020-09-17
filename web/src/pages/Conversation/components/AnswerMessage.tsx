@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   answer: {
@@ -9,18 +9,19 @@ const useStyles = makeStyles({
     color: 'white',
     backgroundColor: 'blue',
     padding: 12,
-    borderRadius: 6,
-  },
+    borderRadius: 6
+  }
 });
-
 
 export function AnswerMessage({ content }: { content: string | null | undefined }) {
   const styles = useStyles();
   return (
-    <div style={{
-      textAlign: 'right',
-      padding: 12,
-    }} >
+    <div
+      style={{
+        textAlign: 'right',
+        padding: 12
+      }}
+    >
       <Typography variant='caption' className={styles.answer}>
         {content}
       </Typography>

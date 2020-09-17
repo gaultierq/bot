@@ -17,7 +17,8 @@ export function DeleteBotButton({ bot }: { bot: Bot }) {
           variables: { input: { id: bot.id } },
           refetchQueries: ['indexBot']
         });
-      }}>
+      }}
+    >
       delete
     </Button>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Bot, useCreateConversationMutation, useEditBotMutation, useGetBotQuery} from '@web/graphql';
-import {RouteComponentProps, useHistory} from 'react-router-dom';
+import { Bot, useCreateConversationMutation, useEditBotMutation, useGetBotQuery } from '@web/graphql';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import BotForm from './BotForm';
 import NotFound from '../Error/404';
-import {DeleteBotButton} from './components/BotDeleteButton';
+import { DeleteBotButton } from './components/BotDeleteButton';
 import Loader from '../../layout/Loader';
-import {InteractionList} from '@web/pages';
-import CircularIntegration from "./components/CircularIntegration";
+import { InteractionList } from '@web/pages';
+import CircularIntegration from './components/CircularIntegration';
 
 type TParams = {
   id: string;

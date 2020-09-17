@@ -38,7 +38,8 @@ export default function BotForm(props: BotFormParams) {
       onSubmit={event => {
         event.preventDefault();
         onSubmit({ title, image, published });
-      }}>
+      }}
+    >
       <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
       <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
       <Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />

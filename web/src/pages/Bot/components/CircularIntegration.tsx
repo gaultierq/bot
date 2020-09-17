@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type CircularIntegrationProps = {
-  onClick: (any) => Promise<void>
+  onClick: (any) => Promise<void>;
 };
 
 const CircularIntegration = (props: ButtonProps) => {
@@ -66,11 +66,11 @@ const CircularIntegration = (props: ButtonProps) => {
     };
   }, []);
 
-  const handleButtonClick = async (event) => {
+  const handleButtonClick = async event => {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      props.onClick && await props.onClick(event);
+      props.onClick && (await props.onClick(event));
       setSuccess(true);
       setLoading(false);
     }
@@ -79,13 +79,8 @@ const CircularIntegration = (props: ButtonProps) => {
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
-        <Button
-          { ...otherProps }
-          className={buttonClassname}
-          disabled={loading}
-          onClick={handleButtonClick}
-        >
-          { children }
+        <Button {...otherProps} className={buttonClassname} disabled={loading} onClick={handleButtonClick}>
+          {children}
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
       </div>

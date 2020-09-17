@@ -12,12 +12,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { useHistory } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -84,6 +81,7 @@ const WithAppBar: React.FunctionComponent<{}> = props => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,14 +98,16 @@ const WithAppBar: React.FunctionComponent<{}> = props => {
         position='fixed'
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open
-        })}>
+        })}
+      >
         <Toolbar>
           <IconButton
             color='inherit'
             aria-label='open drawer'
             onClick={handleDrawerOpen}
             edge='start'
-            className={clsx(classes.menuButton, open && classes.hide)}>
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap>
@@ -122,36 +122,34 @@ const WithAppBar: React.FunctionComponent<{}> = props => {
         open={open}
         classes={{
           paper: classes.drawerPaper
-        }}>
+        }}
+      >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem
+            button
+            key={'bots'}
+            onClick={() => {
+              history.push('/bot/index');
+            }}
+          >
+            <ListItemText primary={'Mes bots'} />
+          </ListItem>
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open
-        })}>
+        })}
+      >
         <div className={classes.drawerHeader} />
+        {/* eslint-disable-next-line react/prop-types */}
         {props.children}
       </main>
     </div>

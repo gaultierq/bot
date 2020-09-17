@@ -1,13 +1,13 @@
-import React from 'react'
-import { useCreateAnswerMutation, useGetConversationQuery } from '@web/graphql'
-import { RouteComponentProps } from 'react-router-dom'
-import { AnswerMessage } from './components/AnswerMessage'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import { useTextField } from '@web/utils'
-import NotFound from '../Error/404'
-import _ from 'lodash'
-import { InteractionMessage } from './components/InteractionMessage'
+import React from 'react';
+import { useCreateAnswerMutation, useGetConversationQuery } from '@web/graphql';
+import { RouteComponentProps } from 'react-router-dom';
+import { AnswerMessage } from './components/AnswerMessage';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import { useTextField } from '@web/utils';
+import NotFound from '../Error/404';
+import _ from 'lodash';
+import { InteractionMessage } from './components/InteractionMessage';
 
 type TParams = {
   id: string;
@@ -89,11 +89,13 @@ function Salut(props: {
   );
 }
 
-function GroupMessage(props: { interaction: any, answers: any[], callbackfn: (a) => any }) {
-  return <div>
-    <InteractionMessage content={props.interaction.content} />
-    {props.answers.map(props.callbackfn)}
-  </div>;
+function GroupMessage(props: { interaction: any; answers: any[]; callbackfn: (a) => any }) {
+  return (
+    <div>
+      <InteractionMessage content={props.interaction.content} />
+      {props.answers.map(props.callbackfn)}
+    </div>
+  );
 }
 
 export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
@@ -141,11 +143,10 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
             key={key}
             interaction={interaction}
             answers={answers}
-            callbackfn={a => (
-              <AnswerMessage key={a.id} content={a.content}/>
-            )} />
+            callbackfn={a => <AnswerMessage key={a.id} content={a.content} />}
+          />
         ))}
-        {currentInteraction && <InteractionMessage content={currentInteraction.content}/>}
+        {currentInteraction && <InteractionMessage content={currentInteraction.content} />}
       </ul>
 
       {currentInteraction && (

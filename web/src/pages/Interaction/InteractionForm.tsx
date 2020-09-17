@@ -22,8 +22,8 @@ const useTextField = defaultValue => {
 };
 
 type InteractionParam = { __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'> & {
-    author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
-  };
+  author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+};
 
 type InteractionFormParams = {
   interaction: CreateInteractionInput | EditInteractionInput;
@@ -43,7 +43,8 @@ export default function InteractionForm(props: InteractionFormParams) {
       onSubmit={event => {
         event.preventDefault();
         onSubmit({ content });
-      }}>
+      }}
+    >
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />
       <div className='form-group my-4'>
         <Button variant='contained' color='primary'>
