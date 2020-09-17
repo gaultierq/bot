@@ -1,15 +1,15 @@
-import React, { useRef } from 'react';
-import { useGetConversationQuery } from '@web/graphql';
-import { RouteComponentProps } from 'react-router-dom';
-import { AnswerMessage } from './components/AnswerMessage';
-import NotFound from '../Error/404';
-import { InteractionMessage } from './components/InteractionMessage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { StartBotButton } from '../Bot/components/StartConversation';
-import './styles.css';
-import { AnswerField } from './components/AnswerField';
-import Loader from '../../layout/Loader';
-import _ from 'lodash';
+import React, { useEffect } from 'react'
+import { useGetConversationQuery } from '@web/graphql'
+import { RouteComponentProps } from 'react-router-dom'
+import { AnswerMessage } from './components/AnswerMessage'
+import NotFound from '../Error/404'
+import { InteractionMessage } from './components/InteractionMessage'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { StartBotButton } from '../Bot/components/StartConversation'
+import './styles.css'
+import { AnswerField } from './components/AnswerField'
+import Loader from '../../layout/Loader'
+import _ from 'lodash'
 
 type TParams = {
   id: string;
@@ -46,9 +46,7 @@ type Message = {
 export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
-
   const [isBotTyping, setIsBotTyping] = React.useState(false);
-
   const { data: queryData, loading, error } = useGetConversationQuery({
     variables: { input: { id } }
   });
@@ -56,16 +54,24 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const conversation = queryData?.getConversation?.conversation;
   const currentInteraction = queryData?.getConversation?.nextInteraction;
 
-  if (loading) return <Loader />;
-  if (!conversation) return <NotFound />;
 
-  const answers = conversation.answers;
+  const answers = conversation?.answers || [];
   const messages: Message[] = transformInMessages(answers);
 
-  const lastAnswer = _.last(answers);
-  console.log('last answer:', { lastAnswer });
+  const lastAnswerDate = Date.parse(_.last(answers)?.createdAt || 0);
 
-  if (currentInteraction) {
+  useEffect(() => {
+    const diff = Date.now() - lastAnswerDate;
+    setIsBotTyping(diff < 2000);
+    const ti = setTimeout(() => {
+      setIsBotTyping(false);
+    }, diff);
+    return () => clearTimeout(ti);
+  }, [lastAnswerDate]);
+
+  console.log('time since last answer:', { diff: Date.now() - lastAnswerDate });
+
+  if (!isBotTyping && currentInteraction) {
     messages.push({
       content: currentInteraction.content,
       answer: false,
@@ -73,11 +79,16 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
     });
   }
 
+  if (!conversation) {
+    if (loading) return <Loader />;
+    return <NotFound />;
+  }
+
   return (
     <div>
       <span>{'Welcome to botId=' + conversation.botId}</span>
       <ul>
-        <TransitionGroup transitionName='example'>
+        <TransitionGroup>
           {messages.map(({ content, key, answer }) => (
             <CSSTransition key={key} timeout={2500} classNames={'item'}>
               <div>
@@ -85,10 +96,11 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
                 {!answer && <InteractionMessage content={content} />}
               </div>
             </CSSTransition>
+
           ))}
         </TransitionGroup>
       </ul>
-
+      { isBotTyping && <Loader />}
       {currentInteraction && <AnswerField conversationId={conversation.id} currentInteraction={currentInteraction} />}
       {!currentInteraction && (
         <div>
