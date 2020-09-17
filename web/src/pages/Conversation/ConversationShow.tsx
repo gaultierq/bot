@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import { useGetConversationQuery } from '@web/graphql'
-import { RouteComponentProps } from 'react-router-dom'
-import { AnswerMessage } from './components/AnswerMessage'
-import NotFound from '../Error/404'
-import { InteractionMessage } from './components/InteractionMessage'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { StartBotButton } from '../Bot/components/StartConversation'
-import './styles.css'
-import { AnswerField } from './components/AnswerField'
-import Loader from '../../layout/Loader'
-import _ from 'lodash'
+import React, { useEffect } from 'react';
+import { useGetConversationQuery } from '@web/graphql';
+import { RouteComponentProps } from 'react-router-dom';
+import { AnswerMessage } from './components/AnswerMessage';
+import NotFound from '../Error/404';
+import { InteractionMessage } from './components/InteractionMessage';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { StartBotButton } from '../Bot/components/StartConversation';
+import './styles.css';
+import { AnswerField } from './components/AnswerField';
+import Loader from '../../layout/Loader';
+import _ from 'lodash';
 
 type TParams = {
   id: string;
@@ -54,7 +54,6 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const conversation = queryData?.getConversation?.conversation;
   const currentInteraction = queryData?.getConversation?.nextInteraction;
 
-
   const answers = conversation?.answers || [];
   const messages: Message[] = transformInMessages(answers);
 
@@ -96,11 +95,10 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
                 {!answer && <InteractionMessage content={content} />}
               </div>
             </CSSTransition>
-
           ))}
         </TransitionGroup>
       </ul>
-      { isBotTyping && <Loader />}
+      {isBotTyping && <Loader />}
       {currentInteraction && <AnswerField conversationId={conversation.id} currentInteraction={currentInteraction} />}
       {!currentInteraction && (
         <div>
