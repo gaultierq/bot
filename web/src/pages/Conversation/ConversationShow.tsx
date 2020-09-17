@@ -1,12 +1,13 @@
-import React from 'react';
-import { useCreateAnswerMutation, useGetConversationQuery, useNextInteractionQuery } from '@web/graphql';
-import { RouteComponentProps } from 'react-router-dom';
-import { Message } from './components/Message';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { useTextField } from '@web/utils';
-import NotFound from '../Error/404';
-import _ from 'lodash';
+import React from 'react'
+import { useCreateAnswerMutation, useGetConversationQuery } from '@web/graphql'
+import { RouteComponentProps } from 'react-router-dom'
+import { AnswerMessage } from './components/AnswerMessage'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import { useTextField } from '@web/utils'
+import NotFound from '../Error/404'
+import _ from 'lodash'
+import { InteractionMessage } from './components/InteractionMessage'
 
 type TParams = {
   id: string;
@@ -88,6 +89,13 @@ function Salut(props: {
   );
 }
 
+function GroupMessage(props: { interaction: any, answers: any[], callbackfn: (a) => any }) {
+  return <div>
+    <InteractionMessage content={props.interaction.content} />
+    {props.answers.map(props.callbackfn)}
+  </div>;
+}
+
 export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
@@ -122,7 +130,6 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
         refetchQueries: ['getConversation']
       });
     }
-    // setMessages(newMessages);
     setAnswerState('');
   };
   return (
@@ -130,14 +137,15 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
       <span>Hello this is the bot running</span>
       <ul>
         {grouped.map(({ interaction, answers, key }, n) => (
-          <div key={key}>
-            <div>{interaction.content + ' (id=' + interaction.id + ')'}</div>
-            {answers.map(a => (
-              <Message key={a.id} content={a.content} />
-            ))}
-          </div>
+          <GroupMessage
+            key={key}
+            interaction={interaction}
+            answers={answers}
+            callbackfn={a => (
+              <AnswerMessage key={a.id} content={a.content}/>
+            )} />
         ))}
-        {currentInteraction && <div>{currentInteraction.content}</div>}
+        {currentInteraction && <InteractionMessage content={currentInteraction.content}/>}
       </ul>
 
       {currentInteraction && (

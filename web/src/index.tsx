@@ -1,19 +1,18 @@
-import { ThemeProvider } from '@material-ui/core';
-import { Routes } from '@web/constants';
-import '@web/global/root.css';
-import { BotEdit, BotList, InteractionCreate, InteractionList } from '@web/pages';
-import theme from '@web/theme';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
-import { configureApolloClient } from '@web/graphql';
-import Config from '@web/config';
-import { Footer } from '@web/layout';
-import * as serviceWorker from './serviceWorker';
-import BotCreate from './pages/Bot/BotCreate';
-import Conversation from './pages/Conversation/ConversationShow';
-import WithAppBar from './layout/AppBar';
+import { ThemeProvider } from '@material-ui/core'
+import { Routes } from '@web/constants'
+import '@web/global/root.css'
+import { BotEdit, BotList, InteractionCreate, InteractionList } from '@web/pages'
+import theme from '@web/theme'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ApolloProvider } from '@apollo/client'
+import { configureApolloClient } from '@web/graphql'
+import Config from '@web/config'
+import * as serviceWorker from './serviceWorker'
+import BotCreate from './pages/Bot/BotCreate'
+import Conversation from './pages/Conversation/ConversationShow'
+import WithAppBar from './layout/AppBar'
 
 const config = new Config(process.env);
 const client = configureApolloClient(config);
@@ -32,7 +31,7 @@ function Routess() {
         <Route exact path={Routes.INTERACTION_CREATE} component={InteractionCreate} />
         <Route path={Routes.CONVERSATION_SHOW} component={Conversation} />
       </Switch>
-      <Route component={Footer} />
+      {/*<Route component={Footer} />*/}
     </Router>
   );
 }
