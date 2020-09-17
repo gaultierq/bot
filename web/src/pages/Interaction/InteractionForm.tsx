@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Interaction, CreateInteractionInput, EditInteractionInput, Maybe, User } from '@web/graphql';
-import Checkbox from '@material-ui/core/Checkbox';
+import { CreateInteractionInput, EditInteractionInput, Interaction, Maybe, User } from '@web/graphql';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,8 +22,8 @@ const useTextField = defaultValue => {
 };
 
 type InteractionParam = { __typename?: 'Interaction' } & Pick<Interaction, 'id' | 'content'> & {
-  author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
-};
+    author?: Maybe<{ __typename?: 'User' } & Pick<User, 'id'>>;
+  };
 
 type InteractionFormParams = {
   interaction: CreateInteractionInput | EditInteractionInput;
@@ -43,13 +43,12 @@ export default function InteractionForm(props: InteractionFormParams) {
       onSubmit={event => {
         event.preventDefault();
         onSubmit({ content });
-      }}
-    >
+      }}>
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />
       <div className='form-group my-4'>
-        <button className='btn btn-block' type='submit'>
+        <Button variant='contained' color='primary'>
           Submit
-        </button>
+        </Button>
       </div>
     </form>
   );

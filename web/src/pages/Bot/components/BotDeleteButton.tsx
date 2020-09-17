@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bot, useDeleteBotMutation } from '@web/graphql';
+import Button from '@material-ui/core/Button';
 
 export function DeleteBotButton({ bot }: { bot: Bot }) {
   const [deleteBotMutation, { error }] = useDeleteBotMutation();
@@ -7,7 +8,7 @@ export function DeleteBotButton({ bot }: { bot: Bot }) {
     console.warn('error', error);
   }
   return (
-    <button
+    <Button
       className='btn btn-block'
       type='submit'
       onClick={event => {
@@ -16,9 +17,8 @@ export function DeleteBotButton({ bot }: { bot: Bot }) {
           variables: { input: { id: bot.id } },
           refetchQueries: ['indexBot']
         });
-      }}
-    >
+      }}>
       delete
-    </button>
+    </Button>
   );
 }

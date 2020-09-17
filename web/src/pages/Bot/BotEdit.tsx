@@ -1,12 +1,12 @@
 import React from 'react';
-import { Bot, useCreateConversationMutation, useEditBotMutation, useGetBotQuery } from '@web/graphql';
-import { RouteComponentProps, useHistory } from 'react-router-dom';
+import {Bot, useCreateConversationMutation, useEditBotMutation, useGetBotQuery} from '@web/graphql';
+import {RouteComponentProps, useHistory} from 'react-router-dom';
 import BotForm from './BotForm';
 import NotFound from '../Error/404';
-import { DeleteBotButton } from './components/BotDeleteButton';
+import {DeleteBotButton} from './components/BotDeleteButton';
 import Loader from '../../layout/Loader';
-import { InteractionList } from '@web/pages';
-import Link from '@material-ui/core/Link';
+import {InteractionList} from '@web/pages';
+import CircularIntegration from "./components/CircularIntegration";
 
 type TParams = {
   id: string;
@@ -46,21 +46,19 @@ export default function BotEdit({ match }: RouteComponentProps<TParams>) {
   const bot = queryData?.getBot.bot as Bot;
   console.debug('fetched bot:', { bot });
 
+  const startBotHandler = async event => {
+    event.preventDefault();
+    const data = await createConversationMutation();
+    const conversationId = data?.data?.createConversation?.conversation?.id;
+    if (conversationId) {
+      history.push(`/conversation/${conversationId}`);
+    }
+  };
   return (
     <div>
-      <Link
-        href='#'
-        onClick={async event => {
-          event.preventDefault();
-          const data = await createConversationMutation();
-          const conversationId = data?.data?.createConversation?.conversation?.id;
-          if (conversationId) {
-            history.push(`/conversation/${conversationId}`);
-          }
-        }}
-      >
-        Start bot
-      </Link>
+      <CircularIntegration onClick={startBotHandler} color={'primary'}>
+        Start Bot
+      </CircularIntegration>
       <BotForm bot={bot} onSubmit={onSubmit} />
       <InteractionList botId={bot.id} />
       <DeleteBotButton bot={bot} />
