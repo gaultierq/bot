@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Conversation",
+      "field": "botId",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Conversation",
+      "field": "bot",
+      "arity": "Required"
+    }
+  ]
+}

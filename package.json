@@ -44,5 +44,8 @@
       "pre-commit": "echo restore yarn lint",
       "pre-push": "yarn lint:fix"
     }
+  },
+  "dependencies": {
+    "react-transition-group": "1.x"
   }
 }

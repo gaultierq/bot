@@ -5,6 +5,7 @@ const getConversation = gql`
     getConversation(input: $input) {
       conversation {
         id
+        botId
         answers {
           id
           content

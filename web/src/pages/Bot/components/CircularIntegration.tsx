@@ -43,10 +43,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type CircularIntegrationProps = {
-  onClick: (any) => Promise<void>;
-};
-
 const CircularIntegration = (props: ButtonProps) => {
   const classes = useStyles();
 

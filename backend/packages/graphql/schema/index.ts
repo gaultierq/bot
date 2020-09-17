@@ -16,7 +16,7 @@ const resolvers = mergeResolvers([
   botResolvers,
   interactionResolvers,
   answerResolvers,
-  conversationResolvers
+  conversationResolvers,
 ]);
 
 const types = loadFilesSync(join(__dirname, './**/types.graphql'));

@@ -1,47 +1,23 @@
 import React from 'react';
-import { useCreateAnswerMutation, useGetConversationQuery } from '@web/graphql';
+import { useGetConversationQuery } from '@web/graphql';
 import { RouteComponentProps } from 'react-router-dom';
 import { AnswerMessage } from './components/AnswerMessage';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { useTextField } from '@web/utils';
+import { hashCode } from '@web/utils';
 import NotFound from '../Error/404';
 import _ from 'lodash';
 import { InteractionMessage } from './components/InteractionMessage';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { StartBotButton } from '../Bot/components/StartConversation';
+import './styles.css';
+import { AnswerField } from './components/AnswerField';
 
 type TParams = {
   id: string;
 };
 
-type IMessage = {
-  content: string;
-  key: string;
-};
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch'
-      }
-    }
-  })
-);
-
-const hashCode = str => {
-  let hash = 0,
-    i,
-    chr;
-  for (i = 0; i < _.size(str); i++) {
-    chr = str.charCodeAt(i);
-    hash = (hash << 5) - hash + chr;
-    hash |= 0;
-  }
-  return hash;
-};
 
 type Created = { interaction: any; answers: any[]; key: string };
+
 const groupAnswers = answers => {
   // item = { interactionId, answers }
   const result = [] as Created[];
@@ -64,45 +40,9 @@ const groupAnswers = answers => {
   return result;
 };
 
-function Salut(props: {
-  classes: any;
-  onSubmit: (event) => Promise<void>;
-  currentInteraction: any;
-  value: any;
-  onChange: any;
-}) {
-  return (
-    <form className={props.classes.root} noValidate autoComplete={'off'} onSubmit={props.onSubmit}>
-      <TextField
-        disabled={!props.currentInteraction}
-        id={'standard-basic'}
-        label={'répondre'}
-        value={props.value}
-        onChange={props.onChange}
-      />
-      <div className='form-group my-4'>
-        <button className='btn btn-block' type='submit'>
-          Envoyer
-        </button>
-      </div>
-    </form>
-  );
-}
-
-function GroupMessage(props: { interaction: any; answers: any[]; callbackfn: (a) => any }) {
-  return (
-    <div>
-      <InteractionMessage content={props.interaction.content} />
-      {props.answers.map(props.callbackfn)}
-    </div>
-  );
-}
-
 export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
-
-  const classes = useStyles();
 
   const { data: queryData, loading: queryLoading, error: queryError } = useGetConversationQuery({
     variables: { input: { id } }
@@ -110,55 +50,54 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const conversation = queryData?.getConversation?.conversation;
   const currentInteraction = queryData?.getConversation?.nextInteraction;
 
-  // answers
-  const [answer, setAnswer, setAnswerState] = useTextField('');
-  const [
-    createAnswerMutation,
-    { data: answerData, loading: answerLoading, error: answerError }
-  ] = useCreateAnswerMutation();
 
   if (!conversation) return <NotFound />;
   const answers = conversation.answers;
-  const grouped = groupAnswers(answers);
 
-  const onSubmit = async event => {
-    event.preventDefault();
-    console.debug('event', { event });
-    if (currentInteraction) {
-      const result = await createAnswerMutation({
-        variables: {
-          input: { conversationId: id, content: answer, interactionId: currentInteraction.id }
-        },
-        refetchQueries: ['getConversation']
-      });
-    }
-    setAnswerState('');
-  };
+
+  const grouped = groupAnswers(answers);
   return (
     <div>
-      <span>Hello this is the bot running</span>
+      <span>Welcome to bot</span>
       <ul>
-        {grouped.map(({ interaction, answers, key }, n) => (
-          <GroupMessage
-            key={key}
-            interaction={interaction}
-            answers={answers}
-            callbackfn={a => <AnswerMessage key={a.id} content={a.content} />}
-          />
-        ))}
+
+        <TransitionGroup transitionName='example'>
+          {grouped.map(({ interaction, answers, key }, n) => (
+            <div>
+              <InteractionMessage content={interaction.content} />
+              {
+                answers.map(a => (
+                  <CSSTransition
+                    key={key}
+                    timeout={2500}
+                    classNames={'item'}
+                  >
+                    <AnswerMessage key={a.id} content={a.content} />
+                  </CSSTransition>
+                )
+                )}
+            </div>
+
+          ))}
+        </TransitionGroup>
+
         {currentInteraction && <InteractionMessage content={currentInteraction.content} />}
       </ul>
 
       {currentInteraction && (
-        <Salut
-          classes={classes}
-          onSubmit={onSubmit}
+        <AnswerField
+          conversationId={conversation.id}
           currentInteraction={currentInteraction}
-          value={answer}
-          onChange={setAnswer}
         />
       )}
-      {!currentInteraction && <div>Thanks for using this bot</div>}
+      {!currentInteraction && (
+        <div>
+          Thanks for using this bot
+          <StartBotButton botId={conversation.botId} />
+        </div>
+
+      )}
+
     </div>
   );
 }
