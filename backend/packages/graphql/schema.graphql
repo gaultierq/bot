@@ -3,7 +3,10 @@ type Answer {
   conversation: Conversation
   interaction: Interaction
   content: String
+  createdAt: Date!
 }
+
+scalar Date
 
 type Bot {
   id: ID!

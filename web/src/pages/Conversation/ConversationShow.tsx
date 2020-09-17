@@ -33,7 +33,6 @@ const transformInMessages = answers => {
       lastii = ii;
       result.push({ content: answer.content, key: `${answer.id}`, answer: true });
     });
-
   }
   return result;
 };
@@ -48,7 +47,6 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   // thats really not good, but still making progress on ts
   const id = match.params.id;
 
-  const interactionId = useRef();
   const [isBotTyping, setIsBotTyping] = React.useState(false);
 
   const { data: queryData, loading, error } = useGetConversationQuery({
@@ -65,7 +63,7 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const messages: Message[] = transformInMessages(answers);
 
   const lastAnswer = _.last(answers);
-
+  console.log('last answer:', { lastAnswer });
 
   if (currentInteraction) {
     messages.push({
@@ -80,11 +78,11 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
       <span>{'Welcome to botId=' + conversation.botId}</span>
       <ul>
         <TransitionGroup transitionName='example'>
-          {messages.map(({ content, key , answer }) => (
+          {messages.map(({ content, key, answer }) => (
             <CSSTransition key={key} timeout={2500} classNames={'item'}>
               <div>
-                { answer && <AnswerMessage content={content} /> }
-                { !answer && <InteractionMessage content={content} /> }
+                {answer && <AnswerMessage content={content} />}
+                {!answer && <InteractionMessage content={content} />}
               </div>
             </CSSTransition>
           ))}
