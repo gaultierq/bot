@@ -139,6 +139,7 @@ export type GetConversationInput = {
 export type GetConversationResult = {
   __typename?: 'GetConversationResult';
   conversation?: Maybe<Conversation>;
+  nextInteraction?: Maybe<Interaction>;
 };
 
 export type GetInteractionInput = {

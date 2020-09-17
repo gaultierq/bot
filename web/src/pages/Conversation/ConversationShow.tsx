@@ -28,17 +28,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const hashCode = (str) => {
-  let hash = 0, i, chr;
+const hashCode = str => {
+  let hash = 0,
+    i,
+    chr;
   for (i = 0; i < _.size(str); i++) {
-    chr   = str.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
+    chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
     hash |= 0;
   }
   return hash;
-}
+};
 
-type Created = { interaction: any, answers: any[], key: string };
+type Created = { interaction: any; answers: any[]; key: string };
 const groupAnswers = answers => {
   // item = { interactionId, answers }
   const result = [] as Created[];
@@ -60,33 +62,46 @@ const groupAnswers = answers => {
   }
   return result;
 };
+
+function Salut(props: {
+  classes: any;
+  onSubmit: (event) => Promise<void>;
+  currentInteraction: any;
+  value: any;
+  onChange: any;
+}) {
+  return (
+    <form className={props.classes.root} noValidate autoComplete={'off'} onSubmit={props.onSubmit}>
+      <TextField
+        disabled={!props.currentInteraction}
+        id={'standard-basic'}
+        label={'répondre'}
+        value={props.value}
+        onChange={props.onChange}
+      />
+      <div className='form-group my-4'>
+        <button className='btn btn-block' type='submit'>
+          Envoyer
+        </button>
+      </div>
+    </form>
+  );
+}
+
 export default function ConversationShow({ match }: RouteComponentProps<TParams>) {
   // thats really not good, but still making progress on ts
   const id = match.params.id;
-  const { data: queryData, loading: queryLoading, error: queryError } = useGetConversationQuery({
-    variables: { input: { id } }
-  });
-
-  const [messages, setMessages] = React.useState<IMessage[]>([]);
-  const [answer, setAnswer, setAnswerState] = useTextField('');
-  const conversation = queryData?.getConversation?.conversation;
-  console.debug('Conversation retrieved:', { conversation });
-
-  const { data: nextInteractionData, loading, error } = useNextInteractionQuery({
-    variables: {
-      input: { conversationId: id }
-    }
-  });
-
-  console.debug('next interaction query data:', { nextInteractionData, loading, error });
-
-  // messages = answers à droite, et leurs interactions au dessus
-  // + nextInteraction
 
   const classes = useStyles();
 
-  const currentInteraction = nextInteractionData?.nextInteraction?.interaction;
+  const { data: queryData, loading: queryLoading, error: queryError } = useGetConversationQuery({
+    variables: { input: { id } }
+  });
+  const conversation = queryData?.getConversation?.conversation;
+  const currentInteraction = queryData?.getConversation?.nextInteraction;
 
+  // answers
+  const [answer, setAnswer, setAnswerState] = useTextField('');
   const [
     createAnswerMutation,
     { data: answerData, loading: answerLoading, error: answerError }
@@ -96,60 +111,45 @@ export default function ConversationShow({ match }: RouteComponentProps<TParams>
   const answers = conversation.answers;
   const grouped = groupAnswers(answers);
 
-
+  const onSubmit = async event => {
+    event.preventDefault();
+    console.debug('event', { event });
+    if (currentInteraction) {
+      const result = await createAnswerMutation({
+        variables: {
+          input: { conversationId: id, content: answer, interactionId: currentInteraction.id }
+        },
+        refetchQueries: ['getConversation']
+      });
+    }
+    // setMessages(newMessages);
+    setAnswerState('');
+  };
   return (
     <div>
       <span>Hello this is the bot running</span>
       <ul>
-        {grouped.map(({ interaction, answers,key }, n) => (
+        {grouped.map(({ interaction, answers, key }, n) => (
           <div key={key}>
             <div>{interaction.content + ' (id=' + interaction.id + ')'}</div>
-            {
-              answers.map(a => <Message key={a.id} content={a.content} />)
-            }
+            {answers.map(a => (
+              <Message key={a.id} content={a.content} />
+            ))}
           </div>
         ))}
         {currentInteraction && <div>{currentInteraction.content}</div>}
       </ul>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete={'off'}
-        onSubmit={async event => {
-          event.preventDefault();
-          console.debug('event', { event });
 
-          // const newMessages: IMessage[] = [
-          //   ...messages,
-          //   {
-          //     content: answer,
-          //     key: `fake-id-${messages.length + 1}`
-          //   }
-          // ];
-          if (currentInteraction) {
-            const result = await createAnswerMutation({
-              variables: {
-                input: { conversationId: id, content: answer, interactionId: currentInteraction.id },
-              },
-            });
-          }
-          // setMessages(newMessages);
-          setAnswerState('');
-        }}
-      >
-        <TextField
-          disabled={!currentInteraction}
-          id={'standard-basic'}
-          label={'répondre'}
+      {currentInteraction && (
+        <Salut
+          classes={classes}
+          onSubmit={onSubmit}
+          currentInteraction={currentInteraction}
           value={answer}
           onChange={setAnswer}
         />
-        <div className='form-group my-4'>
-          <button className='btn btn-block' type='submit'>
-            Envoyer
-          </button>
-        </div>
-      </form>
+      )}
+      {!currentInteraction && <div>Thanks for using this bot</div>}
     </div>
   );
 }

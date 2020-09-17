@@ -14,6 +14,10 @@ const getConversation = gql`
                     }
                 }
             }
+            nextInteraction {
+                id
+                content
+            }
         }
     }
 `;

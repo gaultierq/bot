@@ -1,10 +1,11 @@
 import { Conversation } from './types';
-import { getConversation } from './queries';
+import { getConversation, nextInteraction } from './queries';
 import { createConversation } from './mutations';
 
 const resolvers = {
   Query: {
-    getConversation
+    getConversation,
+    nextInteraction,
   },
   Mutation: {
     createConversation

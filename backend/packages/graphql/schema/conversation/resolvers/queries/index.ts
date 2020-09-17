@@ -1,3 +1,4 @@
 import getConversation from './getConversation';
+import nextInteraction from './nextInteraction';
 
-export { getConversation };
+export { getConversation, nextInteraction };

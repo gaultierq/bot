@@ -141,6 +141,7 @@ export type GetConversationInput = {
 export type GetConversationResult = {
   __typename?: 'GetConversationResult';
   conversation?: Maybe<Conversation>;
+  nextInteraction?: Maybe<Interaction>;
 };
 
 export type GetInteractionInput = {
@@ -527,6 +528,9 @@ export type GetConversationQuery = (
           & Pick<Interaction, 'id' | 'content'>
         )> }
       )>> }
+    )>, nextInteraction?: Maybe<(
+      { __typename?: 'Interaction' }
+      & Pick<Interaction, 'id' | 'content'>
     )> }
   ) }
 );
@@ -1035,6 +1039,10 @@ export const GetConversationDocument = gql`
           content
         }
       }
+    }
+    nextInteraction {
+      id
+      content
     }
   }
 }

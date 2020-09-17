@@ -1,11 +1,12 @@
 import { Conversation } from '@prisma/client';
 import {
-  Parent,
   Context,
-  QueryGetConversationArgs,
   GetConversationInput,
-  GetConversationResult
+  GetConversationResult,
+  Parent,
+  QueryGetConversationArgs
 } from '../../../../types';
+import { findNextInteraction } from './nextInteraction';
 
 async function getConversation(
   _: Parent,
@@ -20,8 +21,9 @@ async function getConversation(
     where: { id }
   });
   console.info('converstation with id', { conversation });
+  const { interaction } = await findNextInteraction(prisma, id);
 
-  return { conversation };
+  return { conversation, nextInteraction: interaction };
 }
 
 export default getConversation;
