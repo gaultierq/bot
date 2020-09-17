@@ -1,5 +1,5 @@
 type Conversation {
   id: ID!
   bot: Bot
-  answers: [Answer]
+  answers: [Answer!]
 }

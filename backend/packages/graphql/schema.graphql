@@ -16,7 +16,7 @@ type Bot {
 type Conversation {
   id: ID!
   bot: Bot
-  answers: [Answer]
+  answers: [Answer!]
 }
 
 type Interaction {

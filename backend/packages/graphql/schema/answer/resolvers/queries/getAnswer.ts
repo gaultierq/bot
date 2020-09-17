@@ -7,7 +7,6 @@ async function getAnswer(_: Parent, args: QueryGetAnswerArgs, context: Context):
   const { id }: GetAnswerInput = input;
 
   const answer: Answer | null = await prisma.answer.findOne({ where: { id } });
-
   return { answer };
 }
 

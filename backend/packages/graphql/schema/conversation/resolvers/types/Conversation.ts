@@ -1,15 +1,15 @@
 /**
  * Conversation type resolvers
  */
-import { Args, Context, Interaction, Parent } from '../../../../types';
+import { Answer, Args, Context, Parent } from '../../../../types';
 
 const Conversation = {
-  // answers: async (parent: Parent, _: Args, context: Context): Promise<Answer[] | null> => {
-  //   const { id } = parent;
-  //   const { prisma } = context;
-  //
-  //   return prisma.answer.findMany({ where: { conversationId: id } });
-  // },
+  answers: async (parent: Parent, _args: Args, context: Context): Promise<Answer[] | null> => {
+    const { id } = parent;
+    const { prisma } = context;
+
+    return prisma.answer.findMany({ where: { conversationId: id }, include: { interaction: true } });
+  },
 };
 
 export default Conversation;
