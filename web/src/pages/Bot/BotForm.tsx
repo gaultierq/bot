@@ -31,23 +31,21 @@ export default function BotForm(props: BotFormParams) {
   };
 
   return (
-    <form
-      className={classes.root}
-      noValidate
-      autoComplete={'off'}
-      onSubmit={event => {
-        event.preventDefault();
-        onSubmit({ title, image, published });
-      }}
-    >
-      <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
-      <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
-      <Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />
-      <div className='form-group my-4'>
-        <Button variant='contained' color='primary'>
-          Submit
-        </Button>
-      </div>
-    </form>
+    <div>
+
+      <div><TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} /></div>
+      <div><TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} /></div>
+
+      {/*<Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />*/}
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={() => {
+          onSubmit({ title, image, published });
+        }}
+      >
+        Créer le bot
+      </Button>
+    </div>
   );
 }

@@ -111,7 +111,7 @@ const WithAppBar: React.FunctionComponent<{}> = props => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap>
-            Persistent drawer
+            FidBot backoffice
           </Typography>
         </Toolbar>
       </AppBar>
