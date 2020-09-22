@@ -1,0 +1,23 @@
+runtime: nodejs12
+instance_class: F1
+automatic_scaling:
+  max_instances: 1
+env_variables:
+  DATABASE_URL: 'postgresql://fdbot:Bl158A$Fw8J$@104.199.62.108:5432/fdbot-staging'
+  NODE_ENV: 'production'
+handlers:
+  - url: /static/js/(.*)
+    static_files: web/build/static/js/\1
+    upload: web/build/static/js/(.*)
+  - url: /static/css/(.*)
+    static_files: web/build/static/css/\1
+    upload: web/build/static/css/(.*)
+  - url: /static/media/(.*)
+    static_files: web/build/static/media/\1
+    upload: web/build/static/media/(.*)
+  - url: /(.*\.(json|ico))$
+    static_files: web/build/\1
+    upload: web/build/.*\.(json|ico)$
+  - url: /
+    static_files: web/build/index.html
+    upload: web/build/index.html

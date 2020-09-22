@@ -24,7 +24,7 @@
     "test:clean": "yarn jest clean --passWithNoTests",
     "generate:graphql": "yarn workspace @project-backend/graphql run generate",
     "generate:prisma": "yarn workspace @project-backend/db run generate",
-    "postinstall": "yarn generate:prisma",
+    "prepare": "yarn generate:prisma",
     "build": "tsc --build && yarn copy",
     "copy": "yarn copyfiles -e build/**/*.graphql **/*.graphql build"
   },

@@ -32,9 +32,12 @@ export default function BotForm(props: BotFormParams) {
 
   return (
     <div>
-
-      <div><TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} /></div>
-      <div><TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} /></div>
+      <div>
+        <TextField id={'standard-basic'} label={'titre'} value={title} onChange={setTitle} />
+      </div>
+      <div>
+        <TextField id={'standard-basic'} label={'image'} value={image} onChange={setImage} />
+      </div>
 
       {/*<Checkbox checked={published} onChange={handleChange} inputProps={{ 'aria-label': 'primary checkbox' }} />*/}
       <Button

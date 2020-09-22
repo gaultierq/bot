@@ -39,7 +39,7 @@ export default function InteractionForm(props: InteractionFormParams) {
     <div>
       <TextField id={'standard-basic'} label={'content'} value={content} onChange={setContent} />
       <div className='form-group my-4'>
-        <Button variant='contained' color='primary' onClick={()=>onSubmit({ content })}>
+        <Button variant='contained' color='primary' onClick={() => onSubmit({ content })}>
           Submit
         </Button>
       </div>
