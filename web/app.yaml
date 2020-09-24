@@ -5,6 +5,8 @@ automatic_scaling:
 env_variables:
   DATABASE_URL: 'postgresql://fdbot:Bl158A$Fw8J$@104.199.62.108:5432/fdbot-staging'
   NODE_ENV: 'production'
+entrypoint:
+  yarn start:backend
 handlers:
   - url: /static/js/(.*)
     static_files: web/build/static/js/\1

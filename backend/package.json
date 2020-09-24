@@ -18,14 +18,13 @@
     "url": "https://github.com/karanpratapsingh/fullstack-starterkit/issues"
   },
   "scripts": {
-    "start": "yarn build && node -r ts-node/register -r tsconfig-paths/register build/index.js",
+    "start": "node -r ts-node/register -r tsconfig-paths/register build/index.js",
     "start:development": "yarn nodemon --exec yarn ts-node -r tsconfig-paths/register index.ts",
     "test": "yarn test:clean && yarn jest --passWithNoTests --detectOpenHandles --verbose",
     "test:clean": "yarn jest clean --passWithNoTests",
     "generate:graphql": "yarn workspace @project-backend/graphql run generate",
     "generate:prisma": "yarn workspace @project-backend/db run generate",
-    "prepare": "yarn generate:prisma",
-    "build": "tsc --build && yarn copy",
+    "build": "yarn generate:prisma && tsc --build && yarn copy",
     "copy": "yarn copyfiles -e build/**/*.graphql **/*.graphql build"
   },
   "dependencies": {
@@ -38,14 +37,14 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
     "jest": "^26.1.0",
     "nodemon": "^2.0.4",
-    "ts-jest": "^26.1.1",
-    "ts-node": "^8.10.2",
-    "tsconfig-paths": "^3.9.0"
+    "ts-jest": "^26.1.1"
   },
   "nodemonConfig": {
     "ext": "js,ts,graphql",
