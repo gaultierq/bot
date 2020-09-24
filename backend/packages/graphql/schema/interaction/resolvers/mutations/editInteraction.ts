@@ -16,7 +16,8 @@ async function editInteraction(
   const { prisma } = context;
   const { input } = args;
   const { id }: EditInteractionInput = input;
-  const interaction = await prisma.interaction.update({ data: input, where: { id } });
+  // const interaction = await prisma.interaction.update({ data: input, where: { id } });
+  const interaction = null;
 
   console.debug('editing interaction', { input, interaction });
 
